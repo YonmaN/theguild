@@ -11,4 +11,8 @@ class IndexController extends ActionController
     {
         return new ViewModel();
     }
+
+    public function myselfAction() {
+    	return new ViewModel();
+    }
 }

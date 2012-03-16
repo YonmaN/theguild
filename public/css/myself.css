@@ -1,0 +1,48 @@
+@CHARSET "windows-1255";
+
+.multiple-select input {
+	margin: 0 4px 0 4px;
+	vertical-align: middle;
+}
+
+.form-field label {
+	width: 90px;
+	display: inline;
+	margin-bottom: 0;
+}
+
+ul.no-bullets-list {
+	list-style-type: none;
+}
+
+.slide_container * {
+	direction: ltr;
+}
+
+#attribute-info-box {
+	width:250px;
+}
+
+#attributes-form-list {
+	width: 380px;
+	margin-left: 20px;
+}
+
+#attributes-form-list li{
+	line-height: 30px;
+}
+#attributes-form-list li .slide_container{
+	margin-top: 6px;
+}
+
+.tooltip .tooltip-content {
+	display: none;
+}
+
+.attribute-info .tooltip-content {
+	display: none;
+}
+
+.active .tooltip-content {
+	display: block !important;
+}

@@ -2,6 +2,9 @@
 return array(
     'di' => array(
         'instance' => array(
+        	'alias' => array(
+        				'index' => 'Application\Controller\IndexController',
+        			),
 
             // Setup for controllers.
 
@@ -23,6 +26,30 @@ return array(
             'Zend\Mvc\Router\RouteStack' => array(
                 'parameters' => array(
                     'routes' => array(
+                    		'sheet' => array(
+                    				'type' => 'Zend\Mvc\Router\Http\Segment',
+                    				'options' => array(
+                    						'route'    => '/sheet[/:id]',
+                    						'defaults' => array(
+                    								'controller' => 'index',
+                    								'action'     => 'sheet',
+                    								'id'		=> 0
+                    						),
+                    				),
+                    		),
+                    		'search' => array(
+                    				'type' => 'Zend\Mvc\Router\Http\Segment',
+                    				'options' => array(
+                    						'route'    => '/search[/:query]',
+                    						'constraints' => array(
+                    								'query' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    						),
+                    						'defaults' => array(
+                    								'controller' => 'index',
+                    								'action'     => 'search',
+                    						),
+                    				),
+                    		),
                         'default' => array(
                             'type'    => 'Zend\Mvc\Router\Http\Segment',
                             'options' => array(

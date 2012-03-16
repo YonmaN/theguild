@@ -1,0 +1,156 @@
+@CHARSET "windows-1255";
+
+.content-box {
+	margin-bottom: 15px;
+	width:100%;
+}
+
+#gravatar {
+	margin-left: 10px;
+}
+
+#personal-box ul {
+	list-style: none;
+	width: 100%;
+}
+
+#slider {
+	height:450px;
+}
+
+#slider .panel {
+	width: 100%;
+}
+
+#attributes-box {
+}
+
+#attributes-box table td.attribute-name {
+	width:3em;
+}
+
+#contentwide .column {
+	width: 300px;
+}
+
+#bio-text {
+	height: 200px;
+	overflow-y: auto;
+}
+
+table.attributes-table td.attribute-details {
+	width:20px;
+}
+
+table.attributes-table td.attribute-value div.value-bar {
+	height:3px;
+	background-color:red;
+	vertical-align:middle;
+}
+
+table.attributes-table td.attribute-details div.icon{
+	width:20px;
+	height:20px;
+	background:url("/images/skin/help.png") no-repeat;
+	cursor:help;
+}
+
+#locations-box div.location {
+	width:140px;
+	height:50px;
+	border: 1px solid black;
+	text-align: left;
+	margin-top:6px;
+}
+
+div.gallery {
+	overflow: auto;
+}
+
+div.gallery div.game-box{
+	margin: 4px;
+	padding: 2px;
+	border: 1px solid black;
+}
+
+div.gallery div.game-box div{
+	text-align:center;
+	cursor:pointer;
+}
+
+.comments-box {
+	margin-top:20px;
+	overflow-y: auto;
+	height:259px;
+}
+
+.comments-internal {
+width: 100%;
+}
+
+.abilities-box h2 {
+	margin-bottom: 10px;
+}
+
+#lfg-box {
+	background: url("/images/skin/lfg.jpg") no-repeat;
+	height: 200px;
+width: 200px;
+}
+
+.abilities-box {
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+table.abilities-table {
+	width: 100%;
+}
+
+table.abilities-table td.ability-name {
+	width:3em;
+}
+
+table.abilities-table td.ability-value div.value-bar {
+	height:3px;
+	background-color:red;
+	vertical-align:middle;
+}
+
+table.abilities-table td.ability-details {
+	width:20px;
+}
+
+table.abilities-table td.ability-details div.icon{
+	width:20px;
+	height:20px;
+	background:url("/images/skin/help.png") no-repeat;
+	cursor:help;
+}
+
+div.tooltip {
+	background: white;
+}
+
+div.tooltip div.tooltip-content {
+	display: block;
+}
+
+#games-list {
+	width:100%;
+	border: 1px solid black;
+	height:82px;
+}
+
+#locations-box div.location label{
+	margin: 3px;
+}
+
+#location-hasharon {
+	background:url("/images/skin/hasharon.jpg") no-repeat;
+}
+
+#location-telaviv {
+	background:url("/images/skin/tel-aviv.jpg") no-repeat;
+}

@@ -1,0 +1,33 @@
+@CHARSET "windows-1255";
+
+div.tooltip-content {
+	color: black;
+	padding:10px;
+	display: none;
+	width: 240px;
+	height:170px;
+	z-index: 1000;
+}
+
+blockquote {
+	font-style: italic;
+}
+
+blockquote:before {
+content: '\201C';
+height: 0;
+	vertical-align: -3px;
+}
+
+blockquote:after {
+content: '\201D';
+	margin-right:6px;
+	vertical-align: -13px;
+}
+
+blockquote:before, blockquote:after {
+color: #69c;
+font-size: 130%;
+width: 50px;
+	line-height: 12px;
+}
