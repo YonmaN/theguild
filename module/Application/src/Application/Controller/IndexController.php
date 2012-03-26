@@ -7,6 +7,8 @@ use Zend\Mvc\Controller\ActionController,
 
 class IndexController extends ActionController
 {
+	private $userMapper;
+	private $gameMapper;
     public function indexAction()
     {
         return new ViewModel();
@@ -22,7 +24,7 @@ class IndexController extends ActionController
 
     public function sheetAction() {
     	$id = $this->getRequest()->query()->get('id');
-    	$view = $this->getLocator()->get('view');
+    	$view = $this->getLocator()->get('Zend\View\Renderer\PhpRenderer');
     	$basePath = $this->getRequest()->getBaseUrl();
     	 
     	$view->plugin('headLink')->appendStylesheet("$basePath/css/sheet.css");
@@ -35,11 +37,38 @@ class IndexController extends ActionController
     	$view->plugin('headScript')->appendFile("$basePath/js/Carousel.js");
     	$view->plugin('headScript')->appendFile("$basePath/js/Carousel.Extra.js");
     	$view->plugin('headScript')->appendFile("$basePath/js/PeriodicalExecuter.js");
-    	
+    	$row = $this->getUserMapper()->findById($id);
+     	$games = $this->getGameMapper()->findByUserId($id);
+//     	$profile = $this->getProfileDbMapper()->getUserProfile($id);
     	return new ViewModel(array(
-			'row' => array(),
-        	'games' => array(),
+			'row' => $row,
+        	'games' => $games,
         	'profile' => array()
 		));
+    }
+    
+    /**
+     * @return \ZfcUser\Model\UserMapper
+     */
+    public function getUserMapper() {
+    	return $this->userMapper;
+    }
+    
+    /**
+     * @param \ZfcUser\Model\UserMapper $userMapper
+     */
+    public function setUserMapper($userMapper) {
+    	$this->userMapper = $userMapper;
+    }
+    
+    /**
+     * @return \Game\Model\GameMapper
+     */
+    public function getGameMapper() {
+    	return $this->gameMapper;
+    }
+    
+    public function setGameMapper($gameMapper) {
+    	$this->gameMapper = $gameMapper;
     }
 }

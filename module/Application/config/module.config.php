@@ -4,8 +4,24 @@ return array(
         'instance' => array(
         	'alias' => array(
         				'index' => 'Application\Controller\IndexController',
+        				'game_tg' => 'Zend\Db\TableGateway\TableGateway'
         			),
-
+        	
+        		'game_tg' => array(
+        				'parameters' => array(
+        						'tableName' => 'game',
+        						'adapter'   => 'zfcuser_zend_db_adapter',
+        				),
+        		),
+        	'Game\Model\GameMapper' => array(
+        		'parameters' => array('tableGateway' => 'game_tg')
+        	),
+        	'Application\Controller\IndexController' => array(
+        				'parameters' => array(
+        					'userMapper' => 'ZfcUser\Model\UserMapper',
+        					'gameMapper' => 'Game\Model\GameMapper'
+        				)
+        			),
             // Setup for controllers.
 
             // Injecting the plugin broker for controller plugins into
@@ -21,7 +37,13 @@ return array(
                     'loader' => 'Zend\Mvc\Controller\PluginLoader',
                 ),
             ),
-
+			'Zend\View\HelperLoader' => array(
+				'parameters' => array(
+					'map' => array(
+						'loginForm' => 'ZfcUser\View\Helper\LoginForm'
+					)
+				)
+			),
             // Setup for router and routes
             'Zend\Mvc\Router\RouteStack' => array(
                 'parameters' => array(

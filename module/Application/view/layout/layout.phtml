@@ -42,39 +42,39 @@ echo $this->doctype();
 			<div id="menu">
 				<ul>
 					<li><a href="<?php echo $this->url('home') ?>" class="menu">דף הבית</a></li>
-					<li><a href="<?php echo $this->url('home') ?>" class="menu">חיפוש</a></li>
-					<li><a href="<?php echo $this->url('home') ?>" class="menu">פרופיל אישי</a></li>
+					<li><a href="<?php echo $this->url('default', array('controller' => 'index', 'action' => 'search')) ?>" class="menu">חיפוש</a></li>
+					<li><a href="<?php echo $this->url('default', array('controller' => 'index', 'action' => 'myself')) ?>" class="menu">פרופיל אישי</a></li>
 					<li><a href="#" class="menu">משחקים</a></li>
 					<li><a href="#" class="menu">מי אנחנו</a></li>
-					<li><a href="<?php echo $this->url('home') ?>" class="menu">התנתק</a></li>
+<?php if ($this->zfcUserIdentity()): ?>
+					<li><a href="<?php echo $this->url('zfcuser/logout') ?>" class="menu">התנתק</a></li>
+<?php endif ?>
 				</ul>
 			</div>
-<?php /*if (isset($loginForm)): ?>
-<?php 	if ($this->edpUserIdentity()): ?>
+<?php 	if ($this->zfcUserIdentity()): ?>
 			<div id="login">
 				<div id="logintxtblank">
 					<div id="loginheading">
 						<h4>משתמש נוכחי</h4>
 					</div>
 					<div>
-<?php 	echo $this->gravatar($this->edpUserIdentity()->getEmail()) ?>
-שלום, <?php echo $this->edpUserIdentity()->getDisplayName() ?>! <a href="<?php echo $this->url('edpuser/logout') ?>">[התנתק]</a>
+<?php 	echo $this->gravatar($this->zfcUserIdentity()->getEmail()) ?>
+שלום, <?php echo $this->zfcUserIdentity()->getDisplayName() ?>! <a href="<?php echo $this->url('zfcuser/logout') ?>">[התנתק]</a>
 					</div>
 				</div>
 			</div>
-<?php 	else:*/?>
+<?php 	else:?>
 			<div id="login">
 				<div id="logintxtblank">
 					<div id="loginheading">
 						<h4>הזדהה במערכת</h4>
 					</div>
-				<?php //echo $loginForm->setAction($this->url('edpuser/login'))->setView($this); ?>
+				<?php echo $this->LoginForm()->setAction($this->url('zfcuser/login'))->setView($this); ?>
 					<div id="member">לא רשום? לא נורא! </div>
 					<div id="register"><a href="<?php echo $this->url('home') ?>">הירשם כאן!</a></div>
 				</div>
 			</div>
-<?php /* 	endif ?>
-<?php endif*/ ?>
+<?php  	endif ?>
 		</div>
 	</div>
 </div>

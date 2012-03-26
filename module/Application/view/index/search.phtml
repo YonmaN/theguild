@@ -1,0 +1,24 @@
+<div id="contentbg">
+	<div id="contentblank">
+		<div id="content">
+			
+			<div id="contentwide" class="fleft">
+			<table>
+			<thead>
+			<tr><th><input type="checkbox" /></th>
+			<th>שם</th><th>תכונות</th><th>גיל</th></tr>
+			</thead>
+			<tbody><tr><th><input type="checkbox" /></th>
+			<?php foreach ($rows as $row) :?>
+			<td><a href="<?php echo $this->url('sheet', array('id' => $row['user_id']))?>"><?php echo $row['display_name']?></a></td><td>תכונות...</td><td><?php echo $row['age']?></td></tr></tbody>
+			<?php endforeach; ?>
+			</table>
+			</div>
+			
+			<div id="contentright" class="fright">
+			<div>Available filters</div>
+			<div>Used filters</div>
+			</div>
+		</div>
+	</div>
+</div>
