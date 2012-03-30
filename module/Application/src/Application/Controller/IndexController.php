@@ -9,6 +9,7 @@ class IndexController extends ActionController
 {
 	private $userMapper;
 	private $gameMapper;
+	private $profileMapper;
     public function indexAction()
     {
         return new ViewModel();
@@ -39,7 +40,7 @@ class IndexController extends ActionController
     	$view->plugin('headScript')->appendFile("$basePath/js/PeriodicalExecuter.js");
     	$row = $this->getUserMapper()->findById($id);
      	$games = $this->getGameMapper()->findByUserId($id);
-//     	$profile = $this->getProfileDbMapper()->getUserProfile($id);
+    	$profile = $this->getProfileMapper()->findByUserId($id);
     	return new ViewModel(array(
 			'row' => $row,
         	'games' => $games,
@@ -70,5 +71,16 @@ class IndexController extends ActionController
     
     public function setGameMapper($gameMapper) {
     	$this->gameMapper = $gameMapper;
+    }
+    
+    /**
+     * @return \ZfcUser\Model\ProfileMapper
+     */
+    public function getProfileMapper() {
+    	return $this->profileMapper;
+    }
+    
+    public function setProfileMapper($profileMapper) {
+    	$this->profileMapper = $profileMapper;
     }
 }

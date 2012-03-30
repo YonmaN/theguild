@@ -4,7 +4,8 @@ return array(
         'instance' => array(
         	'alias' => array(
         				'index' => 'Application\Controller\IndexController',
-        				'game_tg' => 'Zend\Db\TableGateway\TableGateway'
+        				'game_tg' => 'Zend\Db\TableGateway\TableGateway',
+        				'profile_tg' => 'Zend\Db\TableGateway\TableGateway'
         			),
         	
         		'game_tg' => array(
@@ -13,13 +14,23 @@ return array(
         						'adapter'   => 'zfcuser_zend_db_adapter',
         				),
         		),
+        		'profile_tg' => array(
+        				'parameters' => array(
+        						'tableName' => 'profile',
+        						'adapter'   => 'zfcuser_zend_db_adapter',
+        				),
+        		),
         	'Game\Model\GameMapper' => array(
         		'parameters' => array('tableGateway' => 'game_tg')
+        	),
+        	'ZfcUser\Model\ProfileMapper' => array(
+        		'parameters' => array('tableGateway' => 'profile_tg')
         	),
         	'Application\Controller\IndexController' => array(
         				'parameters' => array(
         					'userMapper' => 'ZfcUser\Model\UserMapper',
-        					'gameMapper' => 'Game\Model\GameMapper'
+        					'gameMapper' => 'Game\Model\GameMapper',
+        					'profileMapper' => 'ZfcUser\Model\ProfileMapper'
         				)
         			),
             // Setup for controllers.

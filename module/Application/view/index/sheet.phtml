@@ -1,5 +1,6 @@
 <?php $row = $row ?: new \ZfcUser\Model\User() ?>
-<?php $games = $games ?: new \Zend\Db\ResultSet\ResultSet() ?>
+<?php $games = $games ?: array() ?>
+<?php $profile = $profile ?: array() ?>
 <script type="text/javascript">
 window.addEvent('domready', function () {
     var duration = 300,
