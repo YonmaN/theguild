@@ -154,3 +154,8 @@ div.tooltip div.tooltip-content {
 #location-telaviv {
 	background:url("/images/skin/tel-aviv.jpg") no-repeat;
 }
+
+
+#personal-box label {
+	display: inline;
+}

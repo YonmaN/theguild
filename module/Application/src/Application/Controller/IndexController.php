@@ -44,7 +44,7 @@ class IndexController extends ActionController
     	return new ViewModel(array(
 			'row' => $row,
         	'games' => $games,
-        	'profile' => array()
+        	'profile' => $profile
 		));
     }
     
