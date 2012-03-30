@@ -16,6 +16,9 @@ class IndexController extends ActionController
     }
 
     public function myselfAction() {
+    	if (! $this->zfcUserAuthentication()->hasIdentity()) {
+    		return $this->redirect()->toRoute('zfcuser/login');
+    	}
     	return new ViewModel();
     }
 

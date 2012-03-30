@@ -16,8 +16,8 @@ $this->headLink()->appendStylesheet("$basePath/css/myself.css");
 			
 			<div id="contentwide" class="fleft">
 <div>
-<?php //echo $this->gravatar($this->edpUserIdentity()->getEmail()) ?>
-שלום, <?php /*echo $this->edpUserIdentity()->getDisplayName()*/ ?>! <a href="<?php //echo $this->url('edpuser/logout') ?>">[התנתק]</a>
+<?php echo $this->gravatar($this->zfcUserIdentity()->getEmail()) ?>
+שלום, <?php echo $this->zfcUserIdentity()->getDisplayName() ?>! <a href="<?php echo $this->url('zfcuser/logout') ?>">[התנתק]</a>
 <div>רוצה תמונת פרופיל? הירשם ל-<a href="https://en.gravatar.com/site/signup/" target="_blank">Gravatar!</a></div>
 </div>
 <div id="personal-details-box" class="content-box">
