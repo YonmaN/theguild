@@ -77,7 +77,7 @@ class IndexController extends ActionController
     }
     
     /**
-     * @return \ZfcUser\Model\ProfileMapper
+     * @return \GuildUser\Model\ProfileMapper
      */
     public function getProfileMapper() {
     	return $this->profileMapper;

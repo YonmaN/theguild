@@ -23,14 +23,14 @@ return array(
         	'Game\Model\GameMapper' => array(
         		'parameters' => array('tableGateway' => 'game_tg')
         	),
-        	'ZfcUser\Model\ProfileMapper' => array(
+        	'GuildUser\Model\ProfileMapper' => array(
         		'parameters' => array('tableGateway' => 'profile_tg')
         	),
         	'Application\Controller\IndexController' => array(
         				'parameters' => array(
         					'userMapper' => 'ZfcUser\Model\UserMapper',
         					'gameMapper' => 'Game\Model\GameMapper',
-        					'profileMapper' => 'ZfcUser\Model\ProfileMapper'
+        					'profileMapper' => 'GuildUser\Model\ProfileMapper'
         				)
         			),
             // Setup for controllers.
@@ -51,7 +51,6 @@ return array(
 			'Zend\View\HelperLoader' => array(
 				'parameters' => array(
 					'map' => array(
-						'loginForm' => 'ZfcUser\View\Helper\LoginForm'
 					)
 				)
 			),

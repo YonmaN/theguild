@@ -1,11 +1,23 @@
-<h1>Register</h1>
+<div id="contentbg">
+	<div id="contentblank">
+		<div id="content">
+			
+			<div id="contentwide" class="fleft">
+<h1>הירשם לגילדה</h1>
 
 <?php 
 if(!\ZfcUser\Module::getOption('enable_registration'))
 {
-    print "Registration is disabled";
+    print "הרישום לגילדה כרגע חסום";
     return;       
 }
 ?>
 
 <?php echo $registerForm->setAction($this->url('zfcuser/register'))->setView($this); ?>
+			</div>
+			<div id="contentright" class="fright">
+				side panel
+			</div>
+		</div>
+	</div>
+</div>

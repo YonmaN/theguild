@@ -1,5 +1,5 @@
 <?php
-namespace ZfcUser\Model;
+namespace GuildUser\Model;
 
 use Zend\Db\TableGateway\TableGatewayInterface;
 

@@ -22,6 +22,7 @@ h1,h2,h3,h4,h5,h6,span {margin:0;padding:0}
 #identity-label {width:40px;height:14px;float:right;margin:0;padding:5px 23px 0 0;font-family:Arial;font-size:10px;color:#95844d}
 #identity-element {width:197px;height:21px;float:right;margin:0;padding:0;font-family:Arial;font-size:10px;color:#95844d}
 #credential-label {width:38px;height:14px;float:right;margin:0;padding:5px 28px 0 0 ;font-family:Arial;font-size:10px;color:#95844d}
+#captcha-element {direction: ltr}
 #credential-element {width:197px;height:21px;float:right;margin:0;padding:0;font-family:Arial;font-size:10px;color:#95844d}
 .input {width:181px;height:17px;float: right;margin:0;padding:4px 0 0 16px;font-family:Arial;font-size:10px;color:#95844d;border:solid 1px #ead28b;background:#ead28b}
 #loginbutton-label {display:none}
