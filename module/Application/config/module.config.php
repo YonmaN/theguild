@@ -134,6 +134,9 @@ return array(
                 'parameters' => array(
                     'map'  => array(
                         'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
+                    	// override the default view script for zfcuser/login and register
+                    	'zfcuser/login' => __DIR__ . '/../view/zfcuser/login.phtml',
+                    	'zfcuser/register' => __DIR__ . '/../view/zfcuser/register.phtml',
                     ),
                 ),
             ),

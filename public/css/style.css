@@ -14,17 +14,18 @@ h1,h2,h3,h4,h5,h6,span {margin:0;padding:0}
 #menu ul li {width:76px;height:33px;float: right;margin:0 1px 0 0;padding:0;display:block}
 #menu ul li a.menu {width:76px;height:26px;float: right;margin:0;padding:7px 0 0 0;font-family:Arial;font-size:13px;font-weight:bold;color:#FFF;text-align:center;text-decoration:none;background:url(/images/skin/menu.jpg) no-repeat}
 #menu ul li a.menu:hover {width:76px;height:26px;float: right;margin:0;padding:7px 0 0 0;font-family:Arial;font-size:13px;font-weight:bold;color:#FFF;text-align:center;text-decoration:none;background:url(/images/skin/menuover.jpg) no-repeat}
-#login {width:649px;height:106px;float:right;margin:35px 53px 0 0;padding:0;background:url(/images/skin/loginbg.jpg) no-repeat}
+#login {width:649px;height:106px;float:right;margin:35px 0 0 53px;padding:0;background:url(/images/skin/loginbg.jpg) no-repeat}
 #logintxtblank {width:622px;height:89px;float: right;margin:0;padding:17px 27px 0 0 }
 #loginheading {width:622px;height:21px;float: right;margin:0 0 8px 0;padding:0;font-family:Georgia;font-size:20px;color:#000}
-#loginheading h4 {width:622px;height:21px;float: right;margin:0;padding:0;font-family:Georgia;font-size:20px;font-weight:normal;color:#000}
-#identity-label {width:40px;height:14px;float:right;margin:0;padding:7px 23px 0 0;font-family:Arial;font-size:10px;color:#95844d}
+#loginheading h4 {width:622px;height:21px;float: right;margin:4px 10px 4px 0;padding:0;font-family:Georgia;font-size:20px;font-weight:normal;color:#000}
+#loginheading div {width:622px;height:21px;float: right;margin:4px 10px 4px 0;padding:0;font-family:Georgia;font-size:20px;font-weight:normal;color:#000}
+#identity-label {width:40px;height:14px;float:right;margin:0;padding:5px 23px 0 0;font-family:Arial;font-size:10px;color:#95844d}
 #identity-element {width:197px;height:21px;float:right;margin:0;padding:0;font-family:Arial;font-size:10px;color:#95844d}
-#credential-label {width:38px;height:14px;float:right;margin:0;padding:7px 23px 0 0 ;font-family:Arial;font-size:10px;color:#95844d}
+#credential-label {width:38px;height:14px;float:right;margin:0;padding:5px 28px 0 0 ;font-family:Arial;font-size:10px;color:#95844d}
 #credential-element {width:197px;height:21px;float:right;margin:0;padding:0;font-family:Arial;font-size:10px;color:#95844d}
 .input {width:181px;height:17px;float: right;margin:0;padding:4px 0 0 16px;font-family:Arial;font-size:10px;color:#95844d;border:solid 1px #ead28b;background:#ead28b}
 #loginbutton-label {display:none}
-#loginbutton {width:50px;height:23px;float: right;margin:0 20px 0 0 ;padding:0}
+#loginbutton {width:50px;height:28px;margin:0 40px 0 0 ;padding:0}
 .login {width:50px;height:19px;float: right;margin:0;padding:4px 0 0 0;font-family:Arial;font-size:10px;color:#000;text-align:center;text-decoration:none;background:url(/images/skin/login.jpg) no-repeat}
 .login:hover {width:50px;height:19px;float: right;margin:0;padding:4px 0 0 0;font-family:Arial;font-size:10px;color:#000;text-align:center;text-decoration:none;background:url(/images/skin/loginover.jpg) no-repeat}
 #member {width:105px;height:14px;float:right;margin:9px 0 0 0;padding:0;font-family:Arial;font-size:13px;color:#ab8e4e}

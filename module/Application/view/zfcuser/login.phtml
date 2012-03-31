@@ -1,0 +1,21 @@
+<div id="contentbg">
+	<div id="contentblank">
+		<div id="content">
+			
+			<div id="contentwide" class="fleft">
+				<div id="login">
+					<div id="loginheading">
+						<h4>הזדהה במערכת</h4>
+						<?php echo $loginForm->setAction($this->url('zfcuser/login'))->setView($this); ?>
+						<div>
+							לא רשום עדיין? לא נורא! <a href="<?php echo $this->url('zfcuser/register') ?>">הירשם כאן!</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="contentright" class="fright">
+				side panel
+			</div>
+		</div>
+	</div>
+</div>

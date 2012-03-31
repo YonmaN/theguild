@@ -5,4 +5,6 @@ return array(
 	'ZfcUser\View\Helper\LoginForm'			=> __DIR__ . '/src/ZfcUser/View/Helper/LoginForm.php',
 	'Game\Model\GameMapper'			=> __DIR__ . '/src/Game/Model/GameMapper.php',
 	'ZfcUser\Model\ProfileMapper'			=> __DIR__ . '/src/ZfcUser/Model/ProfileMapper.php',
+	'ZfcUser\Form\Login'                               => __DIR__ . '/src/ZfcUser/Form/Login.php',
+		
 );
