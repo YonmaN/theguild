@@ -23,7 +23,11 @@ class IndexController extends ActionController
     }
 
     public function searchAction() {
-    	return new ViewModel();
+    	$users = $this->getUserMapper()->findAll();
+    	$view = $this->getLocator()->get('Zend\View\Renderer\PhpRenderer');
+    	$basePath = $this->getRequest()->getBaseUrl();
+    	$view->plugin('headLink')->appendStylesheet("$basePath/css/search.css");
+    	return new ViewModel(array('users' => $users));
     }
 
     public function sheetAction() {
@@ -52,14 +56,14 @@ class IndexController extends ActionController
     }
     
     /**
-     * @return \ZfcUser\Model\UserMapper
+     * @return \GuildUser\Model\UserMapper
      */
     public function getUserMapper() {
     	return $this->userMapper;
     }
     
     /**
-     * @param \ZfcUser\Model\UserMapper $userMapper
+     * @param \GuildUser\Model\UserMapper $userMapper
      */
     public function setUserMapper($userMapper) {
     	$this->userMapper = $userMapper;
