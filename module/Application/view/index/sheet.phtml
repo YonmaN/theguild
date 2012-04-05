@@ -230,7 +230,7 @@ window.addEvent('domready', function () {
 							<li><div><label>כינוי</label><div class="fright"><?php echo $row->getDisplayName() ?></div></div></li>
 							<li><div><label>מין</label><div class="fright"><?php echo $profile['gender'] ?></div></div></li>
 							<li><div><label>גיל</label><div class="fright"><?php echo floor((time() - strtotime($profile['birth_date']))/60/60/24/365) ?></div></div></li>
-							<li><div><label>עדכון אחרון</label><div class="fright"><?php echo substr($row->getLastLogin(), 0, strpos($row->getLastLogin(), ' ')) ?></div></div></li>
+							<li><div><label>עדכון אחרון</label><div class="fright"><?php //echo substr($row->getLastLogin(), 0, strpos($row->getLastLogin(), ' ')) ?></div></div></li>
 						</ul>
 					</div>
 					
