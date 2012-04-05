@@ -1,4 +1,26 @@
-<?php $users = $users ?: array() ?>
+<?php $users = $users ?: array(); ?>
+<?php $profiles = $profiles ?: array() ?>
+<script type="text/javascript">
+window.addEvent('domready', function () {
+	
+	$$('ul.attributes-mini-list li.humour').addEvent('mouseover', function() {
+    	ToolTip.instance(this, {
+    		relativeTo: this.id,
+    		autohide: true,
+    		hideDelay: 150,
+    		position: {position: 'centerBottom', edge: 'top'}
+    	}, document.id('attribute-humour-tooltip-2')).show();
+    });
+
+
+});
+</script>
+
+<div id="attribute-humour-tooltip-2" class="tooltip-content"><h3>דירוג הומור: 2</h3>
+	<blockquote>גנום, טרול ושני גובלינים נכנסים ל... רגע, לא, מההתחלה</blockquote>
+	<p>אתה לא מצחיק אבל כנראה גם לא מדכא. משחקים איתך הם משעשעים, כל עוד הכנת את הבדיחות מראש ועשית חזרות בבית.</p>
+</div>
+
 <div id="contentbg">
 	<div id="contentblank">
 		<div id="content">
@@ -9,10 +31,23 @@
 			<tr><th><input type="checkbox" /></th>
 			<th>שם</th><th>תכונות</th><th>גיל</th></tr>
 			</thead>
-			<tbody><tr><th><input type="checkbox" /></th>
+			<tbody>
 			<?php foreach ($users as $row) :?>
-			<td><a href="<?php echo $this->url('default', array('controller' => 'index', 'action' => 'sheet'))?>?<?php echo http_build_query(array('id' => $row['user_id'])) ?>"><?php echo $row['display_name']?></a></td><td>תכונות...</td><td><?php echo $row['age']?></td></tr></tbody>
+			<?php 	$profile = $profiles[$row['user_id']]; ?>
+			<tr><th><input type="checkbox" /></th>
+			<td><a href="<?php echo $this->url('default', array('controller' => 'index', 'action' => 'sheet'))?>?<?php echo http_build_query(array('id' => $row['user_id'])) ?>"><?php echo $row['display_name']?></a></td>
+			<td><ul class="attributes-mini-list">
+				<li class="humour"><?php echo $profile['humour']; ?></li>
+				<li class="teamplay"><?php echo $profile['teamplay']; ?></li>
+				<li class="leadership"><?php echo $profile['leadership']; ?></li>
+				<li class="mobility"><?php echo $profile['mobility']; ?></li>
+				<li class="focus"><?php echo $profile['focus']; ?></li>
+				<li class="hospitality"><?php echo $profile['hospitality']; ?></li>
+				<li class="strictness"><?php echo $profile['strictness']; ?></li>
+			</ul></td>
+			<td><?php echo floor((time() - strtotime($profile['birth_date']))/60/60/24/365) ?></td></tr>
 			<?php endforeach; ?>
+			</tbody>
 			</table>
 			</div>
 			

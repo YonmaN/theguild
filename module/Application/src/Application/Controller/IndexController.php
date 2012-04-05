@@ -23,11 +23,22 @@ class IndexController extends ActionController
     }
 
     public function searchAction() {
+    	$basePath = $this->getRequest()->getBaseUrl();
+    	$view = $this->getLocator()->get('Zend\View\Renderer\PhpRenderer');
+    	$view->plugin('headLink')->appendStylesheet("$basePath/css/ToolTip.css");
+    	$view->plugin('headLink')->appendStylesheet("$basePath/css/tooltip-content.css");
+    	
+    	$view->plugin('headScript')->appendFile("$basePath/js/mootools.js");
+    	$view->plugin('headScript')->appendFile("$basePath/js/mootools-more-1.3.1.1.js");
+    	$view->plugin('headScript')->appendFile("$basePath/js/ToolTip.js");
+    	
     	$users = $this->getUserMapper()->findAll();
+    	$ids = array_map(function ($user) {return $user['user_id'];}, $users);
+    	$profiles = $this->getProfileMapper()->findByUserIds($ids);
     	$view = $this->getLocator()->get('Zend\View\Renderer\PhpRenderer');
     	$basePath = $this->getRequest()->getBaseUrl();
     	$view->plugin('headLink')->appendStylesheet("$basePath/css/search.css");
-    	return new ViewModel(array('users' => $users));
+    	return new ViewModel(array('users' => $users, 'profiles' => $profiles));
     }
 
     public function sheetAction() {

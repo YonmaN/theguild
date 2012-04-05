@@ -26,7 +26,7 @@
 }
 
 #attributes-box table td.attribute-name {
-	width:3em;
+	width:4em;
 }
 
 #contentwide .column {
@@ -38,14 +38,36 @@
 	overflow-y: auto;
 }
 
+table.attributes-table tr.attribute-humour div.value-bar {
+	background-color: blue;
+}
+table.attributes-table tr.attribute-teamplay div.value-bar {
+	background-color: red;
+}
+table.attributes-table tr.attribute-leadership div.value-bar {
+	background-color: purple;
+}
+table.attributes-table tr.attribute-mobility div.value-bar {
+	background-color: orange;
+}
+table.attributes-table tr.attribute-focus div.value-bar {
+	background-color: green;
+}
+table.attributes-table tr.attribute-hospitality div.value-bar {
+	background-color: brown;
+}
+table.attributes-table tr.attribute-strictness div.value-bar {
+	background-color: white;
+}
+
 table.attributes-table td.attribute-details {
 	width:20px;
 }
 
 table.attributes-table td.attribute-value div.value-bar {
-	height:3px;
-	background-color:red;
+	height:5px;
 	vertical-align:middle;
+	border: 1px solid black;
 }
 
 table.attributes-table td.attribute-details div.icon{
@@ -127,14 +149,6 @@ table.abilities-table td.ability-details div.icon{
 	height:20px;
 	background:url("/images/skin/help.png") no-repeat;
 	cursor:help;
-}
-
-div.tooltip {
-	background: white;
-}
-
-div.tooltip div.tooltip-content {
-	display: block;
 }
 
 #games-list {

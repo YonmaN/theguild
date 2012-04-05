@@ -3,7 +3,7 @@
 #search-container{width:660px}
 
 table{width:100%;margin-bottom:18px;padding:0;font-size:13px;border-collapse:collapse;}
-table th,table td{padding:10px 10px 9px;line-height:18px;text-align:left;}
+table th,table td{padding:10px 10px 9px;line-height:18px;text-align:right;}
 table th{padding-top:9px;font-weight:bold;vertical-align:middle;}
 table td{vertical-align:top;border-top:1px solid #ddd;}
 table tbody th{border-top:1px solid #ddd;vertical-align:top;}
@@ -32,3 +32,63 @@ table .orange{color:#f89406;border-bottom-color:#f89406;}
 table .headerSortUp.orange,table .headerSortDown.orange{background-color:#fee9cc;}
 table .purple{color:#7a43b6;border-bottom-color:#7a43b6;}
 table .headerSortUp.purple,table .headerSortDown.purple{background-color:#e2d5f0;}
+
+ul.attributes-mini-list {
+	cursor: default;
+}
+ul.attributes-mini-list li label{
+	margin: 0;
+	display: inline;
+	color: black;
+}
+
+ul.attributes-mini-list li {
+	list-style: none;
+	display: inline-block;
+	text-align:center;
+	line-height: 20px;
+	font-weight: bold;
+	border: 2px solid black;
+	width: 20px;
+	cursor: default;
+	margin: 0 2px 0 2px;
+	
+	-moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
+}
+
+ul.attributes-mini-list li.humour {
+	background-color: blue;
+	color: white;
+}
+
+ul.attributes-mini-list li.teamplay {
+	background-color: red;
+}
+
+ul.attributes-mini-list li.leadership {
+	background-color: purple;
+	color: white;
+}
+
+ul.attributes-mini-list li.mobility {
+	background-color: orange;
+	color: black;
+}
+
+ul.attributes-mini-list li.focus {
+	background-color: green;
+	color: white;
+}
+
+ul.attributes-mini-list li.hospitality {
+	background-color: brown;
+	color: white;
+}
+
+ul.attributes-mini-list li.strictness {
+	background-color: white;
+	color: black;
+}

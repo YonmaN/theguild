@@ -30,6 +30,24 @@ window.addEvent('domready', function () {
     	}, document.id('attribute-humour-tooltip-2')).show();
     });
 
+    document.id('attribute-details-teamplay').addEvent('mouseover', function() {
+    	ToolTip.instance(this, {
+    		relativeTo: this.id,
+    		autohide: true,
+    		hideDelay: 150,
+    		position: {position: 'centerLeft', edge: 'right'}
+    	}, document.id('attribute-teamplay-tooltip-3')).show();
+    });
+
+    document.id('attribute-details-leadership').addEvent('mouseover', function() {
+    	ToolTip.instance(this, {
+    		relativeTo: this.id,
+    		autohide: true,
+    		hideDelay: 150,
+    		position: {position: 'centerLeft', edge: 'right'}
+    	}, document.id('attribute-leadership-tooltip-3')).show();
+    });
+    
     document.id('attribute-details-mobility').addEvent('mouseover', function() {
     	ToolTip.instance(this, {
     		relativeTo: this.id,
@@ -124,6 +142,14 @@ window.addEvent('domready', function () {
 	<blockquote>גנום, טרול ושני גובלינים נכנסים ל... רגע, לא, מההתחלה</blockquote>
 	<p>אתה לא מצחיק אבל כנראה גם לא מדכא. משחקים איתך הם משעשעים, כל עוד הכנת את הבדיחות מראש ועשית חזרות בבית.</p>
 </div>
+<div id="attribute-teamplay-tooltip-3" class="tooltip-content"><h3>חברותי דירוג: 3</h3>
+	<blockquote>גנום, טרול ושני גובלינים נכנסים ל... רגע, לא, מההתחלה</blockquote>
+	<p>אתה לא מצחיק אבל כנראה גם לא מדכא. משחקים איתך הם משעשעים, כל עוד הכנת את הבדיחות מראש ועשית חזרות בבית.</p>
+</div>
+<div id="attribute-leadership-tooltip-3" class="tooltip-content"><h3>דירוג מנהיגות: 3</h3>
+	<blockquote>גנום, טרול ושני גובלינים נכנסים ל... רגע, לא, מההתחלה</blockquote>
+	<p>אתה לא מצחיק אבל כנראה גם לא מדכא. משחקים איתך הם משעשעים, כל עוד הכנת את הבדיחות מראש ועשית חזרות בבית.</p>
+</div>
 <div id="attribute-mobility-tooltip-3" class="tooltip-content"><h3>דירוג ניידות: 3</h3>
 	<blockquote>תרד, אני מגיע</blockquote>
 	<p>אתה נייד וממונע. בין אם בכוחות קסומים, על הסוס של אבא או המכונית הפרטית,
@@ -212,30 +238,40 @@ window.addEvent('domready', function () {
 					<h3>תכונות</h3>
 					<table class="attributes-table" style="width:100%">
 						<tbody>
-							<tr>
+							<tr class="attribute-humour">
 								<td class="attribute-name">הומור</td>
 								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile['humour'] / 5 * 100)?>%;"></div></td>
 								<td class="attribute-details"><div id="attribute-details-humor" class="icon"></div>
 									</td>
 							</tr>
-							<tr>
+							<tr class="attribute-teamplay">
+								<td class="attribute-name">חברותי</td>
+								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile['teamplay'] / 5 * 100)?>%;"></div></td>
+								<td class="attribute-details"><div id="attribute-details-teamplay" class="icon"></div></td>
+							</tr>
+							<tr class="attribute-leadership">
+								<td class="attribute-name">מנהיגות</td>
+								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile['leadership'] / 5 * 100)?>%;"></div></td>
+								<td class="attribute-details"><div id="attribute-details-leadership" class="icon"></div></td>
+							</tr>
+							<tr class="attribute-mobility">
 								<td class="attribute-name">ניידות</td>
 								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile['mobility'] / 5 * 100)?>%;"></div></td>
 								<td class="attribute-details"><div id="attribute-details-mobility" class="icon"></div></td>
 							</tr>
-							<tr>
+							<tr class="attribute-focus">
 								<td class="attribute-name">מיקוד</td>
 								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile['focus'] / 5 * 100)?>%;"></div></td>
 								<td class="attribute-details"><div id="attribute-details-focus" class="icon"></div>
 									</td>
 							</tr>
-							<tr>
+							<tr class="attribute-hospitality">
 								<td class="attribute-name">אירוח</td>
 								<td class="attribute-value"><div class="value-bar" style="width:<?php echo ($profile['hospitality'] / 5 * 100)?>%;"></div></td>
 								<td class="attribute-details"><div id="attribute-details-hospitality" class="icon"></div>
 									</td>
 							</tr>
-							<tr>
+							<tr class="attribute-strictness">
 								<td class="attribute-name">קפדנות</td>
 								<td class="attribute-value"><div class="value-bar" style="width:<?php echo ($profile['strictness'] / 5 * 100)?>%;"></div></td>
 								<td class="attribute-details"><div id="attribute-details-strictness" class="icon"></div>
