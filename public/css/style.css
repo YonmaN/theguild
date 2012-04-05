@@ -127,13 +127,3 @@ h1,h2,h3,h4,h5,h6,span {margin:0;padding:0}
 #validation {width:422px;float: right;margin:5px 0 0 0;padding:0 0 0 293px}
 .xhtml, .xhtml:hover {width:66px;height:17px;float: right;margin:0;padding:1px 0 0 0;font-family:Arial;font-size:11px;color:#000;text-align:center;text-decoration:none;background:url(/images/skin/xhtml.jpg) no-repeat}
 .css, .css:hover {width:66px;height:18px;float: right;margin:0 0 0 5px;padding:0;font-family:Arial;font-size:11px;color:#000;text-align:center;text-decoration:none;background:url(/images/skin/xhtml.jpg) no-repeat}
-
-
-
-div.tooltip {
-	background: white;
-}
-
-div.tooltip div.tooltip-content {
-	display: block;
-}

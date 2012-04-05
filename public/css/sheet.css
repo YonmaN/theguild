@@ -151,6 +151,14 @@ table.abilities-table td.ability-details div.icon{
 	cursor:help;
 }
 
+div.tooltip {
+	background: white;
+}
+
+div.tooltip div.tooltip-content {
+	display: block;
+}
+
 #games-list {
 	width:100%;
 	border: 1px solid black;

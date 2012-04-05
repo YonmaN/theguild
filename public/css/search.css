@@ -92,3 +92,11 @@ ul.attributes-mini-list li.strictness {
 	background-color: white;
 	color: black;
 }
+
+div.tooltip {
+	background: white;
+}
+
+div.tooltip div.tooltip-content {
+	display: block;
+}
