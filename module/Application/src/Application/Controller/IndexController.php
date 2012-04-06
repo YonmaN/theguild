@@ -19,6 +19,19 @@ class IndexController extends ActionController
     	if (! $this->zfcUserAuthentication()->hasIdentity()) {
     		return $this->redirect()->toRoute('zfcuser/login');
     	}
+    	
+    	$basePath = $this->getRequest()->getBaseUrl();
+    	$view = $this->getLocator()->get('Zend\View\Renderer\PhpRenderer');
+    	$view->plugin('headScript')->appendFile("$basePath/js/mootools-core-1.4.5-full-compat.js");
+    	$view->plugin('headScript')->appendFile("$basePath/js/mootools-more-1.4.0.1.js");
+    	$view->headScript()->appendFile("$basePath/js/slider.js");
+    	$view->headScript()->appendFile("$basePath/js/TabPane.js");
+    	
+    	$view->headLink()->appendStylesheet("$basePath/css/slider.css");
+    	$view->headLink()->appendStylesheet("$basePath/css/tooltip-content.css");
+    	$view->headLink()->appendStylesheet("$basePath/css/myself.css");
+    	$view->headLink()->appendStylesheet("$basePath/css/tabs.css");
+    	 
     	return new ViewModel();
     }
 
@@ -28,8 +41,8 @@ class IndexController extends ActionController
     	$view->plugin('headLink')->appendStylesheet("$basePath/css/ToolTip.css");
     	$view->plugin('headLink')->appendStylesheet("$basePath/css/tooltip-content.css");
     	
-    	$view->plugin('headScript')->appendFile("$basePath/js/mootools.js");
-    	$view->plugin('headScript')->appendFile("$basePath/js/mootools-more-1.3.1.1.js");
+    	$view->plugin('headScript')->appendFile("$basePath/js/mootools-core-1.4.5-full-compat.js");
+    	$view->plugin('headScript')->appendFile("$basePath/js/mootools-more-1.4.0.1.js");
     	$view->plugin('headScript')->appendFile("$basePath/js/ToolTip.js");
     	
     	$users = $this->getUserMapper()->findAll();
@@ -50,8 +63,8 @@ class IndexController extends ActionController
     	$view->plugin('headLink')->appendStylesheet("$basePath/css/ToolTip.css");
     	$view->plugin('headLink')->appendStylesheet("$basePath/css/tooltip-content.css");
     	 
-    	$view->plugin('headScript')->appendFile("$basePath/js/mootools.js");
-    	$view->plugin('headScript')->appendFile("$basePath/js/mootools-more-1.3.1.1.js");
+    	$view->plugin('headScript')->appendFile("$basePath/js/mootools-core-1.4.5-full-compat.js");
+    	$view->plugin('headScript')->appendFile("$basePath/js/mootools-more-1.4.0.1.js");
     	$view->plugin('headScript')->appendFile("$basePath/js/ToolTip.js");
     	$view->plugin('headScript')->appendFile("$basePath/js/Carousel.js");
     	$view->plugin('headScript')->appendFile("$basePath/js/Carousel.Extra.js");
