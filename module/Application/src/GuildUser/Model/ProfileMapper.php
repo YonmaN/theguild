@@ -1,18 +1,23 @@
 <?php
 namespace GuildUser\Model;
 
+use ZfcUser\Model\UserMetaMapper;
+
 use Zend\Db\TableGateway\TableGatewayInterface;
 
 use ZfcBase\Mapper\DbMapperAbstract;
 
-class ProfileMapper extends DbMapperAbstract {
+class ProfileMapper extends UserMetaMapper {
 
-	protected $tableName         = 'profile';
-	protected $userIDField       = 'user_id';
-	
 	public function findByUserId($id) {
 		$rowset = $this->getTableGateway()->select('user_id = '. $id);
-		return $rowset->current()->getArrayCopy();
+		$profileRows = $rowset->toArray();
+		$output = array();
+		foreach ($profileRows as $profileRow) {
+			$output[$profileRow['meta_key']] = $profileRow['meta']; 
+		}
+		$profile = Profile::fromArray($output);
+		return $profile;
 	}
 	
 	/**
@@ -21,8 +26,15 @@ class ProfileMapper extends DbMapperAbstract {
 	 */
 	public function findByUserIds($ids) {
 		$rowset = $this->getTableGateway()->select('user_id in('. implode(',', $ids).')');
-		$data = $rowset->toArray();
-		return array_combine(array_map(function ($value) {return $value['user_id'];}, $data), array_values($data));
+		
+		$profileRows = $rowset->toArray();
+		$output = array();
+		foreach ($profileRows as $profileRow) {
+			$output[$profileRow['user_id']][$profileRow['meta_key']] = $profileRow['meta'];
+		}
+		$profiles = Profile::fromArraySet($output);
+		
+		return $profiles;
 	}
 	
 }

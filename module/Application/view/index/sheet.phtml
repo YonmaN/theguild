@@ -1,6 +1,10 @@
-<?php $row = $row ?: new \ZfcUser\Model\User() ?>
-<?php $games = $games ?: array() ?>
-<?php $profile = $profile ?: array() ?>
+<?php use GuildUser\Model\Profile,\ZfcUser\Model\User;
+
+$row = $row ?: new User();
+$games = $games ?: array();
+$profile = $profile ?: new Profile();
+
+?>
 <script type="text/javascript">
 window.addEvent('domready', function () {
     var duration = 300,
@@ -228,8 +232,8 @@ window.addEvent('domready', function () {
 						<div id="gravatar" class="fleft"><?php echo $this->gravatar($row->getEmail()); ?></div>
 						<ul>
 							<li><div><label>כינוי</label><div class="fright"><?php echo $row->getDisplayName() ?></div></div></li>
-							<li><div><label>מין</label><div class="fright"><?php echo $profile['gender'] ?></div></div></li>
-							<li><div><label>גיל</label><div class="fright"><?php echo floor((time() - strtotime($profile['birth_date']))/60/60/24/365) ?></div></div></li>
+							<li><div><label>מין</label><div class="fright"><?php echo $profile->getGender() ?></div></div></li>
+							<li><div><label>גיל</label><div class="fright"><?php echo floor((time() - strtotime($profile->getBirthDate()))/60/60/24/365) ?></div></div></li>
 							<li><div><label>עדכון אחרון</label><div class="fright"><?php //echo substr($row->getLastLogin(), 0, strpos($row->getLastLogin(), ' ')) ?></div></div></li>
 						</ul>
 					</div>
@@ -240,40 +244,40 @@ window.addEvent('domready', function () {
 						<tbody>
 							<tr class="attribute-humour">
 								<td class="attribute-name">הומור</td>
-								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile['humour'] / 5 * 100)?>%;"></div></td>
+								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile->getHumour() / 5 * 100)?>%;"></div></td>
 								<td class="attribute-details"><div id="attribute-details-humor" class="icon"></div>
 									</td>
 							</tr>
 							<tr class="attribute-teamplay">
 								<td class="attribute-name">חברותי</td>
-								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile['teamplay'] / 5 * 100)?>%;"></div></td>
+								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile->getTeamplay() / 5 * 100)?>%;"></div></td>
 								<td class="attribute-details"><div id="attribute-details-teamplay" class="icon"></div></td>
 							</tr>
 							<tr class="attribute-leadership">
 								<td class="attribute-name">מנהיגות</td>
-								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile['leadership'] / 5 * 100)?>%;"></div></td>
+								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile->getLeadership() / 5 * 100)?>%;"></div></td>
 								<td class="attribute-details"><div id="attribute-details-leadership" class="icon"></div></td>
 							</tr>
 							<tr class="attribute-mobility">
 								<td class="attribute-name">ניידות</td>
-								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile['mobility'] / 5 * 100)?>%;"></div></td>
+								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile->getMobility() / 5 * 100)?>%;"></div></td>
 								<td class="attribute-details"><div id="attribute-details-mobility" class="icon"></div></td>
 							</tr>
 							<tr class="attribute-focus">
 								<td class="attribute-name">מיקוד</td>
-								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile['focus'] / 5 * 100)?>%;"></div></td>
+								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile->getFocus() / 5 * 100)?>%;"></div></td>
 								<td class="attribute-details"><div id="attribute-details-focus" class="icon"></div>
 									</td>
 							</tr>
 							<tr class="attribute-hospitality">
 								<td class="attribute-name">אירוח</td>
-								<td class="attribute-value"><div class="value-bar" style="width:<?php echo ($profile['hospitality'] / 5 * 100)?>%;"></div></td>
+								<td class="attribute-value"><div class="value-bar" style="width:<?php echo ($profile->getHospitality() / 5 * 100)?>%;"></div></td>
 								<td class="attribute-details"><div id="attribute-details-hospitality" class="icon"></div>
 									</td>
 							</tr>
 							<tr class="attribute-strictness">
 								<td class="attribute-name">קפדנות</td>
-								<td class="attribute-value"><div class="value-bar" style="width:<?php echo ($profile['strictness'] / 5 * 100)?>%;"></div></td>
+								<td class="attribute-value"><div class="value-bar" style="width:<?php echo ($profile->getStrictness() / 5 * 100)?>%;"></div></td>
 								<td class="attribute-details"><div id="attribute-details-strictness" class="icon"></div>
 									</td>
 							</tr>
@@ -282,7 +286,7 @@ window.addEvent('domready', function () {
 					</div>
 					<div id="bio-box" class="content-box">
 					<h3>כמה מילים על עצמי</h3>
-					<div id="bio-text"><?php echo nl2br($profile['bio'])?></div>
+					<div id="bio-text"><?php echo nl2br($this->escape($profile->getBio()))?></div>
 				</div>
 				</div>
 				

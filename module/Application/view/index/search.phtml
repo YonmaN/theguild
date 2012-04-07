@@ -1,5 +1,7 @@
-<?php $users = $users ?: array(); ?>
-<?php $profiles = $profiles ?: array() ?>
+<?php
+$users = $users ?: array();
+$profiles = $profiles ?: array()
+?>
 <script type="text/javascript">
 window.addEvent('domready', function () {
 	
@@ -32,20 +34,20 @@ window.addEvent('domready', function () {
 			<th>שם</th><th>תכונות</th><th>גיל</th></tr>
 			</thead>
 			<tbody>
-			<?php foreach ($users as $row) :?>
-			<?php 	$profile = $profiles[$row['user_id']]; ?>
+			<?php foreach ($users as $user) :/* @var $profile \ZfcUser\Model\User */ ?>
+			<?php 	$profile = $profiles[$user->getUserId()]; /* @var $profile \GuildUser\Model\Profile */?>
 			<tr><th><input type="checkbox" /></th>
-			<td><a href="<?php echo $this->url('default', array('controller' => 'index', 'action' => 'sheet'))?>?<?php echo http_build_query(array('id' => $row['user_id'])) ?>"><?php echo $row['display_name']?></a></td>
+			<td><a href="<?php echo $this->url('default', array('controller' => 'index', 'action' => 'sheet'))?>?<?php echo http_build_query(array('id' => $user->getUserId())) ?>"><?php echo $user->getDisplayName() ?></a></td>
 			<td><ul class="attributes-mini-list">
-				<li class="humour"><?php echo $profile['humour']; ?></li>
-				<li class="teamplay"><?php echo $profile['teamplay']; ?></li>
-				<li class="leadership"><?php echo $profile['leadership']; ?></li>
-				<li class="mobility"><?php echo $profile['mobility']; ?></li>
-				<li class="focus"><?php echo $profile['focus']; ?></li>
-				<li class="hospitality"><?php echo $profile['hospitality']; ?></li>
-				<li class="strictness"><?php echo $profile['strictness']; ?></li>
+				<li class="humour"><?php echo $profile->getHumour(); ?></li>
+				<li class="teamplay"><?php echo $profile->getTeamplay(); ?></li>
+				<li class="leadership"><?php echo $profile->getLeadership(); ?></li>
+				<li class="mobility"><?php echo $profile->getMobility(); ?></li>
+				<li class="focus"><?php echo $profile->getFocus(); ?></li>
+				<li class="hospitality"><?php echo $profile->getHospitality(); ?></li>
+				<li class="strictness"><?php echo $profile->getStrictness(); ?></li>
 			</ul></td>
-			<td><?php echo floor((time() - strtotime($profile['birth_date']))/60/60/24/365) ?></td></tr>
+			<td><?php echo floor((time() - strtotime($profile->getBirthDate()))/60/60/24/365) ?></td></tr>
 			<?php endforeach; ?>
 			</tbody>
 			</table>

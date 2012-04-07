@@ -1,0 +1,23 @@
+@CHARSET "windows-1255";
+
+ul.tabs {
+    margin: 0;
+    padding: 10px 0 2px 0;
+}
+
+li.tab {
+    display: inline;
+    padding: 4px .4em 2px .4em;
+    list-style: none;
+    background-color: #ead28b;
+    border: 1px #333 solid;
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+	cursor: pointer;
+}
+
+li.tab.active {
+    background-color: #EE7E1F;
+    border-bottom-color: #111;
+}
