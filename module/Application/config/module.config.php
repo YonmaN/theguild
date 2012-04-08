@@ -16,7 +16,7 @@ return array(
         		),
         		'profile_tg' => array(
         				'parameters' => array(
-        						'tableName' => 'profile',
+        						'tableName' => 'user_meta',
         						'adapter'   => 'zfcuser_zend_db_adapter',
         				),
         		),

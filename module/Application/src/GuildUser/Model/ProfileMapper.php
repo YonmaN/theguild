@@ -7,9 +7,12 @@ use Zend\Db\TableGateway\TableGatewayInterface;
 
 use ZfcBase\Mapper\DbMapperAbstract;
 
-class ProfileMapper extends UserMetaMapper {
+class ProfileMapper extends DbMapperAbstract {
 
+     protected $tableName = 'user_meta';
+    
 	public function findByUserId($id) {
+            
 		$rowset = $this->getTableGateway()->select('user_id = '. $id);
 		$profileRows = $rowset->toArray();
 		$output = array();
