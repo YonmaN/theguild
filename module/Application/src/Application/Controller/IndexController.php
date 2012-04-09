@@ -34,7 +34,7 @@ class IndexController extends ActionController
     	$view->headLink()->appendStylesheet("$basePath/css/tabs.css");
     	$view->headLink()->appendStylesheet("$basePath/css/myself.css");
     	
-		$user = $this->zfcUserAuthentication()->getIdentity();
+		$user = $this->zfcUserAuthentication()->getIdentity(); /* @var $user \ZfcUser\Model\User */
         $profile = $this->getProfileMapper()->findByUserId($user->getUserId());
 		
 		$personal = new Form(array(
@@ -50,7 +50,16 @@ class IndexController extends ActionController
 			)
 		);
 		$personal->setIsArray(true);
+
+		$details = array(
+			'full_name' => $profile->getName(),
+			'display_name' => $user->getDisplayName(),
+			'email' => $user->getEmail(),
+			'lfg' => $profile->getLfg() === 'true' ? 'Yes' : 'No',
+			'gender' => ucwords($profile->getGender())
+		);
 		
+		$personal->populate($details);
     	return new ViewModel(array('user' => $user, 'profile' => $profile, 'personal' => $personal));
     }
 

@@ -11,6 +11,10 @@ class ProfileMapper extends DbMapperAbstract {
 
      protected $tableName = 'user_meta';
     
+	/**
+	 * @param integer $id
+	 * @return \GuildUser\Model\Profile 
+	 */
 	public function findByUserId($id) {
             
 		$rowset = $this->getTableGateway()->select('user_id = '. $id);
