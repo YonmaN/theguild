@@ -24,7 +24,7 @@ ul.no-bullets-list {
 }
 
 #attributes-form-list {
-	width: 380px;
+	width: 300px;
 	margin-left: 20px;
 }
 
@@ -45,4 +45,17 @@ ul.no-bullets-list {
 
 .active .tooltip-content {
 	display: block !important;
+}
+
+.tabs-container {
+	border: 1px solid black;
+	padding: 6px;
+}
+
+li.tab {
+	border-bottom: 0;
+}
+
+ul.tabs {
+    padding: 10px 0 0 0;
 }

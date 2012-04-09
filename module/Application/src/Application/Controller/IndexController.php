@@ -2,7 +2,7 @@
 
 namespace Application\Controller;
 
-use ZfcUser\Model\UserMetaMapper;
+use ZfcUser\Model\UserMetaMapper, Zend\Form\Form;
 
 use Zend\Mvc\Controller\ActionController,
     Zend\View\Model\ViewModel;
@@ -31,10 +31,27 @@ class IndexController extends ActionController
     	
     	$view->headLink()->appendStylesheet("$basePath/css/slider.css");
     	$view->headLink()->appendStylesheet("$basePath/css/tooltip-content.css");
-    	$view->headLink()->appendStylesheet("$basePath/css/myself.css");
     	$view->headLink()->appendStylesheet("$basePath/css/tabs.css");
-    	 
-    	return new ViewModel();
+    	$view->headLink()->appendStylesheet("$basePath/css/myself.css");
+    	
+		$user = $this->zfcUserAuthentication()->getIdentity();
+        $profile = $this->getProfileMapper()->findByUserId($user->getUserId());
+		
+		$personal = new Form(array(
+				'attribs' => array('name' => 'personal'),
+				'elements' => array(
+					'full_name' => array('type' => 'text','options' => array('label' => 'שם מלא')),
+					'display_name' => array('type' => 'text','options' => array('label' => 'שם תצוגה')),
+					'email' => array('type' => 'text','options' => array('label' => 'דוא"ל')),
+					'lfg' => array('type' => 'radio','options' => array('label' => 'מחפש?', 'multiOptions' => array('Yes' => 'כן, אני מחפש קבוצה', 'No' => 'לא, תעזבו אותי בשקט'))),
+					'gender' => array('type' => 'radio','options' => array('label' => 'מין', 'multiOptions' => array('Male' => 'שחקן', 'Female' => 'שחקנית', 'Other' => 'משהו אחר או לא ניתן להגדרה'))),
+					'submit' => array('type' => 'submit', 'options' => array('label' => 'שמור פרטים אישיים'))
+				),
+			)
+		);
+		$personal->setIsArray(true);
+		
+    	return new ViewModel(array('user' => $user, 'profile' => $profile, 'personal' => $personal));
     }
 
     public function searchAction() {
@@ -115,3 +132,4 @@ class IndexController extends ActionController
     	$this->profileMapper = $profileMapper;
     }
 }
+
