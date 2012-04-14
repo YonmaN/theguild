@@ -59,3 +59,12 @@ li.tab {
 ul.tabs {
     padding: 10px 0 0 0;
 }
+
+.zend_form input {
+	display: inline;
+	margin-left: 6px;
+}
+
+.zend_form label {
+	display: inline;
+}
