@@ -68,3 +68,8 @@ ul.tabs {
 .zend_form label {
 	display: inline;
 }
+
+.zend_form button#personal-submit {
+	width: 120px;
+	height: 30px;
+}

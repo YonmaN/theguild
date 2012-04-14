@@ -1,6 +1,7 @@
 <?php
 return array(
     'Application\Controller\IndexController' => __DIR__ . '/src/Application/Controller/IndexController.php',
+    'GuildUser\Controller\IndexController' => __DIR__ . '/src/GuildUser/Controller/IndexController.php',
     'Application\Module'                     => __DIR__ . '/Module.php',
 	'Game\Model\GameMapper'			=> __DIR__ . '/src/Game/Model/GameMapper.php',
 	'GuildUser\Model\ProfileMapper'			=> __DIR__ . '/src/GuildUser/Model/ProfileMapper.php',

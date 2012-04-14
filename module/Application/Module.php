@@ -40,5 +40,14 @@ class Module implements AutoloaderProvider
         $locator      = $app->getLocator();
         $renderer     = $locator->get('Zend\View\Renderer\PhpRenderer');
         $renderer->plugin('basePath')->setBasePath($basePath);
+		
+		
+		/// json responder
+		$locator             = $app->getLocator();
+        $view                = $locator->get('Zend\View\View');
+        $phpRendererStrategy = $locator->get('Zend\View\Strategy\JsonStrategy');
+        $view->events()->attachAggregate($phpRendererStrategy, 1000);
+		
+		
     }
 }

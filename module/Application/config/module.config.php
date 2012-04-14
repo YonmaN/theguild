@@ -5,7 +5,8 @@ return array(
         	'alias' => array(
         				'index' => 'Application\Controller\IndexController',
         				'game_tg' => 'Zend\Db\TableGateway\TableGateway',
-        				'profile_tg' => 'Zend\Db\TableGateway\TableGateway'
+        				'profile_tg' => 'Zend\Db\TableGateway\TableGateway',
+						'guilduser' => 'GuildUser\Controller\IndexController'
         			),
         	
         		'game_tg' => array(
@@ -27,6 +28,13 @@ return array(
         		'parameters' => array('tableGateway' => 'profile_tg')
         	),
         	'Application\Controller\IndexController' => array(
+        				'parameters' => array(
+        					'userMapper' => 'GuildUser\Model\UserMapper',
+        					'gameMapper' => 'Game\Model\GameMapper',
+        					'profileMapper' => 'GuildUser\Model\ProfileMapper'
+        				)
+        			),
+        	'GuildUser\Controller\IndexController' => array(
         				'parameters' => array(
         					'userMapper' => 'GuildUser\Model\UserMapper',
         					'gameMapper' => 'Game\Model\GameMapper',
@@ -68,6 +76,16 @@ return array(
                                 ),
                                 'defaults' => array(
                                     'controller' => 'Application\Controller\IndexController',
+                                    'action'     => 'index',
+                                ),
+                            ),
+                        ),
+                        'myself' => array(
+                            'type' => 'Zend\Mvc\Router\Http\Literal',
+                            'options' => array(
+                                'route'    => '/myself',
+                                'defaults' => array(
+                                    'controller' => 'guilduser',
                                     'action'     => 'index',
                                 ),
                             ),
@@ -157,6 +175,12 @@ return array(
                     'exceptionTemplate' => 'error/index',
                 ),
             ),
+			'Zend\View\Strategy\JsonStrategy' => array(
+				'parameters' => array(
+					'renderer' => 'Zend\View\Renderer\JsonRenderer'
+					
+				),
+			)
         ),
     ),
 );

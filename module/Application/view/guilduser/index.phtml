@@ -19,6 +19,7 @@
 		<div id="personal-details-box" class="tab-content content-box">
 			<h3>פרטים אישיים</h3>
 			<?php echo $personal ?>
+			<div id="result"></div>
 		</div>
 
 		<div class="tab-content content-box">
@@ -159,6 +160,18 @@
 
 // ON LOAD 
 window.addEvent('domready', function() {
+	
+
+	new Form.Request($('personal-form'), $('result'), {
+		requestOptions: {
+			'spinnerTarget': $('personal-form')
+		},
+		extraData: { // This is just to make this example work.
+			'html': 'Form sent.'
+		}
+	});
+
+	
         var tabPane = new TabPane('tabs', {contentSelector: '.tab-content'}, function() {
 			var showTab = window.location.hash.match(/tab=(\d+)/);
 			return showTab ? showTab[1] : 0;
