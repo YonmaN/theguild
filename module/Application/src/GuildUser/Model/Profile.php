@@ -286,4 +286,24 @@ class Profile extends ModelAbstract
         return $this;
     }
  
+	
+	/**
+     * Set properties from an array
+     *
+     * @param array $array
+     * @return ZfcBase\Model\ModelAbstract
+     */
+    public function setFromArray($array)
+    {
+        if (!is_array($array) && !$array instanceof Traversable) {
+            return false;
+        } 
+        foreach ($array as $key => $value) {
+            $setter = static::fieldToSetterMethod($key);
+            if (is_callable(array($this, $setter))) {
+                $this->$setter($value);
+            }
+        }
+        return $this;
+    }
 }

@@ -46,7 +46,7 @@ class IndexController extends ActionController
 			'full_name' => $profile->getName(),
 			'display_name' => $user->getDisplayName(),
 			'email' => $user->getEmail(),
-			'lfg' => $profile->getLfg() === 'true' ? 'Yes' : 'No',
+			'lfg' => $profile->getLfg(),
 			'gender' => ucwords($profile->getGender())
 		);
 		$personal->setMethod('post');
@@ -79,7 +79,7 @@ class IndexController extends ActionController
 				$user = $this->zfcUserAuthentication()->getIdentity(); /* @var $user \ZfcUser\Model\User */
 				$profileMapper = $this->getProfileMapper();
 				$profile = $profileMapper->findByUserId($user->getUserId()); /* @var $profile \GuildUser\Model\Profile */
-				$profile->setHumour($attributes->getValue('humour'));
+				$profile->setFromArray(current($attributes->getValues()));
 				$profileMapper->persist($profile);
 			} else {
 				$payload['errors'] = $attributes->getMessages();
