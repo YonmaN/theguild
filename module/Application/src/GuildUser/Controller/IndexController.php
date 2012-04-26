@@ -84,12 +84,6 @@ class IndexController extends ActionController
 				$profile->setName($personal->getValue('full_name'));
 				
 				$profileMapper->persist($profile);
-				
-				$userMapper = $this->getUserMapper();
-				$user->setDisplayName($personal->getValue('display_name'));
-				$user->setDisplayName($personal->getValue('email'));
-				$userMapper->persist($user);
-				
 			} else {
 				$payload['errors'] = $personal->getMessages();
 			}
