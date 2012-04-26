@@ -51,8 +51,47 @@ class IndexController extends ActionController
 		);
 		$personal->setMethod('post');
 		$personal->populate($details);
-    	return new ViewModel(array('user' => $user, 'personal' => $personal));
+		
+		$attributes = $this->getAttributesForm();
+		$attributes->setIsArray(true);
+		$attributes->setName('attributes');
+		$attributes->setAction($this->url()->fromRoute('default', array('controller' => 'guilduser', 'action' => 'attributes')));
+		$attributes->setAttrib('id', 'attributes-form');
+		
+		$attributes->populate($profile->toArray());
+		
+    	return new ViewModel(array('user' => $user, 'personal' => $personal, 'profile' => $profile, 'attributesForm' => $attributes));
     }
+    
+	public function attributesAction() {
+		if (! $this->zfcUserAuthentication()->hasIdentity()) {
+    		return new \Zend\View\Model\JsonModel(array('success' => false));
+    	}
+		
+		$attributes = $this->getAttributesForm();
+		$attributes->setIsArray(true);
+		$attributes->setName('attributes');
+		
+		if ($this->getRequest()->isPost()) {
+			$valid = $attributes->isValid($this->getRequest()->post()->toArray());
+			$payload = array('success' => $valid);
+			if ($valid) {
+				$user = $this->zfcUserAuthentication()->getIdentity(); /* @var $user \ZfcUser\Model\User */
+				$profileMapper = $this->getProfileMapper();
+				$profile = $profileMapper->findByUserId($user->getUserId()); /* @var $profile \GuildUser\Model\Profile */
+				$profile->setHumour($attributes->getValue('humour'));
+				$profileMapper->persist($profile);
+			} else {
+				$payload['errors'] = $attributes->getMessages();
+			}
+		} else {
+			$payload = array('success' => false);
+		}
+		$viewModel = new \Zend\View\Model\JsonModel($payload);
+		
+		$viewModel->setTerminal(true);
+		return $viewModel;
+	}
     
 	public function detailsAction() {
 		if (! $this->zfcUserAuthentication()->hasIdentity()) {
@@ -82,6 +121,7 @@ class IndexController extends ActionController
 				$profile->setLfg($personal->getValue('lfg'));
 				$profile->setGender($personal->getValue('gender'));
 				$profile->setName($personal->getValue('full_name'));
+				$profile->setBio($personal->getValue('bio'));
 				
 				$profileMapper->persist($profile);
 			} else {
@@ -102,12 +142,32 @@ class IndexController extends ActionController
 	private function getDetailsForm() {
 		return new Form(array(
 				'elements' => array(
+					'bio' => array('type' => 'textarea', 'options' => array('value' => 'סיפור רקע ו-Fluff','rows' => 15,)),
 					'full_name' => array('type' => 'text','options' => array('label' => 'שם מלא')),
 					'display_name' => array('type' => 'text','options' => array('label' => 'שם תצוגה')),
 					'email' => array('type' => 'text','options' => array('label' => 'דוא"ל')),
 					'lfg' => array('type' => 'radio','options' => array('label' => 'מחפש?', 'multiOptions' => array('Yes' => 'כן, אני מחפש קבוצה', 'No' => 'לא, תעזבו אותי בשקט'))),
 					'gender' => array('type' => 'radio','options' => array('label' => 'מין', 'multiOptions' => array('Male' => 'שחקן', 'Female' => 'שחקנית', 'Other' => 'משהו אחר או לא ניתן להגדרה'))),
-					'submit' => array('type' => 'submit', 'options' => array('label' => 'שמור פרטים אישיים'))
+					'personal-submit' => array('type' => 'submit', 'options' => array('label' => 'שמור פרטים אישיים'))
+				),
+			)
+		);
+	}
+	
+	/**
+	 * @return \Zend\Form\Form 
+	 */
+	private function getAttributesForm() {
+		return new Form(array(
+				'elements' => array(
+					'humour' => array('type' => 'hidden','options' => array('label' => '', 'class' => 'input-mini')),
+					'teamplay' => array('type' => 'hidden','options' => array('label' => '', 'class' => 'input-mini')),
+					'leadership' => array('type' => 'text','options' => array('label' => 'מנהיגות', 'class' => 'input-mini')),
+					'mobility' => array('type' => 'text','options' => array('label' => 'ניידות', 'class' => 'input-mini')),
+					'focus' => array('type' => 'text','options' => array('label' => 'מיקוד', 'class' => 'input-mini')),
+					'hospitality' => array('type' => 'text','options' => array('label' => 'אירוח', 'class' => 'input-mini')),
+					'strictness' => array('type' => 'text','options' => array('label' => 'קפדנות', 'class' => 'input-mini')),
+					'attributes-submit' => array('type' => 'submit', 'options' => array('label' => 'שמור תכונות'))
 				),
 			)
 		);

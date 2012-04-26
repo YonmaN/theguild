@@ -35,18 +35,18 @@ class ProfileMapper extends DbMapperAbstract {
 	 * @param array $ids
 	 * @return array
 	 */
-//	public function findByUserIds($ids) {
-//		$rowset = $this->getTableGateway()->select('user_id in('. implode(',', $ids).')');
-//		
-//		$profileRows = $rowset->toArray();
-//		$output = array();
-//		foreach ($profileRows as $profileRow) {
-//			$output[$profileRow['user_id']][$profileRow['meta_key']] = $profileRow['meta'];
-//		}
-//		$profiles = Profile::fromArraySet($output);
-//		
-//		return $profiles;
-//	}
+	public function findByUserIds($ids) {
+		$rowset = $this->getTableGateway()->select('user_id in('. implode(',', $ids).')');
+		
+		$profileRows = $rowset->toArray();
+		$output = array();
+		foreach ($profileRows as $profileRow) {
+			$output[$profileRow['user_id']] = $profileRow;
+		}
+		$profiles = Profile::fromArraySet($output);
+		
+		return $profiles;
+	}
 	
 	public function persist(Profile $profile) {
 		$data = $profile->toArray(); // or perhaps pass it by reference?

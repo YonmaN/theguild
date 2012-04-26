@@ -69,6 +69,16 @@ ul.tabs {
 	display: inline;
 }
 
+.zend_form #personal-bio-element {
+	float: left;
+}
+
+#personal-bio-element textarea {
+    resize: none;
+	width: 375px;
+	height: 291px;
+}
+
 .zend_form button#personal-submit {
 	width: 120px;
 	height: 30px;

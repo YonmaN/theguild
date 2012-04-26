@@ -1,3 +1,4 @@
+<?php $profile = $profile ?: new \GuildUser\Model\Profile() ?>
 <div id="contentbg">
 	<div id="contentblank">
 		<div id="content">
@@ -143,13 +144,10 @@
 								</div>
 								<div class="slider_gutter_r slider_gutter_item"> </div>
 							</div>
-						</div></li>
-					<li><label>מנהיגות</label><span>slider</span></li>
-					<li><label>יצירתיות</label><span>slider</span></li>
-					<li><label>ניידות</label><span>slider</span></li>
-					<li><label>מיקוד</label><span>slider</span></li>
-					<li><label>אירוח</label><span>slider</span></li>
-					<li><label>קפדנות</label><span>slider</span></li>
+						</div>
+					</li>
+					
+					<?php echo $attributesForm ?>
 				</ul>
 			</div>
 		</div>
@@ -162,19 +160,36 @@
 window.addEvent('domready', function() {
 	
 
-	new Form.Request($('personal-form'), null, {
+	new Form.Request($('attributes-form'), null, {
 		onSend: function(){
-			$('personal-submit').set('value', 'שומר פרטים אישיים...').set('disabled', true);
+			$('attributes-attributessubmit').set('value', 'שומר תכונות...').set('disabled', true);
 		},
 		onComplete: function(resultNode, textNodes, args, responseText){
-			$('personal-submit').set('value', 'שמור פרטים אישיים').set('disabled', false);
+			$('attributes-attributessubmit').set('value', 'שמור תכונות').set('disabled', false);
 			var response = eval("(" + responseText + ")");
 			if (response.success) {
 				
 			}
 		},
 		requestOptions: {
-			spinnerTarget: $('submit-element')
+			spinnerTarget: $('attributessubmit-element')
+		},
+		resetForm: false
+	});
+
+	new Form.Request($('personal-form'), null, {
+		onSend: function(){
+			$('personal-personalsubmit').set('value', 'שומר פרטים אישיים...').set('disabled', true);
+		},
+		onComplete: function(resultNode, textNodes, args, responseText){
+			$('personal-personalsubmit').set('value', 'שמור פרטים אישיים').set('disabled', false);
+			var response = eval("(" + responseText + ")");
+			if (response.success) {
+				
+			}
+		},
+		requestOptions: {
+			spinnerTarget: $('personalsubmit-element')
 		},
 		resetForm: false
 	});
@@ -202,8 +217,12 @@ window.addEvent('domready', function() {
 							$('attribute-humour_'+pos).addClass('active');
 						}
 						
+						if ($('attributes-humour')) {
+							$('attributes-humour').value = pos;
+						}
+						
 					}
-				}, null).setMin(1);
+				}, null).setMin(<?php echo intval($profile->getHumour()) ?>);
 				
 				var mySlideC = new Slider($$('#attribute-teamplay-item .slider_gutter_i')[0],
 											$$('#attribute-teamplay-item .knob')[0],
@@ -219,8 +238,12 @@ window.addEvent('domready', function() {
 							$('attribute-teamplay_'+pos).addClass('active');
 						}
 						
+						if ($('attributes-teamplay')) {
+							$('attributes-teamplay').value = pos;
+						}
+						
 					}
-				}, null).setMin(1);
+				}, null).setMin(<?php echo intval($profile->getTeamplay()) ?>);
 
 				$('attributes-editor').initialised = true;
 	        }
