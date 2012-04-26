@@ -162,13 +162,21 @@
 window.addEvent('domready', function() {
 	
 
-	new Form.Request($('personal-form'), $('result'), {
-		requestOptions: {
-			'spinnerTarget': $('personal-form')
+	new Form.Request($('personal-form'), null, {
+		onSend: function(){
+			$('personal-submit').set('value', 'שומר פרטים אישיים...').set('disabled', true);
 		},
-		extraData: { // This is just to make this example work.
-			'html': 'Form sent.'
-		}
+		onComplete: function(resultNode, textNodes, args, responseText){
+			$('personal-submit').set('value', 'שמור פרטים אישיים').set('disabled', false);
+			var response = eval("(" + responseText + ")");
+			if (response.success) {
+				
+			}
+		},
+		requestOptions: {
+			spinnerTarget: $('submit-element')
+		},
+		resetForm: false
 	});
 
 	

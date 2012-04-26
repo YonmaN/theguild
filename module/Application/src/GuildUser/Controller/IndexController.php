@@ -10,6 +10,7 @@ use Zend\Mvc\Controller\ActionController,
 class IndexController extends ActionController
 {
 	private $userMapper;
+	private $userMetaMapper;
 	private $gameMapper;
 	private $profileMapper;
     
@@ -31,7 +32,9 @@ class IndexController extends ActionController
     	$view->headLink()->appendStylesheet("$basePath/css/myself.css");
     	
 		$user = $this->zfcUserAuthentication()->getIdentity(); /* @var $user \ZfcUser\Model\User */
-        $profile = $this->getProfileMapper()->findByUserId($user->getUserId());
+		
+		$profileMapper = $this->getProfileMapper();
+		$profile = $profileMapper->findByUserId($user->getUserId());
 		
 		$personal = $this->getDetailsForm();
 		$personal->setIsArray(true);
@@ -46,13 +49,55 @@ class IndexController extends ActionController
 			'lfg' => $profile->getLfg() === 'true' ? 'Yes' : 'No',
 			'gender' => ucwords($profile->getGender())
 		);
-		
+		$personal->setMethod('post');
 		$personal->populate($details);
-    	return new ViewModel(array('user' => $user, 'profile' => $profile, 'personal' => $personal));
+    	return new ViewModel(array('user' => $user, 'personal' => $personal));
     }
     
 	public function detailsAction() {
-		$viewModel = new \Zend\View\Model\JsonModel(array('success' => true));
+		if (! $this->zfcUserAuthentication()->hasIdentity()) {
+    		return new \Zend\View\Model\JsonModel(array('success' => false));
+    	}
+		
+		$personal = $this->getDetailsForm();
+		$personal->setIsArray(true);
+		$personal->setName('personal');
+		
+		if ($this->getRequest()->isPost()) {
+			$valid = $personal->isValid($this->getRequest()->post()->toArray());
+			$payload = array('success' => $valid);
+			if ($valid) {
+				$user = $this->zfcUserAuthentication()->getIdentity(); /* @var $user \ZfcUser\Model\User */
+				$userModel = $this->getUserMapper();
+				$userModel->persist(
+							$user
+								->setDisplayName($personal->getValue('display_name'))
+								->setEmail($personal->getValue('email'))
+						);
+				
+				
+				$profileMapper = $this->getProfileMapper();
+				$profile = $profileMapper->findByUserId($user->getUserId()); /* @var $profile \GuildUser\Model\Profile */
+				
+				$profile->setLfg($personal->getValue('lfg'));
+				$profile->setGender($personal->getValue('gender'));
+				$profile->setName($personal->getValue('full_name'));
+				
+				$profileMapper->persist($profile);
+				
+				$userMapper = $this->getUserMapper();
+				$user->setDisplayName($personal->getValue('display_name'));
+				$user->setDisplayName($personal->getValue('email'));
+				$userMapper->persist($user);
+				
+			} else {
+				$payload['errors'] = $personal->getMessages();
+			}
+		} else {
+			$payload = array('success' => false);
+		}
+		$viewModel = new \Zend\View\Model\JsonModel($payload);
+		
 		$viewModel->setTerminal(true);
 		return $viewModel;
 	}
@@ -86,6 +131,20 @@ class IndexController extends ActionController
      */
     public function setUserMapper($userMapper) {
     	$this->userMapper = $userMapper;
+    }
+	
+    /**
+     * @return \GuildUser\Model\UserMetaMapper
+     */
+    public function getUserMetaMapper() {
+    	return $this->userMetaMapper;
+    }
+    
+    /**
+     * @param \GuildUser\Model\UserMetaMapper $userMapper
+     */
+    public function setUserMetaMapper($userMetaMapper) {
+    	$this->userMetaMapper = $userMetaMapper;
     }
     
     /**

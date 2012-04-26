@@ -3,12 +3,16 @@
 namespace GuildUser\Model;
 
 use ZfcUser\Model\UserInterface;
-
+use ZfcUser\Model\UserMetaInterface;
 use DateTime,
     ZfcBase\Model\ModelAbstract;
 
 class Profile extends ModelAbstract
 {
+	/**
+	 * @var boolean
+	 */
+	private $new = false;
 	/**
 	 * @var integer
 	 */
@@ -20,7 +24,7 @@ class Profile extends ModelAbstract
     protected $name;
     
     /**
-     * @var string
+     * @var integer
      */
     protected $birthDate;
 
@@ -31,13 +35,13 @@ class Profile extends ModelAbstract
     /**
      * @var boolean
      */
-    protected $lfg;
+    protected $lfg = true;
     /**
      * @var string
      */
     protected $bio;
     /**
-     * @var integer
+     * @var boolean
      */
     protected $gender;
     /**
@@ -68,12 +72,20 @@ class Profile extends ModelAbstract
      * @var integer
      */
     protected $strictness;
-    
 
+	public function isNew() {
+		return $this->new;
+	}
+	
+	public function setNew($new = true) {
+		$this->new = $new;
+		return $this;
+	}
+	
     /**
      * Get userId.
      *
-     * @return int userId
+     * @return integer
      */
     public function getUserId()
     {
@@ -81,91 +93,91 @@ class Profile extends ModelAbstract
     }
     
     /**
-	 * @return the $name
+	 * @return string
 	 */
 	public function getName() {
 		return $this->name;
 	}
 
 	/**
-	 * @return the $birthDate
+	 * @return integer
 	 */
 	public function getBirthDate() {
 		return $this->birthDate;
 	}
 
 	/**
-	 * @return the $visible
+	 * @return boolean
 	 */
 	public function getVisible() {
 		return $this->visible;
 	}
 
 	/**
-	 * @return the $lfg
+	 * @return boolean
 	 */
 	public function getLfg() {
 		return $this->lfg;
 	}
 
 	/**
-	 * @return the $bio
+	 * @return string
 	 */
 	public function getBio() {
 		return $this->bio;
 	}
 
 	/**
-	 * @return the $gender
+	 * @return string
 	 */
 	public function getGender() {
 		return $this->gender;
 	}
 
 	/**
-	 * @return the $humour
+	 * @return integer
 	 */
 	public function getHumour() {
 		return $this->humour;
 	}
 
 	/**
-	 * @return the $mobility
+	 * @return integer
 	 */
 	public function getMobility() {
 		return $this->mobility;
 	}
 
 	/**
-	 * @return the $teamplay
+	 * @return integer
 	 */
 	public function getTeamplay() {
 		return $this->teamplay;
 	}
 
 	/**
-	 * @return the $leadership
+	 * @return integer
 	 */
 	public function getLeadership() {
 		return $this->leadership;
 	}
 
 	/**
-	 * @return the $focus
+	 * @return integer
 	 */
 	public function getFocus() {
 		return $this->focus;
 	}
 
 	/**
-	 * @return the $hospitality
+	 * @return integer
 	 */
 	public function getHospitality() {
 		return $this->hospitality;
 	}
 
 	/**
-	 * @return the $strictness
+	 * @return integer
 	 */
 	public function getStrictness() {
 		return $this->strictness;
@@ -175,91 +187,91 @@ class Profile extends ModelAbstract
 	 * @param string $name
 	 */
 	public function setName($name) {
-		$this->name = $name;
+		$this->name = ($name);
 	}
 
 	/**
 	 * @param string $birthDate
 	 */
 	public function setBirthDate($birthDate) {
-		$this->birthDate = $birthDate;
+		$this->birthDate = ($birthDate);
 	}
 
 	/**
 	 * @param boolean $visible
 	 */
 	public function setVisible($visible) {
-		$this->visible = $visible;
+		$this->visible = ($visible);
 	}
 
 	/**
 	 * @param boolean $lfg
 	 */
 	public function setLfg($lfg) {
-		$this->lfg = $lfg;
+		$this->lfg = ($lfg);
 	}
 
 	/**
 	 * @param string $bio
 	 */
 	public function setBio($bio) {
-		$this->bio = $bio;
+		$this->bio = ($bio);
 	}
 
 	/**
 	 * @param number $gender
 	 */
 	public function setGender($gender) {
-		$this->gender = $gender;
+		$this->gender = ($gender);
 	}
 
 	/**
 	 * @param number $humour
 	 */
 	public function setHumour($humour) {
-		$this->humour = $humour;
+		$this->humour = ($humour);
 	}
 
 	/**
 	 * @param number $mobility
 	 */
 	public function setMobility($mobility) {
-		$this->mobility = $mobility;
+		$this->mobility = ($mobility);
 	}
 
 	/**
 	 * @param number $teamplay
 	 */
 	public function setTeamplay($teamplay) {
-		$this->teamplay = $teamplay;
+		$this->teamplay = ($teamplay);
 	}
 
 	/**
 	 * @param number $leadership
 	 */
 	public function setLeadership($leadership) {
-		$this->leadership = $leadership;
+		$this->leadership = ($leadership);
 	}
 
 	/**
 	 * @param number $focus
 	 */
 	public function setFocus($focus) {
-		$this->focus = $focus;
+		$this->focus = ($focus);
 	}
 
 	/**
 	 * @param number $hospitality
 	 */
 	public function setHospitality($hospitality) {
-		$this->hospitality = $hospitality;
+		$this->hospitality = ($hospitality);
 	}
 
 	/**
 	 * @param number $strictness
 	 */
 	public function setStrictness($strictness) {
-		$this->strictness = $strictness;
+		$this->strictness = ($strictness);
 	}
  
     /**

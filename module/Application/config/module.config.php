@@ -17,7 +17,7 @@ return array(
         		),
         		'profile_tg' => array(
         				'parameters' => array(
-        						'tableName' => 'user_meta',
+        						'tableName' => 'profile',
         						'adapter'   => 'zfcuser_zend_db_adapter',
         				),
         		),
@@ -25,20 +25,23 @@ return array(
         		'parameters' => array('tableGateway' => 'game_tg')
         	),
         	'GuildUser\Model\ProfileMapper' => array(
-        		'parameters' => array('tableGateway' => 'profile_tg')
+        		'parameters' => array('tableGateway' => 'profile_tg',
+										'userMapper' => 'ZfcUser\Model\UserMapper',
+					),
+				
         	),
         	'Application\Controller\IndexController' => array(
         				'parameters' => array(
         					'userMapper' => 'GuildUser\Model\UserMapper',
+        					'profileMapper' => 'GuildUser\Model\ProfileMapper',
         					'gameMapper' => 'Game\Model\GameMapper',
-        					'profileMapper' => 'GuildUser\Model\ProfileMapper'
         				)
         			),
         	'GuildUser\Controller\IndexController' => array(
         				'parameters' => array(
+        					'profileMapper' => 'GuildUser\Model\ProfileMapper',
         					'userMapper' => 'GuildUser\Model\UserMapper',
         					'gameMapper' => 'Game\Model\GameMapper',
-        					'profileMapper' => 'GuildUser\Model\ProfileMapper'
         				)
         			),
             // Setup for controllers.

@@ -45,8 +45,8 @@ class Module implements AutoloaderProvider
 		/// json responder
 		$locator             = $app->getLocator();
         $view                = $locator->get('Zend\View\View');
-        $phpRendererStrategy = $locator->get('Zend\View\Strategy\JsonStrategy');
-        $view->events()->attachAggregate($phpRendererStrategy, 1000);
+        $jsonStrategy = $locator->get('Zend\View\Strategy\JsonStrategy');
+        $view->events()->attachAggregate($jsonStrategy, 1000);
 		
 		
     }
