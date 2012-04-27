@@ -124,27 +124,25 @@
 				</div>
 				<ul id="attributes-form-list" class="form-field no-bullets-list">
 					<li id="attribute-humour-item"><label>הומור</label>
-						<div class="slide_container fright" >
-							<div class="slider" id="slider_humour" >
-								<div class="slider_gutter_l slider_gutter_item"></div>
-								<div id="slider_gutter_humour" class="slider_gutter_i slider_gutter_item">
-									<img class="slider_bkg" src="/images/slider/bkg_slider.gif"/>
-									<div class="knob"></div>
-								</div>
-								<div class="slider_gutter_r slider_gutter_item"> </div>
-							</div>
-						</div>
+						<?php echo $this->slider('humour') ?>
 					</li>
-					<li id="attribute-teamplay-item"><label>שיתוף פעולה</label><div class="slide_container fright" >
-							<div class="slider" id="slider_teamplay" >
-								<div class="slider_gutter_l slider_gutter_item"></div>
-								<div id="slider_gutter_humour" class="slider_gutter_i slider_gutter_item">
-									<img class="slider_bkg" src="/images/slider/bkg_slider.gif"/>
-									<div class="knob"></div>
-								</div>
-								<div class="slider_gutter_r slider_gutter_item"> </div>
-							</div>
-						</div>
+					<li id="attribute-teamplay-item"><label>חברותי</label>
+						<?php echo $this->slider('teamplay') ?>
+					</li>
+					<li id="attribute-leadership-item"><label>מנהיגות</label>
+						<?php echo $this->slider('leadership') ?>
+					</li>
+					<li id="attribute-mobility-item"><label>ניידות</label>
+						<?php echo $this->slider('mobility') ?>
+					</li>
+					<li id="attribute-focus-item"><label>מיקוד</label>
+						<?php echo $this->slider('focus') ?>
+					</li>
+					<li id="attribute-hospitality-item"><label>אירוח</label>
+						<?php echo $this->slider('hospitality') ?>
+					</li>
+					<li id="attribute-strictness-item"><label>קפדנות</label>
+						<?php echo $this->slider('strictness') ?>
 					</li>
 					
 					<?php echo $attributesForm ?>
@@ -203,48 +201,42 @@ window.addEvent('domready', function() {
         tabPane.addEvent('change', function(){
 			// initialise the sliders if the editor is visible and was not previously initialised
 			if ($('attributes-editor').isVisible() && (! $('attributes-editor').initialised)) {
-				var mySlideC = new Slider($$('#attribute-humour-item .slider_gutter_i')[0],
-											$$('#attribute-humour-item .knob')[0],
-											$$('#attribute-humour-item img.slider_bkg')[0],{
-					start: 1,
-					end: 5,
-					offset:0,
-					snap:true, 
-					numsteps:4,
-					onChange: function(pos){
-						$$('.attribute-info').removeClass('active');
-						if ($('attribute-humour_'+pos)) {
-							$('attribute-humour_'+pos).addClass('active');
-						}
-						
-						if ($('attributes-humour')) {
-							$('attributes-humour').value = pos;
-						}
-						
-					}
-				}, null).setMin(<?php echo intval($profile->getHumour()) ?>);
-				
-				var mySlideC = new Slider($$('#attribute-teamplay-item .slider_gutter_i')[0],
-											$$('#attribute-teamplay-item .knob')[0],
-											$$('#attribute-teamplay-item img.slider_bkg')[0],{
-					start: 1,
-					end: 5,
-					offset:0,
-					snap:true, 
-					numsteps:4,
-					onChange: function(pos){
-						$$('.attribute-info').removeClass('active');
-						if ($('attribute-teamplay_'+pos)) {
-							$('attribute-teamplay_'+pos).addClass('active');
-						}
-						
-						if ($('attributes-teamplay')) {
-							$('attributes-teamplay').value = pos;
-						}
-						
-					}
-				}, null).setMin(<?php echo intval($profile->getTeamplay()) ?>);
+				var attributes = {
+					
+					humour: <?php echo intval($profile->getHumour()) ?>,
+					teamplay: <?php echo intval($profile->getTeamplay()) ?>,
+					leadership: <?php echo intval($profile->getLeadership()) ?>,
+					mobility: <?php echo intval($profile->getMobility()) ?>,
+					focus: <?php echo intval($profile->getFocus()) ?>,
+					hospitality: <?php echo intval($profile->getHospitality()) ?>,
+					strictness: <?php echo intval($profile->getStrictness()) ?>
+					
+				};
 
+				Object.each(attributes,
+					function(score, attribute) {
+						new Slider($$('#attribute-'+ attribute +'-item .slider_gutter_i')[0],
+												$$('#attribute-'+ attribute +'-item .knob')[0],
+												$$('#attribute-'+ attribute +'-item img.slider_bkg')[0],{
+						start: 1,
+						end: 5,
+						offset:0,
+						snap:true, 
+						numsteps:4,
+						onChange: function(pos){
+							$$('.attribute-info').removeClass('active');
+							if ($('attribute-'+ attribute +'_'+pos)) {
+								$('attribute-'+ attribute +'_'+pos).addClass('active');
+							}
+
+							if ($('attributes-'+ attribute)) {
+								$('attributes-'+ attribute).value = pos;
+							}
+
+						}
+					}, null).setMin(score);
+				});
+				
 				$('attributes-editor').initialised = true;
 	        }
         });

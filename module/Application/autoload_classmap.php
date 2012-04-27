@@ -9,5 +9,6 @@ return array(
 	'GuildUser\Model\Profile'			=> __DIR__ . '/src/GuildUser/Model/Profile.php',
 	'GuildUser\Form\Login'                               => __DIR__ . '/src/GuildUser/Form/Login.php',
 	'GuildUser\Form\Register'                               => __DIR__ . '/src/GuildUser/Form/Register.php',
+	'MooTools\View\Helper\Slider'                           => __DIR__ . '/src/MooTools/View/Helper/Slider.php',
 		
 );

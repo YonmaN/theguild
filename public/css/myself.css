@@ -102,3 +102,11 @@ ul.tabs {
     height: 24px;
     margin: 0 auto;
 }
+
+#attributes-form dd, #attributes-form dt {
+	display: none;
+}
+
+#attributessubmit-element {
+	display: block !important;
+}

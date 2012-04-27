@@ -62,6 +62,7 @@ return array(
 			'Zend\View\HelperLoader' => array(
 				'parameters' => array(
 					'map' => array(
+						'slider' => 'MooTools\View\Helper\Slider'
 					)
 				)
 			),

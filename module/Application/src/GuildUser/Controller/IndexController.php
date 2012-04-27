@@ -160,13 +160,13 @@ class IndexController extends ActionController
 	private function getAttributesForm() {
 		return new Form(array(
 				'elements' => array(
-					'humour' => array('type' => 'hidden','options' => array('label' => '', 'class' => 'input-mini')),
-					'teamplay' => array('type' => 'hidden','options' => array('label' => '', 'class' => 'input-mini')),
-					'leadership' => array('type' => 'text','options' => array('label' => 'מנהיגות', 'class' => 'input-mini')),
-					'mobility' => array('type' => 'text','options' => array('label' => 'ניידות', 'class' => 'input-mini')),
-					'focus' => array('type' => 'text','options' => array('label' => 'מיקוד', 'class' => 'input-mini')),
-					'hospitality' => array('type' => 'text','options' => array('label' => 'אירוח', 'class' => 'input-mini')),
-					'strictness' => array('type' => 'text','options' => array('label' => 'קפדנות', 'class' => 'input-mini')),
+					'humour' => array('type' => 'hidden','options' => array()),
+					'teamplay' => array('type' => 'hidden','options' => array()),
+					'leadership' => array('type' => 'hidden','options' => array()),
+					'mobility' => array('type' => 'hidden','options' => array()),
+					'focus' => array('type' => 'hidden','options' => array()),
+					'hospitality' => array('type' => 'hidden','options' => array()),
+					'strictness' => array('type' => 'hidden','options' => array()),
 					'attributes-submit' => array('type' => 'submit', 'options' => array('label' => 'שמור תכונות'))
 				),
 			)
