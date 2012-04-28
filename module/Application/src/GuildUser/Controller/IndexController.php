@@ -60,7 +60,18 @@ class IndexController extends ActionController
 		
 		$attributes->populate($profile->toArray());
 		
-    	return new ViewModel(array('user' => $user, 'personal' => $personal, 'profile' => $profile, 'attributesForm' => $attributes));
+		$reader = simplexml_load_file(getcwd().DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'attributes.xml');
+		$attributesContent = array();
+		foreach($reader as $attribute) {
+			$attributesContent[(string)$attribute['id']] = array('name' => (string)$attribute->name, 'headline' => (string)$attribute->headline);
+			$attributesContent[(string)$attribute['id']]['scores'] = array();
+			$scores = current((array)$attribute->scores);
+			foreach ($scores as $score) {
+				$attributesContent[(string)$attribute['id']]['scores'][(string)$score['value']] = array('quote' => (string)$score->quote, 'text' => (string)$score->text);
+			}
+		}
+		
+    	return new ViewModel(array('user' => $user, 'personal' => $personal, 'profile' => $profile, 'attributesForm' => $attributes, 'tooltips' => $attributesContent));
     }
     
 	public function attributesAction() {

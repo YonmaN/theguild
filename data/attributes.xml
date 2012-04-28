@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attributes>
+    <attribute id="humour">
+		<name><![CDATA[הומור]]></name>
+		<headline><![CDATA[הומור]]></headline>
+		<scores>
+			<score value="1">
+				<quote><![CDATA[בדיחות הדעת היא לחלשים]]></quote>
+				<text><![CDATA[יבש כמו צנון, מרובע כמו מסך מחשב, משעמם כמו צבע מתייבש. זה לא שאין לך מחשבות
+				מצחיקות ... הן פשוט מצחיקות רק אותך.]]></text>
+			</score>
+			<score value="2">
+				<quote><![CDATA[גנום, טרול ושני גובלינים נכנסים ל... רגע, לא, מההתחלה]]></quote>
+				<text><![CDATA[אתה לא מצחיק אבל כנראה גם לא מדכא. משחקים איתך הם משעשעים, כל עוד הכנת את הבדיחות
+				מראש ועשית חזרות בבית.]]></text>
+			</score>
+			<score value="3">
+				<quote><![CDATA[יש לי יש לי יש לי! פההההה!]]></quote>
+				<text><![CDATA[צחוק בריא לנשמה - אתה יודע ומיישם. משחקים איתך הם משעשעים, עם one-liners וכמה
+				גיחוחים וציטוטי קומדי קלאב. כשאתה מנסה לאלתר ... זה לא תמיד הולך אבל מעריכים את המאמץ!]]></text>
+			</score>
+			<score value="4">
+				<quote><![CDATA[רגע, סנונית אפריקאית? או אירופאית?]]></quote>
+				<text><![CDATA[צחוק, בשבילך, הוא סוג של תחביב. יש לך את הניצוץ והידע כיצד להשתמש במילים
+				כמו בחרב סייף חדה. מפגשים איתך לעיתים מסתיימים בגילגולים על הריצפה ובטן כואבת]]></text>
+			</score>
+			<score value="5">
+				<quote><![CDATA[מוה-הא-הא-הא-הא]]></quote>
+				<text><![CDATA[אתה אלוהי הצחוק. כשאתה נכנס לחדר, נכנס יחד איתך חוש ההומור ותופס כיסא נפרד
+				. משחקים איתך הם נושא שיחה לכמה חודשים ומאוחר בלילה, פרצי צחוק חסרי שליטה עדיין יהדהדו בבתי
+				השחקנים האחרים]]></text>
+			</score>
+		</scores>
+	</attribute>
+	<attribute id="teamplay">
+		<name><![CDATA[קבוצתי]]></name>
+		<headline><![CDATA[שיתוף פעולה]]></headline>
+		<scores>
+			<score value="1">
+				<quote><![CDATA[מי שאוכל לבד, אוכל יותר]]></quote>
+				<text><![CDATA[בדד, בשבילך אינה מילה גסה. למעשה זהו מצב מועדף - אין מי
+יציק עם שאלות כמו "אתה בטוח שזה יעבוד?" או יעלב אם תהרוג
+את הדמות שלו בשביל החלק שלו ... אה, שלך, באוצר. אם רק היה אפשר, היית נפתר מהמנחה.]]></text>
+			</score>
+			<score value="2">
+				<quote><![CDATA[שמור את אויבייך קרובים ואת חבריך קרובים יותר]]></quote>
+				<text><![CDATA[אנשים הם דברים שימושיים. אולי מצאת דרך לתקשר עם שחקנים אחרים אבל
+				עדיין תעשה מה שטוב לך, ללא קשר לרצון הקבוצה. זה לא שאתה אדם רע - הם פשוט יודו לך
+				בסוף, אם רק הם יחכו.]]></text>
+			</score>
+			<score value="3">
+				<quote><![CDATA[אם כל אחד יעשה את התפקיד שלו, הכול יהיה בסדר]]></quote>
+				<text><![CDATA[משחקי קבוצה הם שם המשחק בשבילך. אם אתה לבד, אתה שואף לחזור
+				ללהקה. שיתוף הפעולה של השחקנים חשוב, כל עוד הוא תורם למשחק ואינו חונק את חופש הפעולה
+				שלך]]></text>
+			</score>
+			<score value="4">
+				<quote><![CDATA[אחד בשביל כולם! כולם בשביל אחד!]]></quote>
+				<text><![CDATA[הקבוצה גדולה מסכום חלקיה והחלקים השונים צריכים לנוע במקשה אחת
+				ולתמוך בכל הרכיבים השונים. הכוכב האמיתי בסרט 300 הוא הפאלאנקס, סופרמן יפסיד לX-men אם הם רק יפסידו לריב
+				והדינוזאור האהוב עליך הוא הוולוסירפטור. נשמע מוכר?]]></text>
+			</score>
+			<score value="5">
+				<quote><![CDATA[שירותים? רגע, כולנו נבוא איתך!]]></quote>
+				<text><![CDATA[המשחקים איתך הם סוג של ניסוי חברתי בו הקבוצה כולה קשורה בכפות הרגליים במשחק
+						כדורגל כנגד גמדים עם קוצים על הראש. הקבוצה לא רק יותר חשובה מהפרט, במשחק שלך הפרט
+						כלל אינו קיים!]]></text>
+			</score>
+		</scores>
+	</attribute>
+	<attribute id="leadership">
+		<name><![CDATA[מנהיגות]]></name>
+		<headline><![CDATA[מנהיגות]]></headline>
+		<scores>
+			<score value="1">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+			<score value="2">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+			<score value="3">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+			<score value="4">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+			<score value="5">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+		</scores>
+	</attribute>
+	<attribute id="mobility">
+		<name><![CDATA[ניידות]]></name>
+		<headline><![CDATA[ניידות]]></headline>
+		<scores>
+			<score value="1">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+			<score value="2">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+			<score value="3">
+				<quote><![CDATA[תרד, אני מגיע]]></quote>
+				<text><![CDATA[אתה נייד וממונע. בין אם בכוחות קסומים, על הסוס של אבא או
+				המכונית הפרטית, אתה מסוגל להגיע לכל מקום המרחק סביר ואולי אף תיתן טרמפים עבור פיצוי הולם]]></text>
+			</score>
+			<score value="4">
+				<quote><![CDATA[תרד, אני מגיע]]></quote>
+				<text><![CDATA[אתה נייד וממונע. בין אם בכוחות קסומים, על הסוס של אבא או
+				המכונית הפרטית, אתה מסוגל להגיע לכל מקום המרחק סביר ואולי אף תיתן טרמפים עבור פיצוי הולם]]></text>
+			</score>
+			<score value="5">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+		</scores>
+	</attribute>
+	<attribute id="focus">
+		<name><![CDATA[מיקוד]]></name>
+		<headline><![CDATA[מיקוד]]></headline>
+		<scores>
+			<score value="1">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+			<score value="2">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+			<score value="3">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+			<score value="4">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+			<score value="5">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+		</scores>
+	</attribute>
+	<attribute id="hospitality">
+		<name><![CDATA[אירוח]]></name>
+		<headline><![CDATA[אירוח]]></headline>
+		<scores>
+			<score value="1">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+			<score value="2">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+			<score value="3">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+			<score value="4">
+				<quote><![CDATA[בואו! יש פיצה ביתית!]]></quote>
+				<text><![CDATA[אם היית יכול, היית עושה מינ/מקס למטבח והסלון שלך. כל משחק אצלך הוא חגיגה
+				של אוכל, חברה ומשחק עד השעות הקטנות של הלילה]]></text>
+			</score>
+			<score value="5">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+		</scores>
+	</attribute>
+	<attribute id="strictness">
+		<name><![CDATA[קפדנות]]></name>
+		<headline><![CDATA[קפדנות]]></headline>
+		<scores>
+			<score value="1">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+			<score value="2">
+				<quote><![CDATA[המשחק נברא כדי שיהנו ממנו]]></quote>
+				<text><![CDATA[החוקים של המשחק והמנחה לא ממש חשובים לך - הם מצע מעניין
+				לדיונים פילוסופיים אבל הם יכולים להישרף לפני שתיתן להם לעכב לך את המשחק
+				או לעצור את הדמות שלך מלעשות משהו שהיא רוצה.]]></text>
+			</score>
+			<score value="3">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+			<score value="4">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+			<score value="5">
+				<quote><![CDATA[]]></quote>
+				<text><![CDATA[]]></text>
+			</score>
+		</scores>
+	</attribute>
+</attributes>
