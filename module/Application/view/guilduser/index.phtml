@@ -67,14 +67,8 @@
 					<li id="attribute-teamplay-item"><label>חברותי</label>
 						<?php echo $this->slider('teamplay') ?>
 					</li>
-					<li id="attribute-leadership-item"><label>מנהיגות</label>
-						<?php echo $this->slider('leadership') ?>
-					</li>
 					<li id="attribute-mobility-item"><label>ניידות</label>
 						<?php echo $this->slider('mobility') ?>
-					</li>
-					<li id="attribute-focus-item"><label>מיקוד</label>
-						<?php echo $this->slider('focus') ?>
 					</li>
 					<li id="attribute-hospitality-item"><label>אירוח</label>
 						<?php echo $this->slider('hospitality') ?>
@@ -143,9 +137,7 @@ window.addEvent('domready', function() {
 					
 					humour: <?php echo intval($profile->getHumour()) ?>,
 					teamplay: <?php echo intval($profile->getTeamplay()) ?>,
-					leadership: <?php echo intval($profile->getLeadership()) ?>,
 					mobility: <?php echo intval($profile->getMobility()) ?>,
-					focus: <?php echo intval($profile->getFocus()) ?>,
 					hospitality: <?php echo intval($profile->getHospitality()) ?>,
 					strictness: <?php echo intval($profile->getStrictness()) ?>
 					

@@ -68,38 +68,12 @@
 			</score>
 		</scores>
 	</attribute>
-	<attribute id="leadership">
-		<name><![CDATA[מנהיגות]]></name>
-		<headline><![CDATA[מנהיגות]]></headline>
-		<scores>
-			<score value="1">
-				<quote><![CDATA[]]></quote>
-				<text><![CDATA[]]></text>
-			</score>
-			<score value="2">
-				<quote><![CDATA[]]></quote>
-				<text><![CDATA[]]></text>
-			</score>
-			<score value="3">
-				<quote><![CDATA[]]></quote>
-				<text><![CDATA[]]></text>
-			</score>
-			<score value="4">
-				<quote><![CDATA[]]></quote>
-				<text><![CDATA[]]></text>
-			</score>
-			<score value="5">
-				<quote><![CDATA[]]></quote>
-				<text><![CDATA[]]></text>
-			</score>
-		</scores>
-	</attribute>
 	<attribute id="mobility">
 		<name><![CDATA[ניידות]]></name>
 		<headline><![CDATA[ניידות]]></headline>
 		<scores>
 			<score value="1">
-				<quote><![CDATA[]]></quote>
+				<quote><![CDATA[כן, אני אתחבר שוב למשחק ב-Skype]]></quote>
 				<text><![CDATA[]]></text>
 			</score>
 			<score value="2">
@@ -115,32 +89,6 @@
 				<quote><![CDATA[תרד, אני מגיע]]></quote>
 				<text><![CDATA[אתה נייד וממונע. בין אם בכוחות קסומים, על הסוס של אבא או
 				המכונית הפרטית, אתה מסוגל להגיע לכל מקום המרחק סביר ואולי אף תיתן טרמפים עבור פיצוי הולם]]></text>
-			</score>
-			<score value="5">
-				<quote><![CDATA[]]></quote>
-				<text><![CDATA[]]></text>
-			</score>
-		</scores>
-	</attribute>
-	<attribute id="focus">
-		<name><![CDATA[מיקוד]]></name>
-		<headline><![CDATA[מיקוד]]></headline>
-		<scores>
-			<score value="1">
-				<quote><![CDATA[]]></quote>
-				<text><![CDATA[]]></text>
-			</score>
-			<score value="2">
-				<quote><![CDATA[]]></quote>
-				<text><![CDATA[]]></text>
-			</score>
-			<score value="3">
-				<quote><![CDATA[]]></quote>
-				<text><![CDATA[]]></text>
-			</score>
-			<score value="4">
-				<quote><![CDATA[]]></quote>
-				<text><![CDATA[]]></text>
 			</score>
 			<score value="5">
 				<quote><![CDATA[]]></quote>

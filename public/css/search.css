@@ -68,19 +68,9 @@ ul.attributes-mini-list li.teamplay {
 	background-color: red;
 }
 
-ul.attributes-mini-list li.leadership {
-	background-color: purple;
-	color: white;
-}
-
 ul.attributes-mini-list li.mobility {
 	background-color: orange;
 	color: black;
-}
-
-ul.attributes-mini-list li.focus {
-	background-color: green;
-	color: white;
 }
 
 ul.attributes-mini-list li.hospitality {

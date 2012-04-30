@@ -59,14 +59,6 @@ class Profile extends ModelAbstract
     /**
      * @var integer
      */
-    protected $leadership;
-    /**
-     * @var integer
-     */
-    protected $focus;
-    /**
-     * @var integer
-     */
     protected $hospitality;
     /**
      * @var integer
@@ -158,20 +150,6 @@ class Profile extends ModelAbstract
 	/**
 	 * @return integer
 	 */
-	public function getLeadership() {
-		return $this->leadership;
-	}
-
-	/**
-	 * @return integer
-	 */
-	public function getFocus() {
-		return $this->focus;
-	}
-
-	/**
-	 * @return integer
-	 */
 	public function getHospitality() {
 		return $this->hospitality;
 	}
@@ -244,20 +222,6 @@ class Profile extends ModelAbstract
 	 */
 	public function setTeamplay($teamplay) {
 		$this->teamplay = ($teamplay);
-	}
-
-	/**
-	 * @param number $leadership
-	 */
-	public function setLeadership($leadership) {
-		$this->leadership = ($leadership);
-	}
-
-	/**
-	 * @param number $focus
-	 */
-	public function setFocus($focus) {
-		$this->focus = ($focus);
 	}
 
 	/**

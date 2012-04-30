@@ -42,15 +42,6 @@ window.addEvent('domready', function () {
     		position: {position: 'centerLeft', edge: 'right'}
     	}, document.id('attribute-teamplay-tooltip-3')).show();
     });
-
-    document.id('attribute-details-leadership').addEvent('mouseover', function() {
-    	ToolTip.instance(this, {
-    		relativeTo: this.id,
-    		autohide: true,
-    		hideDelay: 150,
-    		position: {position: 'centerLeft', edge: 'right'}
-    	}, document.id('attribute-leadership-tooltip-3')).show();
-    });
     
     document.id('attribute-details-mobility').addEvent('mouseover', function() {
     	ToolTip.instance(this, {
@@ -59,15 +50,6 @@ window.addEvent('domready', function () {
     		hideDelay: 150,
     		position: {position: 'centerLeft', edge: 'right'}
     	}, document.id('attribute-mobility-tooltip-3')).show();
-    });
-
-    document.id('attribute-details-focus').addEvent('mouseover', function() {
-    	ToolTip.instance(this, {
-    		relativeTo: this.id,
-    		autohide: true,
-    		hideDelay: 150,
-    		position: {position: 'centerLeft', edge: 'right'}
-    	}, document.id('attribute-focus-tooltip-3')).show();
     });
 
     document.id('attribute-details-hospitality').addEvent('mouseover', function() {
@@ -150,19 +132,10 @@ window.addEvent('domready', function () {
 	<blockquote>גנום, טרול ושני גובלינים נכנסים ל... רגע, לא, מההתחלה</blockquote>
 	<p>אתה לא מצחיק אבל כנראה גם לא מדכא. משחקים איתך הם משעשעים, כל עוד הכנת את הבדיחות מראש ועשית חזרות בבית.</p>
 </div>
-<div id="attribute-leadership-tooltip-3" class="tooltip-content"><h3>דירוג מנהיגות: 3</h3>
-	<blockquote>גנום, טרול ושני גובלינים נכנסים ל... רגע, לא, מההתחלה</blockquote>
-	<p>אתה לא מצחיק אבל כנראה גם לא מדכא. משחקים איתך הם משעשעים, כל עוד הכנת את הבדיחות מראש ועשית חזרות בבית.</p>
-</div>
 <div id="attribute-mobility-tooltip-3" class="tooltip-content"><h3>דירוג ניידות: 3</h3>
 	<blockquote>תרד, אני מגיע</blockquote>
 	<p>אתה נייד וממונע. בין אם בכוחות קסומים, על הסוס של אבא או המכונית הפרטית,
 	 אתה מסוגל להגיע לכל מקום המרחק סביר ואולי אף תיתן טרמפים עבור פיצוי הולם</p>
-</div>
-<div id="attribute-focus-tooltip-3" class="tooltip-content"><h3>דירוג מיקוד: 3</h3>
-<blockquote>פגיעה! בואו נזרוק נזק ונדבר על סרטים!</blockquote>
-<p>בשבילך המשחק הוא לא רק הזדמנות לזכות בניקוד דימיוני אלא גם הזדמנות לשוחח על ספרות, המכונית החדשה
-והאפליקציה החדשה לאייפון, היא ממש מגניבה לא?</p>
 </div>
 <div id="attribute-hospitality-tooltip-5" class="tooltip-content"><h3>דירוג אירוח: 5</h3>
 <blockquote>בואו! יש פיצה ביתית!</blockquote>
@@ -253,21 +226,10 @@ window.addEvent('domready', function () {
 								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile->getTeamplay() / 5 * 100)?>%;"></div></td>
 								<td class="attribute-details"><div id="attribute-details-teamplay" class="icon"></div></td>
 							</tr>
-							<tr class="attribute-leadership">
-								<td class="attribute-name">מנהיגות</td>
-								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile->getLeadership() / 5 * 100)?>%;"></div></td>
-								<td class="attribute-details"><div id="attribute-details-leadership" class="icon"></div></td>
-							</tr>
 							<tr class="attribute-mobility">
 								<td class="attribute-name">ניידות</td>
 								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile->getMobility() / 5 * 100)?>%;"></div></td>
 								<td class="attribute-details"><div id="attribute-details-mobility" class="icon"></div></td>
-							</tr>
-							<tr class="attribute-focus">
-								<td class="attribute-name">מיקוד</td>
-								<td class="attribute-value"><div  class="value-bar" style="width:<?php echo ($profile->getFocus() / 5 * 100)?>%;"></div></td>
-								<td class="attribute-details"><div id="attribute-details-focus" class="icon"></div>
-									</td>
 							</tr>
 							<tr class="attribute-hospitality">
 								<td class="attribute-name">אירוח</td>

@@ -173,9 +173,7 @@ class IndexController extends ActionController
 				'elements' => array(
 					'humour' => array('type' => 'hidden','options' => array()),
 					'teamplay' => array('type' => 'hidden','options' => array()),
-					'leadership' => array('type' => 'hidden','options' => array()),
 					'mobility' => array('type' => 'hidden','options' => array()),
-					'focus' => array('type' => 'hidden','options' => array()),
 					'hospitality' => array('type' => 'hidden','options' => array()),
 					'strictness' => array('type' => 'hidden','options' => array()),
 					'attributes-submit' => array('type' => 'submit', 'options' => array('label' => 'שמור תכונות'))

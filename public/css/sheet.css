@@ -44,14 +44,8 @@ table.attributes-table tr.attribute-humour div.value-bar {
 table.attributes-table tr.attribute-teamplay div.value-bar {
 	background-color: red;
 }
-table.attributes-table tr.attribute-leadership div.value-bar {
-	background-color: purple;
-}
 table.attributes-table tr.attribute-mobility div.value-bar {
 	background-color: orange;
-}
-table.attributes-table tr.attribute-focus div.value-bar {
-	background-color: green;
 }
 table.attributes-table tr.attribute-hospitality div.value-bar {
 	background-color: brown;
