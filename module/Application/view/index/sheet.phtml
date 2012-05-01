@@ -70,7 +70,7 @@ window.addEvent('domready', function () {
     	}, document.id('attribute-strictness-tooltip-2')).show();
     });
 
-<?php foreach (array('crunch', 'lore', 'gm') as $ability) : ?>
+<?php foreach (array('xp', 'gm') as $ability) : ?>
 <?php 	foreach ($games as $game) :?>
     document.id('ability-details-<?php echo $ability ?>-<?php echo $game['game_id']?>').addEvent('mouseover', function() {
     	ToolTip.instance(this, {
@@ -78,7 +78,7 @@ window.addEvent('domready', function () {
     		autohide: true,
     		hideDelay: 150,
     		position: {position: 'centerLeft', edge: 'right'}
-    	}, document.id('ability-details-<?php echo $ability ?>-tooltip-<?php echo $game["ability_$ability"]?>')).show();
+    	}, document.id('ability-details-<?php echo $ability ?>-tooltip-<?php echo $game["$ability"]?>')).show();
     });
 <?php 	endforeach; ?>
 <?php endforeach; ?>
@@ -94,32 +94,17 @@ window.addEvent('domready', function () {
 	<p>אתה חדש במשחק הזה, לא מנוסה בהנחייה או שפשוט אין לך כישרון...</p>
 	<p>אתה יכול להעביר משחק אבל קצר כזה ושהדמויות לא יעשו משהו מפתיע</p>
 </div>
-<div id="ability-details-lore-tooltip-4" class="tooltip-content"><h3>דירוג ידע כללי: 4</h3>
-	<blockquote>אז ככה: בשנת 3591 למניין האימפריה...</blockquote>
-	<p>אתה תיעוד מהלך להיסטוריה, תרבויות וסיפורי העמים של עולם המשחק.</p>
-	<p>אתה מסוגל לצטט טקסטים היסטוריים, נאומים מפורסמים ואנקדוטות איזוטריות מסיפורי הרקע של הדמויות בחבורה.</p>
-</div>
-<div id="ability-details-lore-tooltip-3" class="tooltip-content"><h3>דירוג ידע כללי: 3</h3>
-	<blockquote>בספר הופיע משהו לגבי זה!</blockquote>
-	<p>קראת בספרי המשחק או את סיפורי הרקע והספרים בכריכה רכה. אהבת, נהנית. זהו.</p>
-	<p>באופן כללי אתה מכיר את עולם המשחק. אתה מכיר מקומות, שמות ומסוגל אולי גם להריץ קטעים על פרטים איזוטריים</p>
-</div>
-<div id="ability-details-lore-tooltip-1" class="tooltip-content"><h3>דירוג ידע כללי: 1</h3>
-	<blockquote>זה יותר ממה שהייתי צריך לקרוא לבגרות בהיסטוריה!</blockquote>
-	<p>חדש לחלוטין למשחק. אולי שמעת פעם תיאור קצר על מה המשחק באופן כללי</p>
-	<p>יש לי המון מה לקרוא וכנראה שבמשחקים הראשונים אמציא כינויים מצחיקים לנפ"צים הראשיים</p>
-</div>
-<div id="ability-details-crunch-tooltip-3" class="tooltip-content"><h3>דירוג קראנץ': 3</h3>
+<div id="ability-details-xp-tooltip-3" class="tooltip-content"><h3>דירוג קראנץ': 3</h3>
 	<blockquote>רגע, אני רק רוצה לוודא שלא שכחתי משהו</blockquote>
 	<p>החוקים של המשחק מוכרים לך וייתכן שקראת יותר מספר השחקן הבסיסי.</p>
 	<p>החישובים הבסיסיים ברורים לך אבל לפעמים אתה שוכח להוסיף את הבונוסים שלך.</p>
 </div>
-<div id="ability-details-crunch-tooltip-2" class="tooltip-content"><h3>דירוג קראנץ': 2</h3>
+<div id="ability-details-xp-tooltip-2" class="tooltip-content"><h3>דירוג קראנץ': 2</h3>
 	<blockquote>אז כאילו לרשום את כל זה פה בדף?</blockquote>
 	<p>קראת את ספר החוקים הבסיסי. טוב, את הפרקים עם התמונות של ה... דרקונים.</p>
 	<p>אולי רק עיינת בספר ואתה זוכר פה ושם פרטים אבל הפרטים קצת מעורפלים. כנראה שתזדקק לעזרה במשחק עצמו</p>
 </div>
-<div id="ability-details-crunch-tooltip-1" class="tooltip-content"><h3>דירוג קראנץ': 1</h3>
+<div id="ability-details-xp-tooltip-1" class="tooltip-content"><h3>דירוג קראנץ': 1</h3>
 	<blockquote>רגע, אני רק רוצה לוודא שלא שכחתי משהו</blockquote>
 	<p>החוקים של המשחק מוכרים לך וייתכן שקראת יותר מספר השחקן הבסיסי.</p>
 	<p>החישובים הבסיסיים ברורים לך אבל לפעמים אתה שוכח להוסיף את הבונוסים שלך.</p>
@@ -169,18 +154,13 @@ window.addEvent('domready', function () {
 								<table class="abilities-table">
 									<tbody>
 										<tr>
-											<td class="ability-name">קראנץ'</td>
-											<td class="ability-value"><div class="value-bar" style="width:<?php echo ($game['ability_crunch'] / 5 * 100)?>%"></div></td>
-											<td class="ability-details"><div id="ability-details-crunch-<?php echo $game['game_id']?>" class="ability-details-crunch icon"></div></td>
-										</tr>
-										<tr>
-											<td class="ability-name">ידע כללי</td>
-											<td class="ability-value"><div class="value-bar" style="width:<?php echo ($game['ability_lore'] / 5 * 100)?>%"></div></td>
-											<td class="ability-details"><div id="ability-details-lore-<?php echo $game['game_id']?>" class="ability-details-lore icon"></div></td>
+											<td class="ability-name">ניסיון</td>
+											<td class="ability-value"><div class="value-bar" style="width:<?php echo ($game['xp'] / 5 * 100)?>%"></div></td>
+											<td class="ability-details"><div id="ability-details-xp-<?php echo $game['game_id']?>" class="ability-details-xp icon"></div></td>
 										</tr>
 										<tr>
 											<td class="ability-name">מנחה</td>
-											<td class="ability-value"><div class="value-bar" style="width:<?php echo ($game['ability_gm'] / 5 * 100)?>%;"></div></td>
+											<td class="ability-value"><div class="value-bar" style="width:<?php echo ($game['gm'] / 5 * 100)?>%;"></div></td>
 											<td class="ability-details"><div id="ability-details-gm-<?php echo $game['game_id']?>" class="ability-details-gm icon"></div></td>
 										</tr>
 									</tbody>

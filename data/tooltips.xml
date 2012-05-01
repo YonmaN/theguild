@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<attributes>
-    <attribute id="humour">
+<tooltips>
+    <tooltip id="humour" type="attribute">
 		<name><![CDATA[הומור]]></name>
 		<headline><![CDATA[הומור]]></headline>
 		<scores>
@@ -31,8 +31,8 @@
 				השחקנים האחרים]]></text>
 			</score>
 		</scores>
-	</attribute>
-	<attribute id="teamplay">
+	</tooltip>
+	<tooltip id="teamplay" type="attribute">
 		<name><![CDATA[קבוצתי]]></name>
 		<headline><![CDATA[שיתוף פעולה]]></headline>
 		<scores>
@@ -67,8 +67,8 @@
 						כלל אינו קיים!]]></text>
 			</score>
 		</scores>
-	</attribute>
-	<attribute id="mobility">
+	</tooltip>
+	<tooltip id="mobility" type="attribute">
 		<name><![CDATA[ניידות]]></name>
 		<headline><![CDATA[ניידות]]></headline>
 		<scores>
@@ -95,8 +95,8 @@
 				<text><![CDATA[]]></text>
 			</score>
 		</scores>
-	</attribute>
-	<attribute id="hospitality">
+	</tooltip>
+	<tooltip id="hospitality" type="attribute">
 		<name><![CDATA[אירוח]]></name>
 		<headline><![CDATA[אירוח]]></headline>
 		<scores>
@@ -122,8 +122,8 @@
 				<text><![CDATA[]]></text>
 			</score>
 		</scores>
-	</attribute>
-	<attribute id="strictness">
+	</tooltip>
+	<tooltip id="strictness" type="attribute">
 		<name><![CDATA[קפדנות]]></name>
 		<headline><![CDATA[קפדנות]]></headline>
 		<scores>
@@ -150,5 +150,5 @@
 				<text><![CDATA[]]></text>
 			</score>
 		</scores>
-	</attribute>
-</attributes>
+	</tooltip>
+</tooltips>

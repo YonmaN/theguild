@@ -60,14 +60,14 @@ class IndexController extends ActionController
 		
 		$attributes->populate($profile->toArray());
 		
-		$reader = simplexml_load_file(getcwd().DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'attributes.xml');
+		$reader = simplexml_load_file(getcwd().DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'tooltips.xml');
 		$attributesContent = array();
-		foreach($reader as $attribute) {
-			$attributesContent[(string)$attribute['id']] = array('name' => (string)$attribute->name, 'headline' => (string)$attribute->headline);
-			$attributesContent[(string)$attribute['id']]['scores'] = array();
-			$scores = current((array)$attribute->scores);
+		foreach($reader->xpath('tooltip[@type="attribute"]') as $tooltip) {
+			$attributesContent[(string)$tooltip['id']] = array('name' => (string)$tooltip->name, 'headline' => (string)$tooltip->headline);
+			$attributesContent[(string)$tooltip['id']]['scores'] = array();
+			$scores = current((array)$tooltip->scores);
 			foreach ($scores as $score) {
-				$attributesContent[(string)$attribute['id']]['scores'][(string)$score['value']] = array('quote' => (string)$score->quote, 'text' => (string)$score->text);
+				$attributesContent[(string)$tooltip['id']]['scores'][(string)$score['value']] = array('quote' => (string)$score->quote, 'text' => (string)$score->text);
 			}
 		}
 		

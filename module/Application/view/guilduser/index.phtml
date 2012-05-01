@@ -7,13 +7,13 @@
 <div>
 <?php echo $this->gravatar($this->zfcUserIdentity()->getEmail()) ?>
 שלום, <?php echo $this->zfcUserIdentity()->getDisplayName() ?>! <a href="<?php echo $this->url('zfcuser/logout') ?>">[התנתק]</a>
-<div>רוצה תמונת פרופיל? הירשם ל-<a href="https://en.gravatar.com/site/signup/" target="_blank">Gravatar!</a></div>
 </div>
 
 <div id="tabs">
 	<ul class="tabs">
         <li class="tab">פרטים אישיים</li>
-        <li class="tab">מיקומים</li>
+        <li class="tab">משחקים</li>
+        <li class="tab">אזורי משחק</li>
         <li class="tab">תכונות</li>
     </ul>
 	<div class="tabs-container">
@@ -21,6 +21,11 @@
 			<h3>פרטים אישיים</h3>
 			<?php echo $personal ?>
 			<div id="result"></div>
+		</div>
+
+		<div class="tab-content content-box">
+			<h3>משחקים</h3>
+			
 		</div>
 
 		<div class="tab-content content-box">
