@@ -23,9 +23,26 @@
 			<div id="result"></div>
 		</div>
 
-		<div class="tab-content content-box">
+		<div id="registered-games-box" class="tab-content content-box">
 			<h3>משחקים</h3>
-			
+			<div id="available-games-list" class="fleft">
+				<ul class="no-bullets-list">
+<?php foreach ($games as $game): ?>
+					<li><label><input type="checkbox" <?php echo isset($assignedGames[$game['game_id']]) ? 'checked="checked"' : '' ?>/><?php echo $game['game_name'] ?></label></li>
+<?php endforeach ?>
+				</ul>
+			</div>
+			<div id="game-user-details" class="fright" style="width:50%">
+				<ul id="attributes-form-list" class="form-field no-bullets-list">
+					<li id="attribute-humour-item"><label>הומור</label>
+						<?php echo $this->slider('humour') ?>
+					</li>
+					<li id="attribute-teamplay-item"><label>חברותי</label>
+						<?php echo $this->slider('teamplay') ?>
+					</li>
+				</ul>
+				<textarea></textarea>
+			</div>
 		</div>
 
 		<div class="tab-content content-box">

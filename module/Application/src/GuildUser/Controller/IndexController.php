@@ -71,7 +71,11 @@ class IndexController extends ActionController
 			}
 		}
 		
-    	return new ViewModel(array('user' => $user, 'personal' => $personal, 'profile' => $profile, 'attributesForm' => $attributes, 'tooltips' => $attributesContent));
+		$games = $this->getGameMapper()->findAllGames();
+		$userGames = $this->getGameMapper()->findByUserId($user->getUserId());
+		
+    	return new ViewModel(array('assignedGames' => $userGames, 'games' => $games, 'user' => $user,
+			'personal' => $personal, 'profile' => $profile, 'attributesForm' => $attributes, 'tooltips' => $attributesContent));
     }
     
 	public function attributesAction() {

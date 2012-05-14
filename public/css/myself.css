@@ -110,3 +110,36 @@ ul.tabs {
 #attributessubmit-element {
 	display: block !important;
 }
+
+.tabs-container .tab-content {
+	height: 399px;
+}
+
+#available-games-list li label {
+	cursor: pointer;
+}
+
+#available-games-list ul {
+	margin-left: 0;
+}
+
+#available-games-list li label:hover {
+	color:red;
+	background-color: #EAD28B;
+}
+
+#available-games-list {
+	width: 50%;
+	overflow-y: auto;
+}
+
+#available-games-list label input {
+	display: inline;
+	margin-left: 6px;
+}
+
+#game-user-details {
+	width: 50%;
+	height: 371px;
+	background-color: #EAD28B;
+}
