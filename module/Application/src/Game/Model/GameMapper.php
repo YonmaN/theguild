@@ -17,7 +17,7 @@ class GameMapper extends DbMapperAbstract {
 	public function findByUserId($id) {
 		$gateway = $this->getTableGateway(); /* @var $gateway \Zend\Db\TableGateway\TableGateway */
 		// TODO protect from injection
-		$gateway->getSqlSelect()->join('user_game', 'user_game.game_id = game.game_id AND user_id = ' . $id);
+		$gateway->getSqlSelect()->join('user_game', "user_game.game_id = game.game_id AND user_id = {$id} AND user_game.enabled = 1");
 		$rowset = $gateway->select()->toArray();
 		
 		$gamesArray = array();

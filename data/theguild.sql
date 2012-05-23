@@ -1,3 +1,3 @@
 CREATE TABLE "game" ("game_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "game_name" VARCHAR, "game_name_short" VARCHAR);
-CREATE TABLE "user_game" ("user_id" INTEGER NOT NULL , "game_id" INTEGER NOT NULL , "comments" TEXT, "xp" INTEGER, "gm" INTEGER, "learn" BOOL, PRIMARY KEY ("user_id", "game_id"));
+CREATE TABLE "user_game" ("user_id" INTEGER NOT NULL , "game_id" INTEGER NOT NULL , "enabled" INTEGER NOT NULL DEFAULT 1, "comments" TEXT, "xp" INTEGER, "gm" INTEGER, "learn" BOOL, PRIMARY KEY ("user_id", "game_id"));
 CREATE TABLE "profile" ("name" VARCHAR, "birth_date" INTEGER NOT NULL  DEFAULT CURRENT_TIMESTAMP, "lfg" BOOL NOT NULL  DEFAULT true, "bio" TEXT NOT NULL  DEFAULT '', "gender" VARCHAR DEFAULT('Other'), "humour" INTEGER NOT NULL  DEFAULT 2, "mobility" INTEGER NOT NULL  DEFAULT 2, "teamplay" INTEGER NOT NULL  DEFAULT 2, "hospitality" INTEGER NOT NULL  DEFAULT 2, "strictness" INTEGER NOT NULL  DEFAULT 2, "user_id" INTEGER PRIMARY KEY  NOT NULL )

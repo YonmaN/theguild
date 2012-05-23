@@ -11,6 +11,7 @@ class IndexController extends ActionController
 {
 	private $userMapper;
 	private $userMetaMapper;
+	private $userGameMapper;
 	private $gameMapper;
 	private $profileMapper;
     
@@ -72,12 +73,29 @@ class IndexController extends ActionController
 		}
 		
 		$games = $this->getGameMapper()->findAllGames();
-		$userGames = $this->getGameMapper()->findByUserId($user->getUserId());
+		$userGameMapper = $this->getLocator()->get('GuildUser\Model\GameMapper');
+		$userGames = $userGameMapper->findByUserId($user->getUserId());
 		
     	return new ViewModel(array('assignedGames' => $userGames, 'games' => $games, 'user' => $user,
 			'personal' => $personal, 'profile' => $profile, 'attributesForm' => $attributes, 'tooltips' => $attributesContent));
     }
     
+	public function setgameAction() {
+		if (! $this->zfcUserAuthentication()->hasIdentity()) {
+    		return new \Zend\View\Model\JsonModel(array('success' => false));
+    	}
+		$gameMapper = $this->getGameMapper();
+		$db = $gameMapper->getTableGateway()->getAdapter();
+		$user = $this->zfcUserAuthentication()->getIdentity(); /* @var $user \ZfcUser\Model\User */
+		
+		$params = $this->getRequest()->post();
+		
+		$userGameMapper = $this->getLocator()->get('GuildUser\Model\GameMapper');
+		$userGame = $userGameMapper->findUserGame($user->getUserId(),$params['gameId']);
+		$userGame->setEnabled(intval($params['enable']));
+		$userGameMapper->persist($userGame);
+	}
+	
 	public function attributesAction() {
 		if (! $this->zfcUserAuthentication()->hasIdentity()) {
     		return new \Zend\View\Model\JsonModel(array('success' => false));
@@ -223,6 +241,17 @@ class IndexController extends ActionController
     
     public function setGameMapper($gameMapper) {
     	$this->gameMapper = $gameMapper;
+    }
+    
+    /**
+     * @return \GuildUser\Model\GameMapper
+     */
+    public function getUserGameMapper() {
+    	return $this->userGameMapper;
+    }
+    
+    public function setUserGameMapper($userGameMapper) {
+    	$this->userGameMapper = $userGameMapper;
     }
     
     /**

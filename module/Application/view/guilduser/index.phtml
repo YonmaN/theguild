@@ -28,7 +28,7 @@
 			<div id="available-games-list" class="fleft">
 				<ul class="no-bullets-list">
 <?php foreach ($games as $game): ?>
-					<li><label><input type="checkbox" <?php echo isset($assignedGames[$game['game_id']]) ? 'checked="checked"' : '' ?>/><?php echo $game['game_name'] ?></label></li>
+					<li><input value="<?php echo $game['game_id'] ?>" type="checkbox" <?php echo isset($assignedGames[$game['game_id']]) ? 'checked="checked"' : '' ?>/><label><?php echo $game['game_name'] ?></label></li>
 <?php endforeach ?>
 				</ul>
 			</div>
@@ -101,6 +101,16 @@
 // ON LOAD 
 window.addEvent('domready', function() {
 	
+
+		$$('#available-games-list ul li input').addEvent('click', function(event){
+			var checkBox = event.target;
+			var gameId = checkBox.value;
+			var enable = checkBox.checked ? 1 : 0;
+			
+			new Request.JSON({
+				url: '/guilduser/setgame'
+			}).post({'gameId': gameId, 'enable': enable});
+		});
 
 	new Form.Request($('attributes-form'), null, {
 		onSend: function(){

@@ -5,9 +5,17 @@ return array(
         	'alias' => array(
         				'index' => 'Application\Controller\IndexController',
         				'game_tg' => 'Zend\Db\TableGateway\TableGateway',
+        				'user_game_tg' => 'Zend\Db\TableGateway\TableGateway',
         				'profile_tg' => 'Zend\Db\TableGateway\TableGateway',
 						'guilduser' => 'GuildUser\Controller\IndexController'
         			),
+        	
+        		'user_game_tg' => array(
+        				'parameters' => array(
+        						'tableName' => 'user_game',
+        						'adapter'   => 'zfcuser_zend_db_adapter',
+        				),
+        		),
         	
         		'game_tg' => array(
         				'parameters' => array(
@@ -21,6 +29,9 @@ return array(
         						'adapter'   => 'zfcuser_zend_db_adapter',
         				),
         		),
+        	'GuildUser\Model\GameMapper' => array(
+        		'parameters' => array('tableGateway' => 'user_game_tg')
+        	),
         	'Game\Model\GameMapper' => array(
         		'parameters' => array('tableGateway' => 'game_tg')
         	),
@@ -35,6 +46,7 @@ return array(
         					'userMapper' => 'GuildUser\Model\UserMapper',
         					'profileMapper' => 'GuildUser\Model\ProfileMapper',
         					'gameMapper' => 'Game\Model\GameMapper',
+        					'userGameMapper' => 'GuildUser\Model\GameMapper',
         				)
         			),
         	'GuildUser\Controller\IndexController' => array(
