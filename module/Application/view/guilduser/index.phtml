@@ -107,8 +107,12 @@ window.addEvent('domready', function() {
 			var gameId = checkBox.value;
 			var enable = checkBox.checked ? 1 : 0;
 			
+			this.set('disabled', true);
 			new Request.JSON({
-				url: '/guilduser/setgame'
+				url: '/guilduser/setgame',
+				onComplete: function() {
+					this.set('disabled', false);
+				}.bind(this)
 			}).post({'gameId': gameId, 'enable': enable});
 		});
 
