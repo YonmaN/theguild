@@ -16,9 +16,6 @@ class IndexController extends ActionController
 	private $profileMapper;
     
     public function indexAction() {
-    	if (! $this->zfcUserAuthentication()->hasIdentity()) {
-    		return $this->redirect()->toRoute('zfcuser/login');
-    	}
     	
     	$basePath = $this->getRequest()->getBaseUrl();
     	$view = $this->getLocator()->get('Zend\View\Renderer\PhpRenderer');
@@ -81,9 +78,6 @@ class IndexController extends ActionController
     }
     
 	public function setgameAction() {
-		if (! $this->zfcUserAuthentication()->hasIdentity()) {
-    		return new \Zend\View\Model\JsonModel(array('success' => false));
-    	}
 		$gameMapper = $this->getGameMapper();
 		$db = $gameMapper->getTableGateway()->getAdapter();
 		$user = $this->zfcUserAuthentication()->getIdentity(); /* @var $user \ZfcUser\Model\User */
@@ -96,10 +90,11 @@ class IndexController extends ActionController
 		$userGameMapper->persist($userGame);
 	}
 	
+	public function getgameAction() {
+		
+	}
+	
 	public function attributesAction() {
-		if (! $this->zfcUserAuthentication()->hasIdentity()) {
-    		return new \Zend\View\Model\JsonModel(array('success' => false));
-    	}
 		
 		$attributes = $this->getAttributesForm();
 		$attributes->setIsArray(true);
@@ -127,9 +122,6 @@ class IndexController extends ActionController
 	}
     
 	public function detailsAction() {
-		if (! $this->zfcUserAuthentication()->hasIdentity()) {
-    		return new \Zend\View\Model\JsonModel(array('success' => false));
-    	}
 		
 		$personal = $this->getDetailsForm();
 		$personal->setIsArray(true);

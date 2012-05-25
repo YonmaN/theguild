@@ -12,6 +12,7 @@ class Module implements AutoloaderProvider
     {
         $events = StaticEventManager::getInstance();
         $events->attach('bootstrap', 'bootstrap', array($this, 'initializeView'), 100);
+        $events->attach('bootstrap', 'bootstrap', array($this, 'initializeSessionControl'), 99);
     }
 
     public function getAutoloaderConfig()
@@ -50,4 +51,21 @@ class Module implements AutoloaderProvider
 		
 		
     }
+	
+	public function initializeSessionControl($e) {
+		$app          = $e->getParam('application');
+        $locator      = $app->getLocator();
+		
+		$app->events()->attach('route', function(\Zend\Mvc\MvcEvent $e){
+			$routeMatch = $e->getRouteMatch(); /* @var $routeMatch \Zend\Mvc\Router\RouteMatch */
+			$controller = $routeMatch->getParam('controller');
+			if ($controller == 'guilduser') {
+				$authService = new \Zend\Authentication\AuthenticationService;
+				if (! $authService->hasIdentity()) {
+					$routeMatch->setParam('controller', 'zfcuser');
+					$routeMatch->setParam('action', 'login');
+				}
+			}
+		});
+	}
 }
