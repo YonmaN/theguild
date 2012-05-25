@@ -72,14 +72,20 @@ class IndexController extends ActionController
 		$games = $this->getGameMapper()->findAllGames();
 		$userGameMapper = $this->getLocator()->get('GuildUser\Model\GameMapper');
 		$userGames = $userGameMapper->findByUserId($user->getUserId());
+
+		$skillsForm = $this->getSkillsForm();
+		$skillsForm->setIsArray(true);
+		$skillsForm->setName('skills');
+		$skillsForm->setAction($this->url()->fromRoute('default', array('controller' => 'guilduser', 'action' => 'setgame')));
+		$skillsForm->setAttrib('id', 'skills-form');
+		
 		
     	return new ViewModel(array('assignedGames' => $userGames, 'games' => $games, 'user' => $user,
-			'personal' => $personal, 'profile' => $profile, 'attributesForm' => $attributes, 'tooltips' => $attributesContent));
+			'personal' => $personal, 'profile' => $profile, 'attributesForm' => $attributes, 'tooltips' => $attributesContent,
+			'skillsForm' => $skillsForm));
     }
     
 	public function setgameAction() {
-		$gameMapper = $this->getGameMapper();
-		$db = $gameMapper->getTableGateway()->getAdapter();
 		$user = $this->zfcUserAuthentication()->getIdentity(); /* @var $user \ZfcUser\Model\User */
 		
 		$params = $this->getRequest()->post();
@@ -90,8 +96,22 @@ class IndexController extends ActionController
 		$userGameMapper->persist($userGame);
 	}
 	
-	public function getgameAction() {
+	public function getusergameAction() {
+		$user = $this->zfcUserAuthentication()->getIdentity(); /* @var $user \ZfcUser\Model\User */
 		
+		$params = $this->getRequest()->query();
+		
+		$userGameMapper = $this->getLocator()->get('GuildUser\Model\GameMapper');
+		$userGame = $userGameMapper->findUserGame($user->getUserId(),$params['gameId']);
+		if (! $userGame) {
+			$userGame = \GuildUser\Model\UserGame::fromArray(array());
+		}
+		
+		$view = new \Zend\View\Model\JsonModel();
+		$view->setTerminal(true);
+		$view->setVariables(array('success' => true, 'userGame' => $userGame->toArray()));
+		
+		return $view;
 	}
 	
 	public function attributesAction() {
@@ -191,6 +211,22 @@ class IndexController extends ActionController
 					'hospitality' => array('type' => 'hidden','options' => array()),
 					'strictness' => array('type' => 'hidden','options' => array()),
 					'attributes-submit' => array('type' => 'submit', 'options' => array('label' => 'שמור תכונות'))
+				),
+			)
+		);
+	}
+	
+	/**
+	 * @return \Zend\Form\Form 
+	 */
+	private function getSkillsForm() {
+		return new Form(array(
+				'elements' => array(
+					'xp' => array('type' => 'hidden','options' => array()),
+					'gm' => array('type' => 'hidden','options' => array()),
+					'comments' => array('type' => 'textarea','options' => array()),
+					'gameId' => array('type' => 'hidden','options' => array()),
+					'attributes-submit' => array('type' => 'submit', 'options' => array('label' => 'שמור'))
 				),
 			)
 		);
