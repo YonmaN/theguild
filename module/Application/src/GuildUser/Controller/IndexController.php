@@ -224,7 +224,8 @@ class IndexController extends ActionController
 				'elements' => array(
 					'xp' => array('type' => 'hidden','options' => array()),
 					'gm' => array('type' => 'hidden','options' => array()),
-					'comments' => array('type' => 'textarea','options' => array()),
+					'learn' => array('type' => 'checkbox','options' => array('label' => 'יכול ומעוניין ללמוד משחק זה')),
+					'comments' => array('type' => 'textarea','options' => array('label' => 'הערות')),
 					'gameId' => array('type' => 'hidden','options' => array()),
 					'attributes-submit' => array('type' => 'submit', 'options' => array('label' => 'שמור'))
 				),

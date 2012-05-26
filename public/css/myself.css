@@ -143,3 +143,11 @@ ul.tabs {
 	height: 371px;
 	background-color: #EAD28B;
 }
+
+#skills-comments-element textarea {
+	width: 100%;
+	height: 200px;
+}
+
+#skills-learn-element {
+}
