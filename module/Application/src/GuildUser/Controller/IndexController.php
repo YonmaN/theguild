@@ -79,6 +79,19 @@ class IndexController extends ActionController
 		$skillsForm->setAction($this->url()->fromRoute('default', array('controller' => 'guilduser', 'action' => 'setgame')));
 		$skillsForm->setAttrib('id', 'skills-form');
 		
+		$checkbox = $skillsForm->getElement('learn');
+		$getId = function(\Zend\Form\Decorator $decorator) {
+                return $decorator->getElement()->getId() . '-element';
+            };
+			$checkbox->setDisableLoadDefaultDecorators(true);
+			$checkbox->clearDecorators();
+            $checkbox->addDecorator('ViewHelper')
+                 ->addDecorator('Errors')
+                 ->addDecorator('Label', array('tag' => 'dt', 'placement' => 'APPEND'))
+                 ->addDecorator('Description', array('tag' => 'p', 'class' => 'description'))
+				->addDecorator('HtmlTag', array('tag' => 'dd',
+                                                 'id'  => array('callback' => $getId)))
+                 ;
 		
     	return new ViewModel(array('assignedGames' => $userGames, 'games' => $games, 'user' => $user,
 			'personal' => $personal, 'profile' => $profile, 'attributesForm' => $attributes, 'tooltips' => $attributesContent,

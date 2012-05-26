@@ -143,6 +143,7 @@ ul.tabs {
 	height: 356px;
 	background-color: #EAD28B;
 	padding: 7px;
+	overflow-y: auto;
 }
 
 #skills-comments-element textarea {
@@ -150,5 +151,11 @@ ul.tabs {
 	height: 183px;
 }
 
-#skills-learn-element {
+#skills-learn-element input {
+	float: right;
+}
+
+#skills-learn-label {
+	line-height: 18px;
+	margin-bottom: 3px;
 }
