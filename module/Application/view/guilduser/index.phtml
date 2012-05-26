@@ -13,7 +13,7 @@
 	<ul class="tabs">
         <li class="tab">פרטים אישיים</li>
         <li class="tab">משחקים</li>
-        <li class="tab">אזורי משחק</li>
+        <li class="tab">סביבה וסיגנון</li>
         <li class="tab">תכונות</li>
     </ul>
 	<div class="tabs-container">
@@ -32,21 +32,21 @@
 <?php endforeach ?>
 				</ul>
 			</div>
-			<div id="game-user-details" class="fright" style="width:50%">
+			<div id="game-user-details" class="fright">
 				<ul id="attributes-form-list" class="form-field no-bullets-list">
-					<li id="attribute-humour-item"><label>הומור</label>
-						<?php echo $this->slider('humour') ?>
+					<li id="skill-xp-item"><label>ניסיון</label>
+						<?php echo $this->slider('xp') ?>
 					</li>
-					<li id="attribute-teamplay-item"><label>חברותי</label>
-						<?php echo $this->slider('teamplay') ?>
+					<li id="skill-gm-item"><label>מנחה</label>
+						<?php echo $this->slider('gm') ?>
 					</li>
 				</ul>
-				<textarea></textarea>
+				<?php echo $skillsForm ?>
 			</div>
 		</div>
 
 		<div class="tab-content content-box">
-			<h3>אזורי משחק</h3>
+			<h3>סביבה וסיגנון</h3>
 			<ul class="no-bullets-list multiple-select form-field">
 				<li><input type="checkbox" id="location[gush-dan]"/><label for="location[gush-dan]">גוש דן</label></li>
 				<li><input type="checkbox" id="location[hasharon]" /><label for="location[hasharon]">השרון</label></li>
@@ -101,6 +101,90 @@
 // ON LOAD 
 window.addEvent('domready', function() {
 	
+	$('game-user-details').spinner = new Spinner($('game-user-details'));
+	
+	var gameFormElements = {
+		xpSlider: new Slider($$('#skill-xp-item .slider_gutter_i')[0],
+								$$('#skill-xp-item .knob')[0],
+								$$('#skill-xp-item img.slider_bkg')[0],{
+						start: 1,
+						end: 5,
+						offset:0,
+						snap:true, 
+						numsteps:4,
+						onChange: function(pos){
+							$$('.attribute-info').removeClass('active');
+							if ($('skill_xp-'+pos)) {
+								$('skill_xp-'+pos).addClass('active');
+							}
+
+							if ($('skill-xp')) {
+								$('skill-xp').value = pos;
+							}
+
+						}
+					}, null).setMin(1),
+		gmSlider: new Slider($$('#skill-gm-item .slider_gutter_i')[0],
+								$$('#skill-gm-item .knob')[0],
+								$$('#skill-gm-item img.slider_bkg')[0],{
+						start: 1,
+						end: 5,
+						offset:0,
+						snap:true, 
+						numsteps:4,
+						onChange: function(pos){
+							$$('.attribute-info').removeClass('active');
+							if ($('skill_gm-'+pos)) {
+								$('skill_gm-'+pos).addClass('active');
+							}
+
+							if ($('skill-gm')) {
+								$('skill-gm').value = pos;
+							}
+
+						}
+					}, null).setMin(1),
+		comments: $('skills-comments'),
+		learn: $('skills-learn'),
+	};
+
+		$$('#available-games-list ul li label').addEvent('click', function(event){
+			var item = event.target;
+			var checkBox = item.getPrevious('input');
+			var gameId = checkBox.value;
+			
+			$('game-user-details').spinner.show();
+			
+			new Request.JSON({
+				url: '/guilduser/getusergame',
+				onComplete: function(response) {
+					gameFormElements.comments.empty();
+					gameFormElements.learn.set('checked', '');
+					gameFormElements.xpSlider.setMin(1);
+					gameFormElements.gmSlider.setMin(1);
+					if (response.success) {
+						var userGame = response.userGame;
+						if(userGame.xp) {
+							gameFormElements.xpSlider.setMin(userGame.xp.toInt());
+						}
+						
+						if(userGame.gm) {
+							gameFormElements.gmSlider.setMin(userGame.gm.toInt());
+						}
+						
+						if (userGame.comments) {
+							gameFormElements.comments.set('text', userGame.comments);
+						}
+						
+						if (userGame.learn == '1') {
+							gameFormElements.learn.set('checked', 'checked');
+						}
+					}
+					
+					$('game-user-details').spinner.hide();
+				}.bind(this)
+			}).get({'gameId': gameId});
+		});
 
 		$$('#available-games-list ul li input').addEvent('click', function(event){
 			var checkBox = event.target;
@@ -153,10 +237,11 @@ window.addEvent('domready', function() {
 	
         var tabPane = new TabPane('tabs', {contentSelector: '.tab-content'}, function() {
 			var showTab = window.location.hash.match(/tab=(\d+)/);
-			return showTab ? showTab[1] : 0;
+			return showTab ? showTab[1].toInt() : 0;
 		});
 
-        tabPane.addEvent('change', function(){
+        tabPane.addEvent('change', function(what){
+			window.location.hash = 'tab='+what;
 			// initialise the sliders if the editor is visible and was not previously initialised
 			if ($('attributes-editor').isVisible() && (! $('attributes-editor').initialised)) {
 				var attributes = {
@@ -174,23 +259,23 @@ window.addEvent('domready', function() {
 						new Slider($$('#attribute-'+ attribute +'-item .slider_gutter_i')[0],
 												$$('#attribute-'+ attribute +'-item .knob')[0],
 												$$('#attribute-'+ attribute +'-item img.slider_bkg')[0],{
-						start: 1,
-						end: 5,
-						offset:0,
-						snap:true, 
-						numsteps:4,
-						onChange: function(pos){
-							$$('.attribute-info').removeClass('active');
-							if ($('attribute_'+ attribute +'-'+pos)) {
-								$('attribute_'+ attribute +'-'+pos).addClass('active');
-							}
+							start: 1,
+							end: 5,
+							offset:0,
+							snap:true, 
+							numsteps:4,
+							onChange: function(pos){
+								$$('.attribute-info').removeClass('active');
+								if ($('attribute_'+ attribute +'-'+pos)) {
+									$('attribute_'+ attribute +'-'+pos).addClass('active');
+								}
 
-							if ($('attributes-'+ attribute)) {
-								$('attributes-'+ attribute).value = pos;
-							}
+								if ($('attributes-'+ attribute)) {
+									$('attributes-'+ attribute).value = pos;
+								}
 
-						}
-					}, null).setMin(score);
+							}
+						}, null).setMin(score);
 				});
 				
 				$('attributes-editor').initialised = true;
