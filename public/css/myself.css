@@ -139,14 +139,15 @@ ul.tabs {
 }
 
 #game-user-details {
-	width: 318px;
-	height: 371px;
+	width: 304px;
+	height: 356px;
 	background-color: #EAD28B;
+	padding: 7px;
 }
 
 #skills-comments-element textarea {
 	width: 100%;
-	height: 200px;
+	height: 183px;
 }
 
 #skills-learn-element {
