@@ -118,8 +118,8 @@ window.addEvent('domready', function() {
 								$('skill_xp-'+pos).addClass('active');
 							}
 
-							if ($('skill-xp')) {
-								$('skill-xp').value = pos;
+							if ($('skills-xp')) {
+								$('skills-xp').value = pos;
 							}
 
 						}
@@ -138,14 +138,15 @@ window.addEvent('domready', function() {
 								$('skill_gm-'+pos).addClass('active');
 							}
 
-							if ($('skill-gm')) {
-								$('skill-gm').value = pos;
+							if ($('skills-gm')) {
+								$('skills-gm').value = pos;
 							}
 
 						}
 					}, null).setMin(1),
 		comments: $('skills-comments'),
 		learn: $('skills-learn'),
+		gameId: $('skills-gameId')
 	};
 
 		$$('#available-games-list ul li label').addEvent('click', function(event){
@@ -162,6 +163,7 @@ window.addEvent('domready', function() {
 					gameFormElements.learn.set('checked', '');
 					gameFormElements.xpSlider.setMin(1);
 					gameFormElements.gmSlider.setMin(1);
+					gameFormElements.gameId.value = 0;
 					if (response.success) {
 						var userGame = response.userGame;
 						if(userGame.xp) {
@@ -178,6 +180,9 @@ window.addEvent('domready', function() {
 						
 						if (userGame.learn == '1') {
 							gameFormElements.learn.set('checked', 'checked');
+						}
+						if (userGame.game_id) {
+							gameFormElements.gameId.value = userGame.game_id;
 						}
 					}
 					
@@ -199,6 +204,24 @@ window.addEvent('domready', function() {
 				}.bind(this)
 			}).post({'gameId': gameId, 'enable': enable});
 		});
+
+	new Form.Request($('skills-form'), null, {
+		onSend: function(){
+			this.pastValue = $('skills-submit').value;
+			$('skills-submit').set('value', 'שומר ...').set('disabled', true);
+		},
+		onComplete: function(resultNode, textNodes, args, responseText){
+			$('skills-submit').set('value', this.pastValue).set('disabled', false);
+			var response = eval("(" + responseText + ")");
+			if (response.success) {
+				
+			}
+		},
+		requestOptions: {
+			spinnerTarget: $('submit-element')
+		},
+		resetForm: false
+	});
 
 	new Form.Request($('attributes-form'), null, {
 		onSend: function(){

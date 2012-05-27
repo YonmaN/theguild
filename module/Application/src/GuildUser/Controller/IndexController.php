@@ -96,17 +96,46 @@ class IndexController extends ActionController
     	return new ViewModel(array('assignedGames' => $userGames, 'games' => $games, 'user' => $user,
 			'personal' => $personal, 'profile' => $profile, 'attributesForm' => $attributes, 'tooltips' => $attributesContent,
 			'skillsForm' => $skillsForm));
-    }
+    } 
     
 	public function setgameAction() {
 		$user = $this->zfcUserAuthentication()->getIdentity(); /* @var $user \ZfcUser\Model\User */
 		
 		$params = $this->getRequest()->post();
-		
+		if (isset($params['skills'])) {
+			$params = $params['skills'];
+		}
 		$userGameMapper = $this->getLocator()->get('GuildUser\Model\GameMapper');
+		//todo add adaptive handling of input (state, skills, comments ...) 
+		
 		$userGame = $userGameMapper->findUserGame($user->getUserId(),$params['gameId']);
-		$userGame->setEnabled(intval($params['enable']));
+		if (isset($params['enable'])) {
+			$userGame->setEnabled(intval($params['enable']));
+		}
+
+		if (isset($params['xp'])) {
+			$userGame->setXp(intval($params['xp']));
+		}
+
+		if (isset($params['gm'])) {
+			$userGame->setGm(intval($params['gm']));
+		}
+
+		if (isset($params['learn'])) {
+			$userGame->setLearn(intval($params['learn']));
+		}
+
+		if (isset($params['comments'])) {
+			$striptags = new \Zend\Filter\StripTags();
+			$userGame->setComments($striptags->filter($params['comments']));
+		}
+
+		if (isset($params['xp'])) {
+			$userGame->setXp(intval($params['xp']));
+		}
+		
 		$userGameMapper->persist($userGame);
+		return $this->getResponse();
 	}
 	
 	public function getusergameAction() {
@@ -235,12 +264,13 @@ class IndexController extends ActionController
 	private function getSkillsForm() {
 		return new Form(array(
 				'elements' => array(
+					'gameId' => array('type' => 'hidden','options' => array()),
 					'xp' => array('type' => 'hidden','options' => array()),
 					'gm' => array('type' => 'hidden','options' => array()),
 					'learn' => array('type' => 'checkbox','options' => array('label' => 'יכול ומעוניין ללמוד משחק זה')),
 					'comments' => array('type' => 'textarea','options' => array('label' => 'הערות')),
 					'gameId' => array('type' => 'hidden','options' => array()),
-					'attributes-submit' => array('type' => 'submit', 'options' => array('label' => 'שמור'))
+					'submit' => array('type' => 'submit', 'options' => array('label' => 'שמור'))
 				),
 			)
 		);

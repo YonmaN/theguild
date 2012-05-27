@@ -24,7 +24,7 @@ ul.no-bullets-list {
 }
 
 #attributes-form-list {
-	width: 300px;
+	width: 271px;
 	margin-left: 20px;
 }
 
@@ -144,6 +144,7 @@ ul.tabs {
 	background-color: #EAD28B;
 	padding: 7px;
 	overflow-y: auto;
+	overflow-x: none;
 }
 
 #skills-comments-element textarea {
@@ -158,4 +159,8 @@ ul.tabs {
 #skills-learn-label {
 	line-height: 18px;
 	margin-bottom: 3px;
+}
+
+#skills-gameId-label, #skills-xp-label, #skills-gm-label, #submit-label {
+	display: none;
 }
