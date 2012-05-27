@@ -145,22 +145,25 @@ window.addEvent('domready', function() {
 						}
 					}, null).setMin(1),
 		comments: $('skills-comments'),
-		learn: $('skills-learn'),
 		gameId: $('skills-gameId')
 	};
 
-		$$('#available-games-list ul li label').addEvent('click', function(event){
-			var item = event.target;
-			var checkBox = item.getPrevious('input');
+		$$('#available-games-list ul li').addEvent('click', function(event){
+			var checkBox = event.target.getFirst('input');
+			if (! checkBox) {
+				checkBox = event.target.getPrevious('input');
+			}
 			var gameId = checkBox.value;
 			
 			$('game-user-details').spinner.show();
+			
+			this.getParent().getChildren('li').removeClass('active');
+			this.addClass('active');
 			
 			new Request.JSON({
 				url: '/guilduser/getusergame',
 				onComplete: function(response) {
 					gameFormElements.comments.empty();
-					gameFormElements.learn.set('checked', '');
 					gameFormElements.xpSlider.setMin(1);
 					gameFormElements.gmSlider.setMin(1);
 					gameFormElements.gameId.value = 0;
@@ -173,14 +176,11 @@ window.addEvent('domready', function() {
 						if(userGame.gm) {
 							gameFormElements.gmSlider.setMin(userGame.gm.toInt());
 						}
-						
+
 						if (userGame.comments) {
 							gameFormElements.comments.set('text', userGame.comments);
 						}
 						
-						if (userGame.learn == '1') {
-							gameFormElements.learn.set('checked', 'checked');
-						}
 						if (userGame.game_id) {
 							gameFormElements.gameId.value = userGame.game_id;
 						}
@@ -203,6 +203,7 @@ window.addEvent('domready', function() {
 					this.set('disabled', false);
 				}.bind(this)
 			}).post({'gameId': gameId, 'enable': enable});
+			event.stopPropagation(true);
 		});
 
 	new Form.Request($('skills-form'), null, {
@@ -212,10 +213,6 @@ window.addEvent('domready', function() {
 		},
 		onComplete: function(resultNode, textNodes, args, responseText){
 			$('skills-submit').set('value', this.pastValue).set('disabled', false);
-			var response = eval("(" + responseText + ")");
-			if (response.success) {
-				
-			}
 		},
 		requestOptions: {
 			spinnerTarget: $('submit-element')
@@ -229,10 +226,6 @@ window.addEvent('domready', function() {
 		},
 		onComplete: function(resultNode, textNodes, args, responseText){
 			$('attributes-attributessubmit').set('value', 'שמור תכונות').set('disabled', false);
-			var response = eval("(" + responseText + ")");
-			if (response.success) {
-				
-			}
 		},
 		requestOptions: {
 			spinnerTarget: $('attributessubmit-element')

@@ -22,19 +22,19 @@ class UserGame extends ModelAbstract
 	/**
 	 * @var string
 	 */
-	protected $comments;
+	protected $comments = '';
 	/**
 	 * @var integer
 	 */
-	protected $xp;
+	protected $xp = 0;
 	/**
 	 * @var integer
 	 */
-	protected $gm;
+	protected $gm = 0;
 	/**
 	 * @var integer
 	 */
-	protected $learn;
+	protected $learn = 0;
 	/**
 	 * @var integer
 	 */

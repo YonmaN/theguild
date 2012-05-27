@@ -115,16 +115,22 @@ ul.tabs {
 	height: 399px;
 }
 
+#available-games-list li {
+	margin-top: 8px;
+	cursor: pointer;
+}
+
 #available-games-list li label {
 	cursor: pointer;
+	display: inline;
+	margin-right: 8px;
 }
 
 #available-games-list ul {
 	margin-left: 0;
 }
 
-#available-games-list li label:hover {
-	color:red;
+#available-games-list li:hover, #available-games-list li.active {
 	background-color: #EAD28B;
 }
 
@@ -139,12 +145,16 @@ ul.tabs {
 }
 
 #game-user-details {
-	width: 304px;
-	height: 356px;
+	width: 294px;
+	height: 342px;
 	background-color: #EAD28B;
-	padding: 7px;
-	overflow-y: auto;
-	overflow-x: none;
+	padding: 12px;
+	overflow: none;
+	border-radius: 6px;
+}
+
+#game-user-details + .spinner {
+	border-radius: 6px;
 }
 
 #skills-comments-element textarea {

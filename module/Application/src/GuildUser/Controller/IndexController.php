@@ -5,7 +5,8 @@ namespace GuildUser\Controller;
 use ZfcUser\Model\UserMetaMapper, Zend\Form\Form;
 
 use Zend\Mvc\Controller\ActionController,
-    Zend\View\Model\ViewModel;
+    Zend\View\Model\ViewModel,
+	GuildUser\Model\UserGame;
 
 class IndexController extends ActionController
 {
@@ -79,20 +80,6 @@ class IndexController extends ActionController
 		$skillsForm->setAction($this->url()->fromRoute('default', array('controller' => 'guilduser', 'action' => 'setgame')));
 		$skillsForm->setAttrib('id', 'skills-form');
 		
-		$checkbox = $skillsForm->getElement('learn');
-		$getId = function(\Zend\Form\Decorator $decorator) {
-                return $decorator->getElement()->getId() . '-element';
-            };
-			$checkbox->setDisableLoadDefaultDecorators(true);
-			$checkbox->clearDecorators();
-            $checkbox->addDecorator('ViewHelper')
-                 ->addDecorator('Errors')
-                 ->addDecorator('Label', array('tag' => 'dt', 'placement' => 'APPEND'))
-                 ->addDecorator('Description', array('tag' => 'p', 'class' => 'description'))
-				->addDecorator('HtmlTag', array('tag' => 'dd',
-                                                 'id'  => array('callback' => $getId)))
-                 ;
-		
     	return new ViewModel(array('assignedGames' => $userGames, 'games' => $games, 'user' => $user,
 			'personal' => $personal, 'profile' => $profile, 'attributesForm' => $attributes, 'tooltips' => $attributesContent,
 			'skillsForm' => $skillsForm));
@@ -106,9 +93,14 @@ class IndexController extends ActionController
 			$params = $params['skills'];
 		}
 		$userGameMapper = $this->getLocator()->get('GuildUser\Model\GameMapper');
-		//todo add adaptive handling of input (state, skills, comments ...) 
 		
 		$userGame = $userGameMapper->findUserGame($user->getUserId(),$params['gameId']);
+		if (! $userGame) {
+			$userGame = UserGame::fromArray(array(
+				'userId' => $user->getUserId(), 'gameId' => $params['gameId']
+			));
+		}
+		
 		if (isset($params['enable'])) {
 			$userGame->setEnabled(intval($params['enable']));
 		}
@@ -119,10 +111,6 @@ class IndexController extends ActionController
 
 		if (isset($params['gm'])) {
 			$userGame->setGm(intval($params['gm']));
-		}
-
-		if (isset($params['learn'])) {
-			$userGame->setLearn(intval($params['learn']));
 		}
 
 		if (isset($params['comments'])) {
@@ -267,7 +255,6 @@ class IndexController extends ActionController
 					'gameId' => array('type' => 'hidden','options' => array()),
 					'xp' => array('type' => 'hidden','options' => array()),
 					'gm' => array('type' => 'hidden','options' => array()),
-					'learn' => array('type' => 'checkbox','options' => array('label' => 'יכול ומעוניין ללמוד משחק זה')),
 					'comments' => array('type' => 'textarea','options' => array('label' => 'הערות')),
 					'gameId' => array('type' => 'hidden','options' => array()),
 					'submit' => array('type' => 'submit', 'options' => array('label' => 'שמור'))
