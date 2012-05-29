@@ -47,23 +47,23 @@ class Profile extends ModelAbstract
     /**
      * @var integer
      */
-    protected $humour;
+    protected $humour = 0;
     /**
      * @var integer
      */
-    protected $mobility;
+    protected $mobility = 0;
     /**
      * @var integer
      */
-    protected $teamplay;
+    protected $teamplay = 0;
     /**
      * @var integer
      */
-    protected $hospitality;
+    protected $hospitality = 0;
     /**
      * @var integer
      */
-    protected $strictness;
+    protected $strictness = 0;
 
 	public function isNew() {
 		return $this->new;
