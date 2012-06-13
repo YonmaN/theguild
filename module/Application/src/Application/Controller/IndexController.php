@@ -19,7 +19,7 @@ class IndexController extends ActionController
 
     public function searchAction() {
     	$basePath = $this->getRequest()->getBaseUrl();
-    	$view = $this->getLocator()->get('Zend\View\Renderer\PhpRenderer');
+    	$view = $this->getServiceLocator()->get('Zend\View\Renderer\PhpRenderer');
     	$view->plugin('headLink')->appendStylesheet("$basePath/css/ToolTip.css");
     	$view->plugin('headLink')->appendStylesheet("$basePath/css/tooltip-content.css");
     	$view->plugin('headLink')->appendStylesheet("$basePath/css/search.css");
@@ -36,7 +36,7 @@ class IndexController extends ActionController
 
     public function sheetAction() {
     	$id = $this->getRequest()->query()->get('id');
-    	$view = $this->getLocator()->get('Zend\View\Renderer\PhpRenderer');
+    	$view = $this->getServiceLocator()->get('Zend\View\Renderer\PhpRenderer');
     	$basePath = $this->getRequest()->getBaseUrl();
     	 
     	$view->plugin('headLink')->appendStylesheet("$basePath/css/sheet.css");

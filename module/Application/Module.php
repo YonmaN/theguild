@@ -2,18 +2,32 @@
 
 namespace Application;
 
-use Zend\Module\Manager,
-    Zend\EventManager\StaticEventManager,
-    Zend\Module\Consumer\AutoloaderProvider;
+use Zend\ModuleManager\ModuleManager as Manager,
+    Zend\EventManager\StaticEventManager;
 
-class Module implements AutoloaderProvider
+class Module implements \Zend\ModuleManager\Feature\BootstrapListenerInterface, \Zend\ModuleManager\Feature\InitProviderInterface, \Zend\ModuleManager\Feature\ServiceProviderInterface
 {
-    public function init(Manager $moduleManager)
-    {
-        $events = StaticEventManager::getInstance();
-        $events->attach('bootstrap', 'bootstrap', array($this, 'initializeView'), 100);
-        $events->attach('bootstrap', 'bootstrap', array($this, 'initializeSessionControl'), 99);
-    }
+	public static $options;
+	
+	public function getServiceConfiguration() {
+		return array(
+			'factories' => array(
+				'zfcuser_user_mapper' => function ($sm) {
+						$adapter = $sm->get('zfcuser_zend_db_adapter');
+						$tg = new \Zend\Db\TableGateway\TableGateway('user', $adapter);
+						return new \GuildUser\Model\UserMapper($tg);
+					},
+			)
+		);
+	}
+	
+	public function init($manager = null) {
+		$manager->events()->attach('loadModules.post', array($this, 'modulesLoaded'));
+	}
+	
+	public function onBootstrap(\Zend\EventManager\Event $e) {
+		$this->initializeSessionControl($e);
+	}
 
     public function getAutoloaderConfig()
     {
@@ -33,29 +47,9 @@ class Module implements AutoloaderProvider
     {
         return include __DIR__ . '/config/module.config.php';
     }
-    
-    public function initializeView($e)
-    {
-        $app          = $e->getParam('application');
-        $basePath     = $app->getRequest()->getBasePath();
-        $locator      = $app->getLocator();
-        $renderer     = $locator->get('Zend\View\Renderer\PhpRenderer');
-        $renderer->plugin('basePath')->setBasePath($basePath);
-		
-		
-		/// json responder
-		$locator             = $app->getLocator();
-        $view                = $locator->get('Zend\View\View');
-        $jsonStrategy = $locator->get('Zend\View\Strategy\JsonStrategy');
-        $view->events()->attachAggregate($jsonStrategy, 1000);
-		
-		
-    }
 	
-	public function initializeSessionControl($e) {
-		$app          = $e->getParam('application');
-        $locator      = $app->getLocator();
-		
+	public function initializeSessionControl(\Zend\Mvc\MvcEvent $e) {
+		$app = $e->getApplication();
 		$app->events()->attach('route', function(\Zend\Mvc\MvcEvent $e){
 			$routeMatch = $e->getRouteMatch(); /* @var $routeMatch \Zend\Mvc\Router\RouteMatch */
 			$controller = $routeMatch->getParam('controller');
@@ -68,4 +62,21 @@ class Module implements AutoloaderProvider
 			}
 		});
 	}
+	
+    public function modulesLoaded($e)
+    {
+        $config = $e->getConfigListener()->getMergedConfig();
+        static::$options = $config;
+    }
+
+    /**
+     * @TODO: Come up with a better way of handling module settings/options
+     */
+    public static function getOption($option)
+    {
+        if (!isset(static::$options[$option])) {
+            return null;
+        }
+        return static::$options[$option];
+    }
 }

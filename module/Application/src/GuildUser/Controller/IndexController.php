@@ -19,7 +19,7 @@ class IndexController extends ActionController
     public function indexAction() {
     	
     	$basePath = $this->getRequest()->getBaseUrl();
-    	$view = $this->getLocator()->get('Zend\View\Renderer\PhpRenderer');
+    	$view = $this->getServiceLocator()->get('Zend\View\Renderer\PhpRenderer');
     	$view->plugin('headScript')->appendFile("$basePath/js/mootools-core-1.4.5-full-compat.js");
     	$view->plugin('headScript')->appendFile("$basePath/js/mootools-more-1.4.0.1.js");
     	$view->headScript()->appendFile("$basePath/js/slider.js");
@@ -31,15 +31,14 @@ class IndexController extends ActionController
     	$view->headLink()->appendStylesheet("$basePath/css/myself.css");
     	
 		$user = $this->zfcUserAuthentication()->getIdentity(); /* @var $user \ZfcUser\Model\User */
-		
 		$profileMapper = $this->getProfileMapper();
 		$profile = $profileMapper->findByUserId($user->getUserId());
 		
 		$personal = $this->getDetailsForm();
-		$personal->setIsArray(true);
+		//$personal->setIsArray(true);
 		$personal->setName('personal');
-		$personal->setAction($this->url()->fromRoute('default', array('controller' => 'guilduser', 'action' => 'details')));
-		$personal->setAttrib('id', 'personal-form');
+		$personal->setAttribute('action', $this->url()->fromRoute('default', array('controller' => 'guilduser', 'action' => 'details')));
+		$personal->setAttribute('id', 'personal-form');
 		
 		$details = array(
 			'full_name' => $profile->getName(),
@@ -48,16 +47,16 @@ class IndexController extends ActionController
 			'lfg' => $profile->getLfg(),
 			'gender' => ucwords($profile->getGender())
 		);
-		$personal->setMethod('post');
-		$personal->populate($details);
+		$personal->setAttribute('method', 'post');
+		$personal->setData($details);
 		
 		$attributes = $this->getAttributesForm();
-		$attributes->setIsArray(true);
+//		$attributes->setIsArray(true);
 		$attributes->setName('attributes');
-		$attributes->setAction($this->url()->fromRoute('default', array('controller' => 'guilduser', 'action' => 'attributes')));
-		$attributes->setAttrib('id', 'attributes-form');
+		$attributes->setAttribute('action', $this->url()->fromRoute('default', array('controller' => 'guilduser', 'action' => 'attributes')));
+		$attributes->setAttribute('id', 'attributes-form');
 		
-		$attributes->populate($profile->toArray());
+		$attributes->setData($profile->toArray());
 		
 		$reader = simplexml_load_file(getcwd().DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'tooltips.xml');
 		$attributesContent = array();
@@ -71,14 +70,14 @@ class IndexController extends ActionController
 		}
 		
 		$games = $this->getGameMapper()->findAllGames();
-		$userGameMapper = $this->getLocator()->get('GuildUser\Model\GameMapper');
+		$userGameMapper = $this->getServiceLocator()->get('GuildUser\Model\GameMapper');
 		$userGames = $userGameMapper->findByUserId($user->getUserId());
 
 		$skillsForm = $this->getSkillsForm();
-		$skillsForm->setIsArray(true);
+//		$skillsForm->setIsArray(true);
 		$skillsForm->setName('skills');
-		$skillsForm->setAction($this->url()->fromRoute('default', array('controller' => 'guilduser', 'action' => 'setgame')));
-		$skillsForm->setAttrib('id', 'skills-form');
+		$skillsForm->setAttribute('action', $this->url()->fromRoute('default', array('controller' => 'guilduser', 'action' => 'setgame')));
+		$skillsForm->setAttribute('id', 'skills-form');
 		
     	return new ViewModel(array('assignedGames' => $userGames, 'games' => $games, 'user' => $user,
 			'personal' => $personal, 'profile' => $profile, 'attributesForm' => $attributes, 'tooltips' => $attributesContent,
@@ -92,7 +91,7 @@ class IndexController extends ActionController
 		if (isset($params['skills'])) {
 			$params = $params['skills'];
 		}
-		$userGameMapper = $this->getLocator()->get('GuildUser\Model\GameMapper');
+		$userGameMapper = $this->getServiceLocator()->get('GuildUser\Model\GameMapper');
 		
 		$userGame = $userGameMapper->findUserGame($user->getUserId(),$params['gameId']);
 		if (! $userGame) {
@@ -131,7 +130,7 @@ class IndexController extends ActionController
 		
 		$params = $this->getRequest()->query();
 		
-		$userGameMapper = $this->getLocator()->get('GuildUser\Model\GameMapper');
+		$userGameMapper = $this->getServiceLocator()->get('GuildUser\Model\GameMapper');
 		$userGame = $userGameMapper->findUserGame($user->getUserId(),$params['gameId']);
 		if (! $userGame) {
 			$userGame = \GuildUser\Model\UserGame::fromArray(array());

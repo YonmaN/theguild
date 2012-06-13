@@ -12,7 +12,7 @@ $settings = array(
      * Please specify the DI alias for the configured Zend\Db\Adapter\Adapter
      * instance that ZfcUser should use.
      */
-//     'zend_db_adapter' => 'Zend\Db\Adapter\Adapter',
+     'zend_db_adapter' => 'Zend\Db\Adapter\Adapter',
 
     /**
      * User Model Entity Class
@@ -163,16 +163,8 @@ $settings = array(
  */
 return array(
     'zfcuser' => $settings,
-    'di' => array(
-	'instance' => array(
-	    'alias' => array(
-	// 'zfcuser_zend_db_adapter' => $settings['zend_db_adapter'],
-	    ),
-		'Zend\Db\Adapter\Adapter' => array('parameters' => array('driver' => 'Zend\Db\Adapter\Driver\Pdo\Pdo')),
-		'Zend\Db\Adapter\Driver\Pdo\Pdo' => array('parameters' => array('connection' => 'masterdb')),
-		'Zend\Mvc\Router\RouteStack' => array(
-			'parameters' => array(
-				'routes' => array(
+	'router' => array(
+		'routes' => array(
 					'zfcuser' => array(
 						'type' => 'Literal',
 						'priority' => 1000,
@@ -183,7 +175,27 @@ return array(
 								'action'     => 'index',
 							),
 						),
-		)))),
+		))
+	),
+//	'service_manager' => array(
+//		'factories' => array(
+//			'zfcuser_user_mapper' => function ($sm) {
+//                    $adapter = $sm->get('zfcuser_zend_db_adapter');
+//                    $tg = new \Zend\Db\TableGateway\TableGateway('user', $adapter);
+//                    return new \GuildUser\Model\UserMapper($tg);
+//                },
+//		)
+//	),
+    'di' => array(
+	'instance' => array(
+	    'alias' => array(
+		 'zfcuser_zend_db_adapter' => $settings['zend_db_adapter'],
+	    ),
+//		'Zend\Db\Adapter\Adapter' => array('parameters' => array('driver' => 'Zend\Db\Adapter\Driver\Pdo\Pdo')),
+//		'Zend\Db\Adapter\Driver\Pdo\Pdo' => array('parameters' => array('connection' => 'masterdb')),
+//		'Zend\Mvc\Router\RouteStack' => array(
+//			'parameters' => array(
+//				)),
 		'zfcuser' => array(
 			'parameters' => array(
 				'loginForm'    => 'GuildUser\Form\Login',
