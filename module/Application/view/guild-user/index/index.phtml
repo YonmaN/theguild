@@ -19,7 +19,19 @@
 	<div class="tabs-container">
 		<div id="personal-details-box" class="tab-content content-box">
 			<h3>פרטים אישיים</h3>
-			<?php echo $personal ?>
+			<?php
+$personal->prepare();
+echo $this->form()->openTag($personal);
+?>
+			<dl class="zend_form">
+			<?php foreach ($personal->getElements() as $element) { ?>
+				<?php if ($element->getAttribute('label') != null) { ?>
+				<dt><?php echo $this->formLabel($element); ?></dt>
+				<?php } ?>
+				<dd><?php echo $this->formInput($element) . $this->formElementErrors($element); ?></dd>
+			<?php } ?>
+			</dl>
+			<?php echo $this->form()->closeTag(); ?>
 			<div id="result"></div>
 		</div>
 
@@ -41,7 +53,19 @@
 						<?php echo $this->slider('gm') ?>
 					</li>
 				</ul>
-				<?php echo $skillsForm ?>
+				<?php
+$skillsForm->prepare();
+echo $this->form()->openTag($skillsForm);
+?>
+			<dl class="zend_form">
+			<?php foreach ($skillsForm->getElements() as $element) { ?>
+				<?php if ($element->getAttribute('label') != null) { ?>
+				<dt><?php echo $this->formLabel($element); ?></dt>
+				<?php } ?>
+				<dd><?php echo $this->formInput($element) . $this->formElementErrors($element); ?></dd>
+			<?php } ?>
+			</dl>
+			<?php echo $this->form()->closeTag(); ?>
 			</div>
 		</div>
 
@@ -88,8 +112,19 @@
 					<li id="attribute-strictness-item"><label>קפדנות</label>
 						<?php echo $this->slider('strictness') ?>
 					</li>
-					
-					<?php echo $attributesForm ?>
+					<?php
+$attributesForm->prepare();
+echo $this->form()->openTag($attributesForm);
+?>
+			<dl class="zend_form">
+			<?php foreach ($attributesForm->getElements() as $element) { ?>
+				<?php if ($element->getAttribute('label') != null) { ?>
+				<dt><?php echo $this->formLabel($element); ?></dt>
+				<?php } ?>
+				<dd><?php echo $this->formInput($element) . $this->formElementErrors($element); ?></dd>
+			<?php } ?>
+			</dl>
+			<?php echo $this->form()->closeTag(); ?>
 				</ul>
 			</div>
 		</div>

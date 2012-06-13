@@ -214,15 +214,16 @@ class IndexController extends ActionController
 	 * @return \Zend\Form\Form 
 	 */
 	private function getDetailsForm() {
-		return new Form(array(
+		$factory = new \Zend\Form\Factory();
+		return $factory->createForm(array(
 				'elements' => array(
-					'bio' => array('type' => 'textarea', 'options' => array('value' => 'סיפור רקע ו-Fluff','rows' => 15,)),
-					'full_name' => array('type' => 'text','options' => array('label' => 'שם מלא')),
-					'display_name' => array('type' => 'text','options' => array('label' => 'שם תצוגה')),
-					'email' => array('type' => 'text','options' => array('label' => 'דוא"ל')),
-					'lfg' => array('type' => 'radio','options' => array('label' => 'מחפש?', 'multiOptions' => array('Yes' => 'כן, אני מחפש קבוצה', 'No' => 'לא, תעזבו אותי בשקט'))),
-					'gender' => array('type' => 'radio','options' => array('label' => 'מין', 'multiOptions' => array('Male' => 'שחקן', 'Female' => 'שחקנית', 'Other' => 'משהו אחר או לא ניתן להגדרה'))),
-					'personal-submit' => array('type' => 'submit', 'options' => array('label' => 'שמור פרטים אישיים'))
+					array('spec' => array('name' => 'bio', 'attributes' => array('type' => 'textarea', 'value' => 'סיפור רקע ו-Fluff','rows' => 15,))),
+					array('spec' => array('name' => 'full_name', 'attributes' => array('type' => 'text','label' => 'שם מלא'))),
+					array('spec' => array('name' => 'display_name', 'attributes' => array('type' => 'text','label' => 'שם תצוגה'))),
+					array('spec' => array('name' => 'email', 'attributes' => array('type' => 'text','label' => 'דוא"ל'))),
+					array('spec' => array('name' => 'lfg', 'attributes' => array('type' => 'radio','label' => 'מחפש?', 'multiOptions' => array('Yes' => 'כן, אני מחפש קבוצה', 'No' => 'לא, תעזבו אותי בשקט')))),
+					array('spec' => array('name' => 'gender', 'attributes' => array('type' => 'radio','label' => 'מין', 'multiOptions' => array('Male' => 'שחקן', 'Female' => 'שחקנית', 'Other' => 'משהו אחר או לא ניתן להגדרה')))),
+					array('spec' => array('name' => 'personal-submit', 'attributes' => array('type' => 'submit', 'label' => 'שמור פרטים אישיים')))
 				),
 			)
 		);
@@ -232,14 +233,15 @@ class IndexController extends ActionController
 	 * @return \Zend\Form\Form 
 	 */
 	private function getAttributesForm() {
-		return new Form(array(
+		$factory = new \Zend\Form\Factory();
+		return $factory->createForm(array(
 				'elements' => array(
-					'humour' => array('type' => 'hidden','options' => array()),
-					'teamplay' => array('type' => 'hidden','options' => array()),
-					'mobility' => array('type' => 'hidden','options' => array()),
-					'hospitality' => array('type' => 'hidden','options' => array()),
-					'strictness' => array('type' => 'hidden','options' => array()),
-					'attributes-submit' => array('type' => 'submit', 'options' => array('label' => 'שמור תכונות'))
+					array('spec' => array('name' => 'humour', array('attributes' => array('type' => 'hidden')))),
+					array('spec' => array('name' => 'teamplay', array('attributes' => array('type' => 'hidden')))),
+					array('spec' => array('name' => 'mobility', array('attributes' => array('type' => 'hidden')))),
+					array('spec' => array('name' => 'hospitality', array('attributes' => array('type' => 'hidden')))),
+					array('spec' => array('name' => 'strictness', array('attributes' => array('type' => 'hidden')))),
+					array('spec' => array('name' => 'attributes-submit', array( 'attributes' => array('type' => 'submit','label' => 'שמור תכונות'))))
 				),
 			)
 		);
@@ -249,14 +251,15 @@ class IndexController extends ActionController
 	 * @return \Zend\Form\Form 
 	 */
 	private function getSkillsForm() {
-		return new Form(array(
+		$factory = new \Zend\Form\Factory();
+		return $factory->createForm(array(
 				'elements' => array(
-					'gameId' => array('type' => 'hidden','options' => array()),
-					'xp' => array('type' => 'hidden','options' => array()),
-					'gm' => array('type' => 'hidden','options' => array()),
-					'comments' => array('type' => 'textarea','options' => array('label' => 'הערות')),
-					'gameId' => array('type' => 'hidden','options' => array()),
-					'submit' => array('type' => 'submit', 'options' => array('label' => 'שמור'))
+					array('spec' => array('name' => 'gameId', array('type' => 'hidden','options' => array()))),
+					array('spec' => array('name' => 'xp', array('type' => 'hidden','options' => array()))),
+					array('spec' => array('name' => 'gm', array('type' => 'hidden','options' => array()))),
+					array('spec' => array('name' => 'comments', array('type' => 'textarea','options' => array('label' => 'הערות')))),
+					array('spec' => array('name' => 'gameId', array('type' => 'hidden','options' => array()))),
+					array('spec' => array('name' => 'submit', array('type' => 'submit', 'options' => array('label' => 'שמור'))))
 				),
 			)
 		);
