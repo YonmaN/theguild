@@ -199,7 +199,6 @@ window.addEvent('domready', function() {
 			new Request.JSON({
 				url: '/guilduser/getusergame',
 				onComplete: function(response) {
-					console.log(gameFormElements);
 					gameFormElements.comments.empty();
 					gameFormElements.xpSlider.setMin(1);
 					gameFormElements.gmSlider.setMin(1);

@@ -41,6 +41,9 @@ class GameMapper extends DbMapperAbstract {
 	 */
 	public function findUserGame($userId, $gameId) {
 		$gameArray = current($this->getTableGateway()->select("user_id = {$userId} AND game_id = {$gameId}")->toArray());
+		if (! $gameArray) {
+			return new UserGame();
+		}
 		return UserGame::fromArray($gameArray);
 	}
 	
