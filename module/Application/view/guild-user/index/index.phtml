@@ -58,12 +58,13 @@ $skillsForm->prepare();
 echo $this->form()->openTag($skillsForm);
 ?>
 			<dl class="zend_form">
-			<?php foreach ($skillsForm->getElements() as $element) { ?>
-				<?php if ($element->getAttribute('label') != null) { ?>
-				<dt><?php echo $this->formLabel($element); ?></dt>
-				<?php } ?>
-				<dd><?php echo $this->formInput($element) . $this->formElementErrors($element); ?></dd>
-			<?php } ?>
+			<dd><?php echo $this->formInput($skillsForm->get('gameId')->setAttribute('id', 'skills-gameId')) . $this->formElementErrors($skillsForm->get('gameId')); ?></dd>
+			<dd><?php echo $this->formInput($skillsForm->get('xp')) . $this->formElementErrors($skillsForm->get('xp')); ?></dd>
+			<dd><?php echo $this->formInput($skillsForm->get('gm')) . $this->formElementErrors($skillsForm->get('gm')); ?></dd>
+			<dt><?php echo $this->formLabel($skillsForm->get('comments')); ?></dt>
+			<dd><?php echo $this->formTextarea($skillsForm->get('comments')->setAttribute('id', 'skills-comments'))
+					. $this->formElementErrors($skillsForm->get('comments')); ?></dd>
+			<dd><?php echo $this->formInput($skillsForm->get('submit'))?></dd>
 			</dl>
 			<?php echo $this->form()->closeTag(); ?>
 			</div>
@@ -198,6 +199,7 @@ window.addEvent('domready', function() {
 			new Request.JSON({
 				url: '/guilduser/getusergame',
 				onComplete: function(response) {
+					console.log(gameFormElements);
 					gameFormElements.comments.empty();
 					gameFormElements.xpSlider.setMin(1);
 					gameFormElements.gmSlider.setMin(1);

@@ -254,12 +254,11 @@ class IndexController extends ActionController
 		$factory = new \Zend\Form\Factory();
 		return $factory->createForm(array(
 				'elements' => array(
-					array('spec' => array('name' => 'gameId', array('type' => 'hidden','options' => array()))),
-					array('spec' => array('name' => 'xp', array('type' => 'hidden','options' => array()))),
-					array('spec' => array('name' => 'gm', array('type' => 'hidden','options' => array()))),
-					array('spec' => array('name' => 'comments', array('type' => 'textarea','options' => array('label' => 'הערות')))),
-					array('spec' => array('name' => 'gameId', array('type' => 'hidden','options' => array()))),
-					array('spec' => array('name' => 'submit', array('type' => 'submit', 'options' => array('label' => 'שמור'))))
+					array('spec' => array('name' => 'gameId', 'attributes' => array('type' => 'hidden'))),
+					array('spec' => array('name' => 'xp', 'attributes' => array('type' => 'hidden'))),
+					array('spec' => array('name' => 'gm', 'attributes' => array('type' => 'hidden'))),
+					array('spec' => array('name' => 'comments', 'attributes' => array('type' => 'textarea', 'label' => 'הערות'))),
+					array('spec' => array('name' => 'submit', 'attributes' => array('type' => 'submit', 'label' => 'שמור')))
 				),
 			)
 		);
