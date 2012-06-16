@@ -94,7 +94,7 @@ class IndexController extends ActionController
 		$userGameMapper = $this->getServiceLocator()->get('GuildUser\Model\GameMapper');
 		
 		$userGame = $userGameMapper->findUserGame($user->getUserId(),$params['gameId']);
-		if (! $userGame) {
+		if (! $userGame->getUserId()) {
 			$userGame = UserGame::fromArray(array(
 				'userId' => $user->getUserId(), 'gameId' => $params['gameId']
 			));
@@ -131,12 +131,7 @@ class IndexController extends ActionController
 		$params = $this->getRequest()->query();
 		
 		$userGameMapper = $this->getServiceLocator()->get('GuildUser\Model\GameMapper');
-		try {
 			$userGame = $userGameMapper->findUserGame($user->getUserId(),$params['gameId']);
-		} catch (\Exception $e) {
-			print_r($e->getMessage());
-			exit;
-		}
 		if (! $userGame) {
 			$userGame = \GuildUser\Model\UserGame::fromArray(array());
 		}
