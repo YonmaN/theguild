@@ -17,7 +17,10 @@ class Module implements \Zend\ModuleManager\Feature\BootstrapListenerInterface, 
 						$tg = new \Zend\Db\TableGateway\TableGateway('user', $adapter);
 						return new \GuildUser\Model\UserMapper($tg);
 					},
-			)
+				'Zend\View\Strategy\JsonStrategy' => function($sm) {
+					return new \Zend\View\Strategy\JsonStrategy(new \Zend\View\Renderer\JsonRenderer());
+				}
+			),
 		);
 	}
 	

@@ -64,6 +64,9 @@ return array(
 		
 		'helper_map' => array(
 			'slider' => 'MooTools\View\Helper\Slider'
+		),
+		'strategies' => array(
+			'Zend\View\Strategy\JsonStrategy'
 		)
     ),
 
