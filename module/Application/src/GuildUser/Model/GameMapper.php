@@ -50,15 +50,9 @@ class GameMapper extends DbMapperAbstract {
 	public function persist(UserGame $userGame)
     {
 		$enabled = intval($userGame->isEnabled());
-		try {
-			$stmt = $this->getTableGateway()->getAdapter()->query("REPLACE INTO user_game (user_id, game_id, comments, xp, gm, learn, enabled)
-				VALUES({$userGame->getUserId()},{$userGame->getGameId()},'{$userGame->getComments()}', {$userGame->getXp()},{$userGame->getGm()},
-				{$userGame->getLearn()},{$enabled})");
-		} catch (\Exception $e) {
-			echo "REPLACE INTO user_game (user_id, game_id, comments, xp, gm, learn, enabled)
-				VALUES({$userGame->getUserId()},{$userGame->getGameId()},'{$userGame->getComments()}', {$userGame->getXp()},{$userGame->getGm()},
-				{$userGame->getLearn()},{$enabled})";
-		}
+		$stmt = $this->getTableGateway()->getAdapter()->query("REPLACE INTO user_game (user_id, game_id, comments, xp, gm, learn, enabled)
+			VALUES({$userGame->getUserId()},{$userGame->getGameId()},'{$userGame->getComments()}', {$userGame->getXp()},{$userGame->getGm()},
+			{$userGame->getLearn()},{$enabled})");
 		$stmt->execute();
         return $userGame;
     }
