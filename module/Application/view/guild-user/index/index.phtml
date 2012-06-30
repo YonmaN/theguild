@@ -22,14 +22,21 @@
 			<?php
 $personal->prepare();
 echo $this->form()->openTag($personal);
+
 ?>
 			<dl class="zend_form">
-			<?php foreach ($personal->getElements() as $element) { ?>
-				<?php if ($element->getAttribute('label') != null) { ?>
-				<dt><?php echo $this->formLabel($element); ?></dt>
-				<?php } ?>
-				<dd><?php echo $this->formInput($element) . $this->formElementErrors($element); ?></dd>
-			<?php } ?>
+				<dd><?php echo $this->formTextarea($personal->get('bio')->setAttribute('id', 'personal-bio-element')) . $this->formElementErrors($personal->get('bio')); ?></dd>
+				<dt><?php echo $this->formLabel($personal->get('full_name')); ?></dt>
+				<dd><?php echo $this->formInput($personal->get('full_name')) . $this->formElementErrors($personal->get('full_name')); ?></dd>
+				<dt><?php echo $this->formLabel($personal->get('display_name')); ?></dt>
+				<dd><?php echo $this->formInput($personal->get('display_name')) . $this->formElementErrors($personal->get('display_name')); ?></dd>
+				<dt><?php echo $this->formLabel($personal->get('email')); ?></dt>
+				<dd><?php echo $this->formInput($personal->get('email')) . $this->formElementErrors($personal->get('email')); ?></dd>
+				<dt><?php echo $this->formLabel($personal->get('lfg')); ?></dt>
+				<dd><?php echo $this->formRadio($personal->get('lfg')) . $this->formElementErrors($personal->get('lfg')); ?></dd>
+				<dt><?php echo $this->formLabel($personal->get('gender')); ?></dt>
+				<dd><?php echo $this->formRadio($personal->get('gender')) . $this->formElementErrors($personal->get('gender')); ?></dd>
+				<dd><?php echo $this->formInput($personal->get('personal-submit')->setAttribute('id','personal-submit')) ?></dd>
 			</dl>
 			<?php echo $this->form()->closeTag(); ?>
 			<div id="result"></div>
@@ -64,7 +71,7 @@ echo $this->form()->openTag($skillsForm);
 			<dt><?php echo $this->formLabel($skillsForm->get('comments')); ?></dt>
 			<dd><?php echo $this->formTextarea($skillsForm->get('comments')->setAttribute('id', 'skills-comments'))
 					. $this->formElementErrors($skillsForm->get('comments')); ?></dd>
-			<dd><?php echo $this->formInput($skillsForm->get('submit'))?></dd>
+			<dd><?php echo $this->formInput($skillsForm->get('submit')->setAttribute('id','skills-submit'))?></dd>
 			</dl>
 			<?php echo $this->form()->closeTag(); ?>
 			</div>
@@ -271,10 +278,10 @@ window.addEvent('domready', function() {
 
 	new Form.Request($('personal-form'), null, {
 		onSend: function(){
-			$('personal-personalsubmit').set('value', 'שומר פרטים אישיים...').set('disabled', true);
+			$('personal-submit').set('value', 'שומר פרטים אישיים...').set('disabled', true);
 		},
 		onComplete: function(resultNode, textNodes, args, responseText){
-			$('personal-personalsubmit').set('value', 'שמור פרטים אישיים').set('disabled', false);
+			$('personal-submit').set('value', 'שמור פרטים אישיים').set('disabled', false);
 			var response = eval("(" + responseText + ")");
 			if (response.success) {
 				

@@ -35,7 +35,6 @@ class IndexController extends ActionController
 		$profile = $profileMapper->findByUserId($user->getUserId());
 		
 		$personal = $this->getDetailsForm();
-		//$personal->setIsArray(true);
 		$personal->setName('personal');
 		$personal->setAttribute('action', $this->url()->fromRoute('default', array('controller' => 'guilduser', 'action' => 'details')));
 		$personal->setAttribute('id', 'personal-form');
@@ -51,7 +50,6 @@ class IndexController extends ActionController
 		$personal->setData($details);
 		
 		$attributes = $this->getAttributesForm();
-//		$attributes->setIsArray(true);
 		$attributes->setName('attributes');
 		$attributes->setAttribute('action', $this->url()->fromRoute('default', array('controller' => 'guilduser', 'action' => 'attributes')));
 		$attributes->setAttribute('id', 'attributes-form');
@@ -74,7 +72,6 @@ class IndexController extends ActionController
 		$userGames = $userGameMapper->findByUserId($user->getUserId());
 
 		$skillsForm = $this->getSkillsForm();
-//		$skillsForm->setIsArray(true);
 		$skillsForm->setName('skills');
 		$skillsForm->setAttribute('action', $this->url()->fromRoute('default', array('controller' => 'guilduser', 'action' => 'setgame')));
 		$skillsForm->setAttribute('id', 'skills-form');
@@ -146,7 +143,6 @@ class IndexController extends ActionController
 	public function attributesAction() {
 		
 		$attributes = $this->getAttributesForm();
-		$attributes->setIsArray(true);
 		$attributes->setName('attributes');
 		
 		if ($this->getRequest()->isPost()) {
@@ -171,13 +167,14 @@ class IndexController extends ActionController
 	}
     
 	public function detailsAction() {
-		
 		$personal = $this->getDetailsForm();
-		$personal->setIsArray(true);
 		$personal->setName('personal');
 		
 		if ($this->getRequest()->isPost()) {
-			$valid = $personal->isValid($this->getRequest()->post()->toArray());
+			$post = $this->getRequest()->post()->toArray();
+			$personal->prepare();
+			$personal->setData($post);
+			$valid = $personal->isValid();
 			$payload = array('success' => $valid);
 			if ($valid) {
 				$user = $this->zfcUserAuthentication()->getIdentity(); /* @var $user \ZfcUser\Model\User */
@@ -216,14 +213,15 @@ class IndexController extends ActionController
 	private function getDetailsForm() {
 		$factory = new \Zend\Form\Factory();
 		return $factory->createForm(array(
+				'input_filter' => array(),
 				'elements' => array(
 					array('spec' => array('name' => 'bio', 'attributes' => array('type' => 'textarea', 'value' => 'סיפור רקע ו-Fluff','rows' => 15,))),
 					array('spec' => array('name' => 'full_name', 'attributes' => array('type' => 'text','label' => 'שם מלא'))),
 					array('spec' => array('name' => 'display_name', 'attributes' => array('type' => 'text','label' => 'שם תצוגה'))),
 					array('spec' => array('name' => 'email', 'attributes' => array('type' => 'text','label' => 'דוא"ל'))),
-					array('spec' => array('name' => 'lfg', 'attributes' => array('type' => 'radio','label' => 'מחפש?', 'multiOptions' => array('Yes' => 'כן, אני מחפש קבוצה', 'No' => 'לא, תעזבו אותי בשקט')))),
-					array('spec' => array('name' => 'gender', 'attributes' => array('type' => 'radio','label' => 'מין', 'multiOptions' => array('Male' => 'שחקן', 'Female' => 'שחקנית', 'Other' => 'משהו אחר או לא ניתן להגדרה')))),
-					array('spec' => array('name' => 'personal-submit', 'attributes' => array('type' => 'submit', 'label' => 'שמור פרטים אישיים')))
+					array('spec' => array('name' => 'lfg', 'attributes' => array('type' => 'radio','label' => 'מחפש?', 'options' => array('כן, אני מחפש קבוצה' => 'Yes', 'לא, תעזבו אותי בשקט' => 'No')))),
+					array('spec' => array('name' => 'gender', 'attributes' => array('type' => 'radio','label' => 'מין', 'options' => array('שחקן' => 'Male', 'שחקנית' => 'Female', 'משהו אחר או לא ניתן להגדרה' => 'Other')))),
+					array('spec' => array('name' => 'personal-submit', 'attributes' => array('type' => 'submit', 'value' => 'שמור פרטים אישיים')))
 				),
 			)
 		);
