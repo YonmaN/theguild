@@ -43,37 +43,16 @@ echo $this->form()->openTag($personal);
 		</div>
 
 		<div id="registered-games-box" class="tab-content content-box">
-			<h3>משחקים</h3>
-			<div id="available-games-list" class="fleft">
-				<ul class="no-bullets-list">
+			<h3 style="display: inline">משחקים</h3>&nbsp;[<a id="registered-games-select-all" href="javascript:void(0)">סמן הכול</a>]&nbsp;[<a id="registered-games-clear-all" href="javascript:void(0)">נקה בחירה</a>]
+			<div>
 <?php foreach ($games as $game): ?>
-					<li><input value="<?php echo $game['game_id'] ?>" type="checkbox" <?php echo isset($assignedGames[$game['game_id']]) ? 'checked="checked"' : '' ?>/><label><?php echo $game['game_name'] ?></label></li>
+					<div class="game_select_box fleft">
+						<div  style="background-image: url(/images/games/dnd.png);">
+							<input class="game_selector_input" value="<?php echo $game['game_id'] ?>" type="checkbox" <?php echo isset($assignedGames[$game['game_id']]) && intval($assignedGames[$game['game_id']]['enabled']) ? 'checked="checked"' : '' ?>/>
+						</div>
+						<label><?php echo $game['game_name'] ?></label>
+					</div>
 <?php endforeach ?>
-				</ul>
-			</div>
-			<div id="game-user-details" class="fright">
-				<ul id="attributes-form-list" class="form-field no-bullets-list">
-					<li id="skill-xp-item"><label>ניסיון</label>
-						<?php echo $this->slider('xp') ?>
-					</li>
-					<li id="skill-gm-item"><label>מנחה</label>
-						<?php echo $this->slider('gm') ?>
-					</li>
-				</ul>
-				<?php
-$skillsForm->prepare();
-echo $this->form()->openTag($skillsForm);
-?>
-			<dl class="zend_form">
-			<dd><?php echo $this->formInput($skillsForm->get('gameId')->setAttribute('id', 'skills-gameId')) . $this->formElementErrors($skillsForm->get('gameId')); ?></dd>
-			<dd><?php echo $this->formInput($skillsForm->get('xp')) . $this->formElementErrors($skillsForm->get('xp')); ?></dd>
-			<dd><?php echo $this->formInput($skillsForm->get('gm')) . $this->formElementErrors($skillsForm->get('gm')); ?></dd>
-			<dt><?php echo $this->formLabel($skillsForm->get('comments')); ?></dt>
-			<dd><?php echo $this->formTextarea($skillsForm->get('comments')->setAttribute('id', 'skills-comments'))
-					. $this->formElementErrors($skillsForm->get('comments')); ?></dd>
-			<dd><?php echo $this->formInput($skillsForm->get('submit')->setAttribute('id','skills-submit'))?></dd>
-			</dl>
-			<?php echo $this->form()->closeTag(); ?>
 			</div>
 		</div>
 
@@ -141,126 +120,48 @@ echo $this->form()->openTag($attributesForm);
 
 <script type="text/javascript" >
 
+function toggleUserGame(enable) {
+	// collect all checkboxes
+	var checkboxes = $$('.game_selector_input');
+	var games = {};
+	checkboxes.each(function(item){
+		// collect all gameids
+		games[item.value] = enable ? 1 : 0;
+	});
+	// disable checkboxes
+	checkboxes.set('disabled', true);
+	checkboxes.set('checked', enable);
+	// send json request
+	new Request.JSON({
+		url: '/guilduser/setgames',
+		onComplete: function() {
+			// enable checkboxes
+			this.set('disabled', false);
+		}.bind(checkboxes)
+	}).post({'games': games});
+}
 // ON LOAD 
 window.addEvent('domready', function() {
 	
-	$('game-user-details').spinner = new Spinner($('game-user-details'));
 	
-	var gameFormElements = {
-		xpSlider: new Slider($$('#skill-xp-item .slider_gutter_i')[0],
-								$$('#skill-xp-item .knob')[0],
-								$$('#skill-xp-item img.slider_bkg')[0],{
-						start: 1,
-						end: 5,
-						offset:0,
-						snap:true, 
-						numsteps:4,
-						onChange: function(pos){
-							$$('.attribute-info').removeClass('active');
-							if ($('skill_xp-'+pos)) {
-								$('skill_xp-'+pos).addClass('active');
-							}
+	
+	$('registered-games-select-all').addEvent('click', toggleUserGame.pass(true));
+	
+	$('registered-games-clear-all').addEvent('click', toggleUserGame.pass(false));
+	
+	$$('input.game_selector_input').addEvent('click', function(event){
+		var checkBox = event.target;
+		var gameId = checkBox.value;
+		var enable = checkBox.checked ? 1 : 0;
 
-							if ($('skills-xp')) {
-								$('skills-xp').value = pos;
-							}
-
-						}
-					}, null).setMin(1),
-		gmSlider: new Slider($$('#skill-gm-item .slider_gutter_i')[0],
-								$$('#skill-gm-item .knob')[0],
-								$$('#skill-gm-item img.slider_bkg')[0],{
-						start: 1,
-						end: 5,
-						offset:0,
-						snap:true, 
-						numsteps:4,
-						onChange: function(pos){
-							$$('.attribute-info').removeClass('active');
-							if ($('skill_gm-'+pos)) {
-								$('skill_gm-'+pos).addClass('active');
-							}
-
-							if ($('skills-gm')) {
-								$('skills-gm').value = pos;
-							}
-
-						}
-					}, null).setMin(1),
-		comments: $('skills-comments'),
-		gameId: $('skills-gameId')
-	};
-
-		$$('#available-games-list ul li').addEvent('click', function(event){
-			var checkBox = event.target.getFirst('input');
-			if (! checkBox) {
-				checkBox = event.target.getPrevious('input');
-			}
-			var gameId = checkBox.value;
-			
-			$('game-user-details').spinner.show();
-			
-			this.getParent().getChildren('li').removeClass('active');
-			this.addClass('active');
-			
-			new Request.JSON({
-				url: '/guilduser/getusergame',
-				onComplete: function(response) {
-					gameFormElements.comments.empty();
-					gameFormElements.xpSlider.setMin(1);
-					gameFormElements.gmSlider.setMin(1);
-					gameFormElements.gameId.value = 0;
-					if (response.success) {
-						var userGame = response.userGame;
-						if(userGame.xp) {
-							gameFormElements.xpSlider.setMin(userGame.xp.toInt());
-						}
-						
-						if(userGame.gm) {
-							gameFormElements.gmSlider.setMin(userGame.gm.toInt());
-						}
-
-						if (userGame.comments) {
-							gameFormElements.comments.set('text', userGame.comments);
-						}
-						
-						if (userGame.game_id) {
-							gameFormElements.gameId.value = userGame.game_id;
-						}
-					}
-					
-					$('game-user-details').spinner.hide();
-				}.bind(this)
-			}).get({'gameId': gameId});
-		});
-
-		$$('#available-games-list ul li input').addEvent('click', function(event){
-			var checkBox = event.target;
-			var gameId = checkBox.value;
-			var enable = checkBox.checked ? 1 : 0;
-			
-			this.set('disabled', true);
-			new Request.JSON({
-				url: '/guilduser/setgame',
-				onComplete: function() {
-					this.set('disabled', false);
-				}.bind(this)
-			}).post({'gameId': gameId, 'enable': enable});
-			event.stopPropagation(true);
-		});
-
-	new Form.Request($('skills-form'), null, {
-		onSend: function(){
-			this.pastValue = $('skills-submit').value;
-			$('skills-submit').set('value', 'שומר ...').set('disabled', true);
-		},
-		onComplete: function(resultNode, textNodes, args, responseText){
-			$('skills-submit').set('value', this.pastValue).set('disabled', false);
-		},
-		requestOptions: {
-			spinnerTarget: $('submit-element')
-		},
-		resetForm: false
+		this.set('disabled', true);
+		new Request.JSON({
+			url: '/guilduser/setgame',
+			onComplete: function() {
+				this.set('disabled', false);
+			}.bind(this)
+		}).post({'gameId': gameId, 'enable': enable});
+		event.stopPropagation(true);
 	});
 
 	new Form.Request($('attributes-form'), null, {

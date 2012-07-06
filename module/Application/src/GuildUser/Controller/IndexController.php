@@ -81,6 +81,31 @@ class IndexController extends ActionController
 			'skillsForm' => $skillsForm));
     } 
     
+	public function setgamesAction() {
+		$user = $this->zfcUserAuthentication()->getIdentity(); /* @var $user \ZfcUser\Model\User */
+		
+		$params = $this->getRequest()->post();
+		$userGameMapper = $this->getServiceLocator()->get('GuildUser\Model\GameMapper');
+		
+		foreach ($params['games'] as $gameId => $enable) {
+			$userGame = $userGameMapper->findUserGame($user->getUserId(),$gameId);
+			if (! $userGame->getUserId()) {
+				$userGame = UserGame::fromArray(array(
+					'userId' => $user->getUserId(), 'gameId' => $gameId
+				));
+			}
+
+			if (isset($enable)) {
+				$userGame->setEnabled(intval($enable));
+			}
+
+			$userGameMapper->persist($userGame);
+			
+		}
+		
+		return $this->getResponse();
+	}
+	
 	public function setgameAction() {
 		$user = $this->zfcUserAuthentication()->getIdentity(); /* @var $user \ZfcUser\Model\User */
 		
