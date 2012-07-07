@@ -47,7 +47,7 @@ echo $this->form()->openTag($personal);
 			<div>
 <?php foreach ($games as $game): ?>
 					<div class="game_select_box fleft">
-						<div  style="background-image: url(/images/games/dnd.png);">
+						<div class="image_holder" style="background-image: url(/images/games/dnd.png);">
 							<input class="game_selector_input" value="<?php echo $game['game_id'] ?>" type="checkbox" <?php echo isset($assignedGames[$game['game_id']]) && intval($assignedGames[$game['game_id']]['enabled']) ? 'checked="checked"' : '' ?>/>
 						</div>
 						<label><?php echo $game['game_name'] ?></label>
@@ -143,8 +143,6 @@ function toggleUserGame(enable) {
 // ON LOAD 
 window.addEvent('domready', function() {
 	
-	
-	
 	$('registered-games-select-all').addEvent('click', toggleUserGame.pass(true));
 	
 	$('registered-games-clear-all').addEvent('click', toggleUserGame.pass(false));
@@ -202,6 +200,7 @@ window.addEvent('domready', function() {
 
         tabPane.addEvent('change', function(what){
 			window.location.hash = 'tab='+what;
+// @todo Why is this needed?
 			// initialise the sliders if the editor is visible and was not previously initialised
 			if ($('attributes-editor').isVisible() && (! $('attributes-editor').initialised)) {
 				var attributes = {
@@ -241,6 +240,8 @@ window.addEvent('domready', function() {
 				$('attributes-editor').initialised = true;
 	        }
         });
+		/// must be fired so that tab init happens
+		tabPane.fireEvent('change', window.location.hash.match(/tab=(\d+)/)[1].toInt());
 });
 
 

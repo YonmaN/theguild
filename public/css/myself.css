@@ -144,12 +144,12 @@ ul.tabs {
 	margin-left: 6px;
 }
 
-.game_select_box div input {
+.game_select_box div.image_holder input {
 	width: 30px;
 	height: 30px;
 }
 
-.game_select_box div {
+.game_select_box div.image_holder {
 	border: 1px solid black;
 	height: 80px;
 	width: 80px;
