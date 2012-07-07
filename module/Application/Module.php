@@ -26,6 +26,7 @@ class Module implements \Zend\ModuleManager\Feature\BootstrapListenerInterface, 
 	
 	public function init($manager = null) {
 		$manager->events()->attach('loadModules.post', array($this, 'modulesLoaded'));
+		date_default_timezone_set(@date_default_timezone_get());
 	}
 	
 	public function onBootstrap(\Zend\EventManager\Event $e) {
