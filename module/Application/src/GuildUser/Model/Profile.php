@@ -16,7 +16,7 @@ class Profile extends ModelAbstract
 	/**
 	 * @var integer
 	 */
-	protected $userId;
+	protected $user_id;
 
     /**
      * @var string
@@ -26,7 +26,7 @@ class Profile extends ModelAbstract
     /**
      * @var integer
      */
-    protected $birthDate;
+    protected $birth_date;
 
     /**
      * @var boolean
@@ -81,7 +81,7 @@ class Profile extends ModelAbstract
      */
     public function getUserId()
     {
-    	return $this->userId;
+    	return $this->user_id;
     }
     
     /**
@@ -94,8 +94,8 @@ class Profile extends ModelAbstract
 	/**
 	 * @return integer
 	 */
-	public function getBirthDate() {
-		return $this->birthDate;
+	public function getbirthDate() {
+		return $this->birth_date;
 	}
 
 	/**
@@ -169,10 +169,10 @@ class Profile extends ModelAbstract
 	}
 
 	/**
-	 * @param string $birthDate
+	 * @param string $birth_date
 	 */
-	public function setBirthDate($birthDate) {
-		$this->birthDate = ($birthDate);
+	public function setbirthDate($birth_date) {
+		$this->birth_date = ($birth_date);
 	}
 
 	/**
@@ -246,7 +246,7 @@ class Profile extends ModelAbstract
      */
     public function setUserId($userId)
     {
-        $this->userId = (int) $userId;
+        $this->user_id = (int) $userId;
         return $this;
     }
  

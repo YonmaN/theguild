@@ -168,16 +168,18 @@ class IndexController extends ActionController
 	public function attributesAction() {
 		
 		$attributes = $this->getAttributesForm();
+		$attributes->prepare();
 		$attributes->setName('attributes');
 		
 		if ($this->getRequest()->isPost()) {
-			$valid = $attributes->isValid($this->getRequest()->post()->toArray());
+			$attributes->setData($this->getRequest()->post()->toArray());
+			$valid = $attributes->isValid();
 			$payload = array('success' => $valid);
 			if ($valid) {
 				$user = $this->zfcUserAuthentication()->getIdentity(); /* @var $user \ZfcUser\Model\User */
 				$profileMapper = $this->getProfileMapper();
 				$profile = $profileMapper->findByUserId($user->getUserId()); /* @var $profile \GuildUser\Model\Profile */
-				$profile->setFromArray(current($attributes->getValues()));
+				$profile->setFromArray($this->getRequest()->post()->toArray());
 				$profileMapper->persist($profile);
 			} else {
 				$payload['errors'] = $attributes->getMessages();
@@ -258,13 +260,14 @@ class IndexController extends ActionController
 	private function getAttributesForm() {
 		$factory = new \Zend\Form\Factory();
 		return $factory->createForm(array(
+				'input_filter' => array(),
 				'elements' => array(
-					array('spec' => array('name' => 'humour', array('attributes' => array('type' => 'hidden')))),
-					array('spec' => array('name' => 'teamplay', array('attributes' => array('type' => 'hidden')))),
-					array('spec' => array('name' => 'mobility', array('attributes' => array('type' => 'hidden')))),
-					array('spec' => array('name' => 'hospitality', array('attributes' => array('type' => 'hidden')))),
-					array('spec' => array('name' => 'strictness', array('attributes' => array('type' => 'hidden')))),
-					array('spec' => array('name' => 'attributes-submit', array( 'attributes' => array('type' => 'submit','label' => 'שמור תכונות'))))
+					array('spec' => array('name' => 'humour', 'attributes' => array('type' => 'hidden', 'label' => 'הומור', 'id' => 'attributes-humour'))),
+					array('spec' => array('name' => 'teamplay', 'attributes' => array('type' => 'hidden', 'label' => 'שיתוף פעולה', 'id' => 'attributes-teamplay'))),
+					array('spec' => array('name' => 'mobility', 'attributes' => array('type' => 'hidden', 'label' => 'ניידות', 'id' => 'attributes-mobility'))),
+					array('spec' => array('name' => 'hospitality', 'attributes' => array('type' => 'hidden', 'label' => 'אירוח', 'id' => 'attributes-hospitality'))),
+					array('spec' => array('name' => 'strictness', 'attributes' => array('type' => 'hidden', 'label' => 'קפדנות', 'id' => 'attributes-strictness'))),
+					array('spec' => array('name' => 'attributes-submit',  'attributes' => array('type' => 'submit','value' => 'שמור תכונות', 'id' => 'attributes-attributessubmit')))
 				),
 			)
 		);

@@ -78,36 +78,22 @@ echo $this->form()->openTag($personal);
 <?php	endforeach ?>
 <?php endforeach ?>
 				</div>
-				<ul id="attributes-form-list" class="form-field no-bullets-list">
-					<li id="attribute-humour-item"><label>הומור</label>
-						<?php echo $this->slider('humour') ?>
-					</li>
-					<li id="attribute-teamplay-item"><label>חברותי</label>
-						<?php echo $this->slider('teamplay') ?>
-					</li>
-					<li id="attribute-mobility-item"><label>ניידות</label>
-						<?php echo $this->slider('mobility') ?>
-					</li>
-					<li id="attribute-hospitality-item"><label>אירוח</label>
-						<?php echo $this->slider('hospitality') ?>
-					</li>
-					<li id="attribute-strictness-item"><label>קפדנות</label>
-						<?php echo $this->slider('strictness') ?>
-					</li>
-					<?php
+				<?php
 $attributesForm->prepare();
 echo $this->form()->openTag($attributesForm);
 ?>
-			<dl class="zend_form">
-			<?php foreach ($attributesForm->getElements() as $element) { ?>
-				<?php if ($element->getAttribute('label') != null) { ?>
-				<dt><?php echo $this->formLabel($element); ?></dt>
-				<?php } ?>
-				<dd><?php echo $this->formInput($element) . $this->formElementErrors($element); ?></dd>
-			<?php } ?>
-			</dl>
-			<?php echo $this->form()->closeTag(); ?>
-				</ul>
+					<ul id="attributes-form-list" class="zend_form form-field no-bullets-list">
+						<?php foreach ($attributesForm->getElements() as $element) : ?>
+						<li id="attribute-<?php echo $element->getName() ?>-item">
+							<?php if ($element->getAttribute('label')) : ?>
+								<label><?php echo $this->formLabel($element); ?></label>
+								<?php echo $this->slider($element->getName()) ?>
+							<?php endif ?>
+							<?php echo $this->formInput($element) ?>
+						</li>
+						<?php endforeach ?>
+					</ul>
+				<?php echo $this->form()->closeTag(); ?>
 			</div>
 		</div>
 	</div>
