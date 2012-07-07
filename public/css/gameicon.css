@@ -1,0 +1,25 @@
+.game_select_box div.image_holder input {
+	width: 30px;
+	height: 30px;
+}
+
+.game_select_box label {
+	height: 55px;
+	overflow-y: hidden;
+}
+
+.game_select_box div.image_holder {
+	border: 1px solid black;
+	height: 80px;
+	width: 80px;
+	text-align: right;
+	padding: 2px;
+}
+
+.game_select_box {
+	height: 80px;
+	width: 80px;
+	margin: 6px;
+	text-align: center;
+	margin-bottom: 60px;
+}

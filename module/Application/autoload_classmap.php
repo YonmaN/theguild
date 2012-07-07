@@ -3,6 +3,7 @@ return array(
     'Application\Controller\IndexController' => __DIR__ . '/src/Application/Controller/IndexController.php',
     'GuildUser\Controller\IndexController' => __DIR__ . '/src/GuildUser/Controller/IndexController.php',
     'Application\Module'                     => __DIR__ . '/Module.php',
+	'Game\View\Helper\GameIcon'			=> __DIR__ . '/src/Game/View/Helper/GameIcon.php',
 	'Game\Model\GameMapper'			=> __DIR__ . '/src/Game/Model/GameMapper.php',
 	'GuildUser\Model\ProfileMapper'			=> __DIR__ . '/src/GuildUser/Model/ProfileMapper.php',
 	'GuildUser\Model\UserMapper'			=> __DIR__ . '/src/GuildUser/Model/UserMapper.php',

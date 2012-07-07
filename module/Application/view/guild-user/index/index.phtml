@@ -46,12 +46,7 @@ echo $this->form()->openTag($personal);
 			<h3 style="display: inline">משחקים</h3>&nbsp;[<a id="registered-games-select-all" href="javascript:void(0)">סמן הכול</a>]&nbsp;[<a id="registered-games-clear-all" href="javascript:void(0)">נקה בחירה</a>]
 			<div>
 <?php foreach ($games as $game): ?>
-					<div class="game_select_box fleft">
-						<div class="image_holder" style="background-image: url(/images/games/dnd.png);">
-							<input class="game_selector_input" value="<?php echo $game['game_id'] ?>" type="checkbox" <?php echo isset($assignedGames[$game['game_id']]) && intval($assignedGames[$game['game_id']]['enabled']) ? 'checked="checked"' : '' ?>/>
-						</div>
-						<label><?php echo $game['game_name'] ?></label>
-					</div>
+<?php	echo $this->gameIcon($game, isset($assignedGames[$game['game_id']]) && intval($assignedGames[$game['game_id']]['enabled'])) ?>
 <?php endforeach ?>
 			</div>
 		</div>

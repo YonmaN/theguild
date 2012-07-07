@@ -7,23 +7,6 @@ $profile = $profile ?: new Profile();
 ?>
 <script type="text/javascript">
 window.addEvent('domready', function () {
-    var duration = 300,
-    links = $$('div#slider-nav a'),
-    tab = new Carousel.Extra({
-	    container: 'slider',
-	    scroll: 1,
-	    circular: true,
-	    current: 3,
-	    previous: links.shift(),
-	    next: links.pop(),
-	    tabs: links,
-	    mode: 'horizontal',
-	    autostart: false,
-	    activeClass: 'selected',
-	    fx: {
-	    	duration: duration
-	    }
-    });
 
     document.id('attribute-details-humor').addEvent('mouseover', function() {
     	ToolTip.instance(this, {
@@ -70,45 +53,8 @@ window.addEvent('domready', function () {
     	}, document.id('attribute-strictness-tooltip-2')).show();
     });
 
-<?php foreach (array('xp', 'gm') as $ability) : ?>
-<?php 	foreach ($games as $game) :?>
-    document.id('ability-details-<?php echo $ability ?>-<?php echo $game['game_id']?>').addEvent('mouseover', function() {
-    	ToolTip.instance(this, {
-    		relativeTo: this.id,
-    		autohide: true,
-    		hideDelay: 150,
-    		position: {position: 'centerLeft', edge: 'right'}
-    	}, document.id('ability-details-<?php echo $ability ?>-tooltip-<?php echo $game["$ability"]?>')).show();
-    });
-<?php 	endforeach; ?>
-<?php endforeach; ?>
 });
 </script>
-<div id="ability-details-gm-tooltip-4" class="tooltip-content"><h3>דירוג מנחה: 4</h3>
-	<blockquote>תנו לי לפתוח בפניכם את העולם שגדל אצלי בראש</blockquote>
-	<p>הנחייה בוערת בעורקיך ומשחקים שבהם אינך מנחה הם רק הפסקות כדי ללמוד מטעויותיהם של אחרים.</p>
-	<p>העולמות שלך מפורטים, הדמויות מגוונות ומהימנות והעלילות הן כמו ספר משובח.</p>
-</div>
-<div id="ability-details-gm-tooltip-2" class="tooltip-content"><h3>דירוג מנחה: 2</h3>
-	<blockquote>די כבר להרוג לי את הרעים!</blockquote>
-	<p>אתה חדש במשחק הזה, לא מנוסה בהנחייה או שפשוט אין לך כישרון...</p>
-	<p>אתה יכול להעביר משחק אבל קצר כזה ושהדמויות לא יעשו משהו מפתיע</p>
-</div>
-<div id="ability-details-xp-tooltip-3" class="tooltip-content"><h3>דירוג קראנץ': 3</h3>
-	<blockquote>רגע, אני רק רוצה לוודא שלא שכחתי משהו</blockquote>
-	<p>החוקים של המשחק מוכרים לך וייתכן שקראת יותר מספר השחקן הבסיסי.</p>
-	<p>החישובים הבסיסיים ברורים לך אבל לפעמים אתה שוכח להוסיף את הבונוסים שלך.</p>
-</div>
-<div id="ability-details-xp-tooltip-2" class="tooltip-content"><h3>דירוג קראנץ': 2</h3>
-	<blockquote>אז כאילו לרשום את כל זה פה בדף?</blockquote>
-	<p>קראת את ספר החוקים הבסיסי. טוב, את הפרקים עם התמונות של ה... דרקונים.</p>
-	<p>אולי רק עיינת בספר ואתה זוכר פה ושם פרטים אבל הפרטים קצת מעורפלים. כנראה שתזדקק לעזרה במשחק עצמו</p>
-</div>
-<div id="ability-details-xp-tooltip-1" class="tooltip-content"><h3>דירוג קראנץ': 1</h3>
-	<blockquote>רגע, אני רק רוצה לוודא שלא שכחתי משהו</blockquote>
-	<p>החוקים של המשחק מוכרים לך וייתכן שקראת יותר מספר השחקן הבסיסי.</p>
-	<p>החישובים הבסיסיים ברורים לך אבל לפעמים אתה שוכח להוסיף את הבונוסים שלך.</p>
-</div>
 <div id="attribute-humour-tooltip-2" class="tooltip-content"><h3>דירוג הומור: 2</h3>
 	<blockquote>גנום, טרול ושני גובלינים נכנסים ל... רגע, לא, מההתחלה</blockquote>
 	<p>אתה לא מצחיק אבל כנראה גם לא מדכא. משחקים איתך הם משעשעים, כל עוד הכנת את הבדיחות מראש ועשית חזרות בבית.</p>
@@ -139,42 +85,9 @@ window.addEvent('domready', function () {
 			<div id="contentwide" class="fleft">
 				<div class="column fleft content-box" >
 					<h2>משחקים רשומים</h2>
-					<div id="slider-nav" >
-					<a href="#page-p">&laquo;</a>
-<?php $panel = 1; foreach ($games as $game): ?>
-					<a href="#<?php echo $panel++ ?>"><?php echo $game['game_name_short']?></a>&nbsp;
-<?php endforeach;?>
-					<a href="#page-p">&raquo;</a>
-					</div>
-					<div id="slider">
-<?php $panel = 1; foreach ($games as $game): ?>
-						<div class="panel">
-							<div class="abilities-box content-box">
-								<h2><?php echo $game['game_name']?></h2>
-								<table class="abilities-table">
-									<tbody>
-										<tr>
-											<td class="ability-name">ניסיון</td>
-											<td class="ability-value"><div class="value-bar" style="width:<?php echo ($game['xp'] / 5 * 100)?>%"></div></td>
-											<td class="ability-details"><div id="ability-details-xp-<?php echo $game['game_id']?>" class="ability-details-xp icon"></div></td>
-										</tr>
-										<tr>
-											<td class="ability-name">מנחה</td>
-											<td class="ability-value"><div class="value-bar" style="width:<?php echo ($game['gm'] / 5 * 100)?>%;"></div></td>
-											<td class="ability-details"><div id="ability-details-gm-<?php echo $game['game_id']?>" class="ability-details-gm icon"></div></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-<?php if ($game['comments']) :?>
-							<div class="comments-box content-box">
-								<h3>הערות, סגנון משחק מועדף</h3>
-								<div class="comments-internal">
-<?php echo nl2br($game['comments']); ?>
-								</div>
-							</div>
-<?php endif; ?>
-						</div>
+					<div>
+<?php foreach ($games as $game): ?>
+<?php	echo $this->gameIcon($game) ?>
 <?php endforeach;?>
 					</div>
 				</div>

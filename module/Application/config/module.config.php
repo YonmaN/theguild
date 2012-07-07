@@ -63,7 +63,8 @@ return array(
         ),
 		
 		'helper_map' => array(
-			'slider' => 'MooTools\View\Helper\Slider'
+			'slider' => 'MooTools\View\Helper\Slider',
+			'gameIcon' => 'Game\View\Helper\GameIcon'
 		),
 		'strategies' => array(
 			'Zend\View\Strategy\JsonStrategy'
@@ -126,7 +127,7 @@ return array(
         				'parameters' => array(
         					'userMapper' => 'GuildUser\Model\UserMapper',
         					'profileMapper' => 'GuildUser\Model\ProfileMapper',
-        					'gameMapper' => 'Game\Model\GameMapper',
+        					'gameMapper' => 'GuildUser\Model\GameMapper',
         					'userGameMapper' => 'GuildUser\Model\GameMapper',
         				)
         			),

@@ -144,26 +144,6 @@ ul.tabs {
 	margin-left: 6px;
 }
 
-.game_select_box div.image_holder input {
-	width: 30px;
-	height: 30px;
-}
-
-.game_select_box div.image_holder {
-	border: 1px solid black;
-	height: 80px;
-	width: 80px;
-	text-align: right;
-	padding: 2px;
-}
-
-.game_select_box {
-	height: 80px;
-	width: 80px;
-	margin: 6px;
-	text-align: center;
-}
-
 #game-user-details {
 	width: 294px;
 	height: 342px;

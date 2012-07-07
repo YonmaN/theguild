@@ -18,8 +18,8 @@ class GameMapper extends DbMapperAbstract {
 		$gateway = $this->getTableGateway(); /* @var $gateway \Zend\Db\TableGateway\TableGateway */
 		// TODO protect from injection
 		$select = new \Zend\Db\Sql\Select($gateway->getTable());
-		$select->join('user_game', "user_game.game_id = game.game_id AND user_id = {$id} AND user_game.enabled = 1");
-		$rowset = $gateway->select($select)->toArray();
+		$select->join('game', "user_game.game_id = game.game_id AND user_id = {$id} AND user_game.enabled = 1");
+		$rowset = $gateway->selectWith($select)->toArray();
 		
 		$gamesArray = array();
 		foreach ($rowset as $game) {
