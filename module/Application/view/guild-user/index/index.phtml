@@ -236,7 +236,9 @@ window.addEvent('domready', function() {
 	        }
         });
 		/// must be fired so that tab init happens
-		tabPane.fireEvent('change', window.location.hash.match(/tab=(\d+)/)[1].toInt());
+		if (window.location.hash.match(/tab=(\d+)/)) {
+			tabPane.fireEvent('change', window.location.hash.match(/tab=(\d+)/)[1].toInt());
+		}
 });
 
 

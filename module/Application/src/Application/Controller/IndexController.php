@@ -28,10 +28,13 @@ class IndexController extends ActionController
     	$view->plugin('headScript')->appendFile("$basePath/js/mootools-more-1.4.0.1.js");
     	$view->plugin('headScript')->appendFile("$basePath/js/ToolTip.js");
     	
+		$tooltipMapper = $this->getServiceLocator()->get('GuildUser\Attribute\TooltipMapper'); /* @var $tooltipMapper \GuildUser\Attribute\TooltipMapper */
+		$attributeTooltips = $tooltipMapper->findAllTooltips();
+		
     	$users = $this->getUserMapper()->findAll();
     	$ids = array_map(function ($user) {return $user->getUserId();}, $users);
     	$profiles = $this->getProfileMapper()->findByUserIds($ids);
-    	return new ViewModel(array('users' => $users, 'profiles' => $profiles));
+    	return new ViewModel(array('users' => $users, 'profiles' => $profiles, 'tooltips' => $attributeTooltips));
     }
 
     public function sheetAction() {

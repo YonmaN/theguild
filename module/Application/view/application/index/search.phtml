@@ -4,24 +4,32 @@ $profiles = $profiles ?: array()
 ?>
 <script type="text/javascript">
 window.addEvent('domready', function () {
-	
-	$$('ul.attributes-mini-list li.humour').addEvent('mouseover', function() {
-    	ToolTip.instance(this, {
-    		relativeTo: this.id,
-    		autohide: true,
-    		hideDelay: 150,
-    		position: {position: 'centerBottom', edge: 'top'}
-    	}, document.id('attribute-humour-tooltip-2')).show();
+	$$('ul.attributes-mini-list li').addEvent('mouseover', function() {
+		if (this.get('text') > 0) {
+			var targetId = 'attribute-{tooltip}-tooltip-{score}'.substitute({tooltip: this.get('class'), score: this.get('text')});
+			ToolTip.instance(this, {
+				relativeTo: this.id,
+				autohide: true,
+				hideDelay: 150,
+				position: {position: 'centerBottom', edge: 'top'}
+			}, $(targetId)).show();
+		}
     });
 
 
 });
 </script>
 
-<div id="attribute-humour-tooltip-2" class="tooltip-content"><h3>דירוג הומור: 2</h3>
-	<blockquote>גנום, טרול ושני גובלינים נכנסים ל... רגע, לא, מההתחלה</blockquote>
-	<p>אתה לא מצחיק אבל כנראה גם לא מדכא. משחקים איתך הם משעשעים, כל עוד הכנת את הבדיחות מראש ועשית חזרות בבית.</p>
+<?php foreach ($tooltips as $id => $tooltip) :?>
+<?php	foreach ($tooltip['scores'] as $score => $content) :?>
+<div id="attribute-<?php echo $id ?>-tooltip-<?php echo $score ?>" class="tooltip-content"><h3><?php echo $tooltip['headline'] ?>: <?php echo $score ?></h3>
+	<blockquote><?php echo $content['quote'] ?></blockquote>
+	<p><?php echo $content['text'] ?></p>
 </div>
+<?php	endforeach ?>
+<?php endforeach ?>
+
+
 
 <div id="contentbg">
 	<div id="contentblank">

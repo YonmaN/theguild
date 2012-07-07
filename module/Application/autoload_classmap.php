@@ -10,6 +10,7 @@ return array(
 	'GuildUser\Model\GameMapper'			=> __DIR__ . '/src/GuildUser/Model/GameMapper.php',
 	'GuildUser\Model\UserGame'			=> __DIR__ . '/src/GuildUser/Model/UserGame.php',
 	'GuildUser\Model\Profile'			=> __DIR__ . '/src/GuildUser/Model/Profile.php',
+	'GuildUser\Attribute\TooltipMapper'			=> __DIR__ . '/src/GuildUser/Attribute/TooltipMapper.php',
 	'GuildUser\Form\Login'                               => __DIR__ . '/src/GuildUser/Form/Login.php',
 	'GuildUser\Form\Register'                               => __DIR__ . '/src/GuildUser/Form/Register.php',
 	'MooTools\View\Helper\Slider'                           => __DIR__ . '/src/MooTools/View/Helper/Slider.php',
