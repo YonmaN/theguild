@@ -69,11 +69,15 @@ ul.tabs {
 	display: inline;
 }
 
+.zend_form .radio_select label {
+	display: block;
+}
+
 .zend_form #personal-bio-element {
 	float: left;
 }
 
-#personal-bio-element textarea {
+textarea#personal-bio-element {
     resize: none;
 	width: 375px;
 	height: 291px;

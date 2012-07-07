@@ -33,9 +33,9 @@ echo $this->form()->openTag($personal);
 				<dt><?php echo $this->formLabel($personal->get('email')); ?></dt>
 				<dd><?php echo $this->formInput($personal->get('email')) . $this->formElementErrors($personal->get('email')); ?></dd>
 				<dt><?php echo $this->formLabel($personal->get('lfg')); ?></dt>
-				<dd><?php echo $this->formRadio($personal->get('lfg')) . $this->formElementErrors($personal->get('lfg')); ?></dd>
+				<dd class="radio_select"><?php echo $this->formRadio($personal->get('lfg')) . $this->formElementErrors($personal->get('lfg')); ?></dd>
 				<dt><?php echo $this->formLabel($personal->get('gender')); ?></dt>
-				<dd><?php echo $this->formRadio($personal->get('gender')) . $this->formElementErrors($personal->get('gender')); ?></dd>
+				<dd class="radio_select"><?php echo $this->formRadio($personal->get('gender')) . $this->formElementErrors($personal->get('gender')); ?></dd>
 				<dd><?php echo $this->formInput($personal->get('personal-submit')->setAttribute('id','personal-submit')) ?></dd>
 			</dl>
 			<?php echo $this->form()->closeTag(); ?>

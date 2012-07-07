@@ -208,18 +208,18 @@ class IndexController extends ActionController
 				$userModel = $this->getUserMapper();
 				$userModel->persist(
 							$user
-								->setDisplayName($personal->getValue('display_name'))
-								->setEmail($personal->getValue('email'))
+								->setDisplayName($post['display_name'])
+								->setEmail($post['email'])
 						);
 				
 				
 				$profileMapper = $this->getProfileMapper();
 				$profile = $profileMapper->findByUserId($user->getUserId()); /* @var $profile \GuildUser\Model\Profile */
 				
-				$profile->setLfg($personal->getValue('lfg'));
-				$profile->setGender($personal->getValue('gender'));
-				$profile->setName($personal->getValue('full_name'));
-				$profile->setBio($personal->getValue('bio'));
+				$profile->setLfg($post['lfg']);
+				$profile->setGender($post['gender']);
+				$profile->setName($post['full_name']);
+				$profile->setBio($post['bio']);
 				
 				$profileMapper->persist($profile);
 			} else {
