@@ -1,5 +1,10 @@
 @CHARSET "windows-1255";
 
+body {
+	/* plusone fix for fun infinte scrollbar */
+	overflow-x: hidden;
+}
+
 .content-box {
 	margin-bottom: 15px;
 	width:100%;
@@ -110,8 +115,9 @@ width: 100%;
 
 #lfg-box {
 	background: url("/images/skin/lfg.jpg") no-repeat;
-	height: 200px;
-width: 200px;
+	float:right;
+	height: 75px;
+    width: 80px;
 }
 
 .abilities-box {
@@ -174,4 +180,20 @@ div.tooltip div.tooltip-content {
 
 #personal-box label {
 	display: inline;
+}
+
+.sociable1 {
+	direction: ltr;
+    height: 84px;
+}
+
+.sociable1 ul {
+	height: 75px;
+    width: 149px;
+    float: left;
+	list-style-type: none;
+}
+
+.sociable1 ul li.gplus-bump {
+	margin-left: 30px;
 }
