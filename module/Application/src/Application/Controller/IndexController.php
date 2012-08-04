@@ -49,13 +49,24 @@ class IndexController extends ActionController
     	$view->plugin('headScript')->appendFile("$basePath/js/mootools-core-1.4.5-full-compat.js");
     	$view->plugin('headScript')->appendFile("$basePath/js/mootools-more-1.4.0.1.js");
     	$view->plugin('headScript')->appendFile("$basePath/js/ToolTip.js");
-    	$view->plugin('headScript')->appendFile("$basePath/js/Carousel.js");
-    	$view->plugin('headScript')->appendFile("$basePath/js/Carousel.Extra.js");
-    	$view->plugin('headScript')->appendFile("$basePath/js/PeriodicalExecuter.js");
     	$row = $this->getUserMapper()->findById($id);
      	$games = $this->getGameMapper()->findByUserId($id);
     	$profile = $this->getProfileMapper()->findByUserId($id);
+		
+		$reader = simplexml_load_file(getcwd().DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'tooltips.xml');
+		$attributesContent = array();
+		foreach($reader->xpath('tooltip[@type="attribute"]') as $tooltip) {
+			$attributesContent[(string)$tooltip['id']] = array('name' => (string)$tooltip->name, 'headline' => (string)$tooltip->headline);
+			$attributesContent[(string)$tooltip['id']]['scores'] = array();
+			$scores = current((array)$tooltip->scores);
+			foreach ($scores as $score) {
+				$attributesContent[(string)$tooltip['id']]['scores'][(string)$score['value']] = array('quote' => (string)$score->quote, 'text' => (string)$score->text);
+			}
+		}
+		
+		
     	return new ViewModel(array(
+			'tooltips' => $attributesContent,
 			'row' => $row,
         	'games' => $games,
         	'profile' => $profile

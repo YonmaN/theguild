@@ -16,7 +16,7 @@ window.addEvent('domready', function () {
     		autohide: true,
     		hideDelay: 150,
     		position: {position: 'centerLeft', edge: 'right'}
-    	}, document.id('attribute-humour-tooltip-2')).show();
+    	}, document.id('attribute-humour-tooltip-<?php echo $profile->getHumour() ?>')).show();
     });
 
     document.id('attribute-details-teamplay').addEvent('mouseover', function() {
@@ -25,7 +25,7 @@ window.addEvent('domready', function () {
     		autohide: true,
     		hideDelay: 150,
     		position: {position: 'centerLeft', edge: 'right'}
-    	}, document.id('attribute-teamplay-tooltip-3')).show();
+    	}, document.id('attribute-teamplay-tooltip-<?php echo $profile->getTeamplay() ?>')).show();
     });
     
     document.id('attribute-details-mobility').addEvent('mouseover', function() {
@@ -34,7 +34,7 @@ window.addEvent('domready', function () {
     		autohide: true,
     		hideDelay: 150,
     		position: {position: 'centerLeft', edge: 'right'}
-    	}, document.id('attribute-mobility-tooltip-3')).show();
+    	}, document.id('attribute-mobility-tooltip-<?php echo $profile->getMobility() ?>')).show();
     });
 
     document.id('attribute-details-hospitality').addEvent('mouseover', function() {
@@ -43,7 +43,7 @@ window.addEvent('domready', function () {
     		autohide: true,
     		hideDelay: 150,
     		position: {position: 'centerLeft', edge: 'right'}
-    	}, document.id('attribute-hospitality-tooltip-5')).show();
+    	}, document.id('attribute-hospitality-tooltip-<?php echo $profile->getHospitality() ?>')).show();
     });
 
     document.id('attribute-details-strictness').addEvent('mouseover', function() {
@@ -52,34 +52,26 @@ window.addEvent('domready', function () {
     		autohide: true,
     		hideDelay: 150,
     		position: {position: 'centerLeft', edge: 'right'}
-    	}, document.id('attribute-strictness-tooltip-2')).show();
+    	}, document.id('attribute-strictness-tooltip-<?php echo $profile->getStrictness() ?>')).show();
     });
 
 });
 </script>
-<div id="attribute-humour-tooltip-2" class="tooltip-content"><h3>דירוג הומור: 2</h3>
-	<blockquote>גנום, טרול ושני גובלינים נכנסים ל... רגע, לא, מההתחלה</blockquote>
-	<p>אתה לא מצחיק אבל כנראה גם לא מדכא. משחקים איתך הם משעשעים, כל עוד הכנת את הבדיחות מראש ועשית חזרות בבית.</p>
+
+<?php foreach ($tooltips as $identifier => $attribute) : ?>
+<?php if (method_exists($profile, 'get'.  ucfirst($identifier))):
+	$method = 'get'.  ucfirst($identifier);
+	$value = $profile->$method();
+	$score = $attribute['scores'][$value];
+?>
+<div id="attribute-<?php echo $identifier ?>-tooltip-<?php echo $value ?>" class="attribute-info tooltip-content">
+	<h3><?php echo $attribute['headline'] ?>: <?php echo $value ?></h3>
+	<blockquote><?php echo $score['quote'] ?></blockquote>
+	<p><?php echo $score['text'] ?></p>
 </div>
-<div id="attribute-teamplay-tooltip-3" class="tooltip-content"><h3>חברותי דירוג: 3</h3>
-	<blockquote>גנום, טרול ושני גובלינים נכנסים ל... רגע, לא, מההתחלה</blockquote>
-	<p>אתה לא מצחיק אבל כנראה גם לא מדכא. משחקים איתך הם משעשעים, כל עוד הכנת את הבדיחות מראש ועשית חזרות בבית.</p>
-</div>
-<div id="attribute-mobility-tooltip-3" class="tooltip-content"><h3>דירוג ניידות: 3</h3>
-	<blockquote>תרד, אני מגיע</blockquote>
-	<p>אתה נייד וממונע. בין אם בכוחות קסומים, על הסוס של אבא או המכונית הפרטית,
-	 אתה מסוגל להגיע לכל מקום המרחק סביר ואולי אף תיתן טרמפים עבור פיצוי הולם</p>
-</div>
-<div id="attribute-hospitality-tooltip-5" class="tooltip-content"><h3>דירוג אירוח: 5</h3>
-<blockquote>בואו! יש פיצה ביתית!</blockquote>
-<p>אם היית יכול, היית עושה מינ/מקס למטבח והסלון שלך. כל משחק אצלך הוא חגיגה של אוכל, חברה ומשחק
-עד השעות הקטנות של הלילה</p>
-</div>
-<div id="attribute-strictness-tooltip-2" class="tooltip-content"><h3>דירוג קפדנות: 2</h3>
-<blockquote>המשחק נברא כדי שיהנו ממנו</blockquote>
-<p> החוקים של המשחק והמנחה לא ממש חשובים לך - הם מצע מעניין לדיונים פילוסופיים אבל הם יכולים להישרף
-לפני שתיתן להם לעכב לך את המשחק או לעצור את הדמות שלך מלעשות משהו שהיא רוצה.</p>
-</div>
+<?php endif ?>
+<?php endforeach ?>
+
 <div id="contentbg">
 	<div id="contentblank">
 		<div id="content">
