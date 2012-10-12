@@ -4,7 +4,7 @@ namespace Application\Controller;
 
 use ZfcUser\Model\UserMetaMapper, Zend\Form\Form;
 
-use Zend\Mvc\Controller\ActionController,
+use Zend\Mvc\Controller\AbstractActionController as ActionController,
     Zend\View\Model\ViewModel;
 
 class IndexController extends ActionController
@@ -31,10 +31,9 @@ class IndexController extends ActionController
 		$tooltipMapper = $this->getServiceLocator()->get('GuildUser\Attribute\TooltipMapper'); /* @var $tooltipMapper \GuildUser\Attribute\TooltipMapper */
 		$attributeTooltips = $tooltipMapper->findAllTooltips();
 		
-    	$users = $this->getUserMapper()->findAll();
-    	$ids = array_map(function ($user) {return $user->getUserId();}, $users);
-    	$profiles = $this->getProfileMapper()->findByUserIds($ids);
-    	return new ViewModel(array('users' => $users, 'profiles' => $profiles, 'tooltips' => $attributeTooltips));
+    	$profiles = $this->getProfileMapper()->findAll();
+        print_r($profiles);
+    	return new ViewModel(array('profiles' => $profiles, 'tooltips' => $attributeTooltips));
     }
 
     public function sheetAction() {
@@ -74,7 +73,7 @@ class IndexController extends ActionController
     }
     
     /**
-     * @return \GuildUser\Model\UserMapper
+     * @return \GuildUser\Mapper\User
      */
     public function getUserMapper() {
     	return $this->userMapper;

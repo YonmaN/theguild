@@ -1,5 +1,4 @@
 <?php
-$users = $users ?: array();
 $profiles = $profiles ?: array()
 ?>
 <script type="text/javascript">
@@ -42,11 +41,9 @@ window.addEvent('domready', function () {
 			<th>שם</th><th>תכונות</th><th>גיל</th></tr>
 			</thead>
 			<tbody>
-<?php foreach ($users as $user) :/* @var $profile \ZfcUser\Model\User */ ?>
+<?php foreach ($profiles as $profile) :/* @var $profile \ZfcUser\Model\User */ ?>
 			<tr><th><input type="checkbox" /></th>
-			<td><a href="<?php echo $this->url('default', array('controller' => 'index', 'action' => 'sheet'))?>?<?php echo http_build_query(array('id' => $user->getUserId())) ?>"><?php echo $user->getDisplayName() ?></a></td>
-<?php	if (isset($profiles[$user->getUserId()])) : ?>
-<?php		$profile = $profiles[$user->getUserId()]; ?>
+			<td><a href="<?php echo $this->url('default', array('controller' => 'index', 'action' => 'sheet'))?>?<?php echo http_build_query(array('id' => $profile->getUserId())) ?>"><?php echo $profile->getDisplayName() ?></a></td>
 			<td><ul class="attributes-mini-list">
 				<li class="humour"><?php echo $profile->getHumour(); ?></li>
 				<li class="teamplay"><?php echo $profile->getTeamplay(); ?></li>
@@ -55,10 +52,6 @@ window.addEvent('domready', function () {
 				<li class="strictness"><?php echo $profile->getStrictness(); ?></li>
 			</ul></td>
 			<td><?php echo floor((time() - strtotime($profile->getBirthDate()))/60/60/24/365) ?></td></tr>
-<?php	else: ?>
-			<td>לא הוגדרו תכונות</td>
-			<td></td>
-<?php	endif ?>
 <?php endforeach ?>
 			</tbody>
 			</table>

@@ -7,7 +7,7 @@ use Zend\Db\Sql\Predicate\Predicate;
 
 use Zend\Db\Sql\Where;
 
-use ZfcBase\Mapper\DbMapperAbstract;
+use ZfcBase\Mapper\AbstractDbMapper as DbMapperAbstract;
 
 class GameMapper extends DbMapperAbstract {
 

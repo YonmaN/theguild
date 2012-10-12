@@ -38,12 +38,6 @@ return array(
             ),
         ),
     ),
-    'controller' => array(
-        'classes' => array(
-            'index' => 'Application\Controller\IndexController',
-            'guilduser' => 'GuildUser\Controller\IndexController'
-        ),
-    ),
     'view_manager' => array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
@@ -123,21 +117,7 @@ return array(
 					),
 				
         	),
-        	'Application\Controller\IndexController' => array(
-        				'parameters' => array(
-        					'userMapper' => 'GuildUser\Model\UserMapper',
-        					'profileMapper' => 'GuildUser\Model\ProfileMapper',
-        					'gameMapper' => 'GuildUser\Model\GameMapper',
-        					'userGameMapper' => 'GuildUser\Model\GameMapper',
-        				)
-        			),
-        	'GuildUser\Controller\IndexController' => array(
-        				'parameters' => array(
-        					'profileMapper' => 'GuildUser\Model\ProfileMapper',
-        					'userMapper' => 'GuildUser\Model\UserMapper',
-        					'gameMapper' => 'Game\Model\GameMapper',
-        				)
-        			),
+        	
         ),
     ),
 );
