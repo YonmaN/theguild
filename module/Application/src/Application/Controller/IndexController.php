@@ -32,7 +32,6 @@ class IndexController extends ActionController
 		$attributeTooltips = $tooltipMapper->findAllTooltips();
 		
     	$profiles = $this->getProfileMapper()->findAll();
-        print_r($profiles);
     	return new ViewModel(array('profiles' => $profiles, 'tooltips' => $attributeTooltips));
     }
 
