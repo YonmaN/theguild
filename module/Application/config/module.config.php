@@ -56,68 +56,9 @@ return array(
             __DIR__ . '/../view',
         ),
 		
-		'helper_map' => array(
-			'slider' => 'MooTools\View\Helper\Slider',
-			'gameIcon' => 'Game\View\Helper\GameIcon'
-		),
 		'strategies' => array(
 			'Zend\View\Strategy\JsonStrategy'
 		)
     ),
 
-	
-//	
-//	
-    'di' => array(
-        'instance' => array(
-        	'alias' => array(
-        				'game_tg' => 'Zend\Db\TableGateway\TableGateway',
-        				'user_game_tg' => 'Zend\Db\TableGateway\TableGateway',
-        				'profile_tg' => 'Zend\Db\TableGateway\TableGateway',
-        				'user_tg' => 'Zend\Db\TableGateway\TableGateway',
-        			),
-//        	
-        		'user_game_tg' => array(
-        				'parameters' => array(
-        						'table' => 'user_game',
-        						'adapter'   => 'zfcuser_zend_db_adapter',
-        				),
-        		),
-        	
-        		'user_tg' => array(
-        				'parameters' => array(
-        						'table' => 'user',
-        						'adapter'   => 'zfcuser_zend_db_adapter',
-        				),
-        		),
-        		'game_tg' => array(
-        				'parameters' => array(
-        						'table' => 'game',
-        						'adapter'   => 'zfcuser_zend_db_adapter',
-        				),
-        		),
-        		'profile_tg' => array(
-        				'parameters' => array(
-        						'table' => 'profile',
-        						'adapter'   => 'zfcuser_zend_db_adapter',
-        				),
-        		),
-        	'GuildUser\Model\UserMapper' => array(
-        		'parameters' => array('tableGateway' => 'user_tg')
-        	),
-        	'GuildUser\Model\GameMapper' => array(
-        		'parameters' => array('tableGateway' => 'user_game_tg')
-        	),
-        	'Game\Model\GameMapper' => array(
-        		'parameters' => array('tableGateway' => 'game_tg')
-        	),
-        	'GuildUser\Model\ProfileMapper' => array(
-        		'parameters' => array('tableGateway' => 'profile_tg',
-										'userMapper' => 'ZfcUser\Model\UserMapper',
-					),
-				
-        	),
-        	
-        ),
-    ),
 );

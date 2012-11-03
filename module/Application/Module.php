@@ -4,9 +4,18 @@ namespace Application;
 
 use GuildUser\Mapper;
 
-class Module implements \Zend\ModuleManager\Feature\ControllerProviderInterface, \Zend\ModuleManager\Feature\BootstrapListenerInterface, \Zend\ModuleManager\Feature\InitProviderInterface, \Zend\ModuleManager\Feature\ServiceProviderInterface
+class Module implements \Zend\ModuleManager\Feature\ViewHelperProviderInterface, \Zend\ModuleManager\Feature\ControllerProviderInterface, \Zend\ModuleManager\Feature\BootstrapListenerInterface, \Zend\ModuleManager\Feature\InitProviderInterface, \Zend\ModuleManager\Feature\ServiceProviderInterface
 {
 	public static $options;
+        
+        public function getViewHelperConfig() {
+            return array(
+                'invokables' => array(
+                    'slider' => 'MooTools\View\Helper\Slider',
+                    'gameIcon' => 'Game\View\Helper\GameIcon'
+                )
+            );
+        }
         
         public function getControllerConfig() {
             return array(
@@ -14,6 +23,8 @@ class Module implements \Zend\ModuleManager\Feature\ControllerProviderInterface,
                     'index' => function ($sm) {
                         $controller = new \Application\Controller\IndexController();
                         $controller->setProfileMapper($sm->getServiceLocator()->get('GuildUser\Mapper\ProfileMapper'));
+                        $controller->setGameMapper($sm->getServiceLocator()->get('GuildUser\Mapper\Game'));
+                        $controller->setUserMapper($sm->getServiceLocator()->get('GuildUser\Mapper\User'));
                         return $controller;
                     },
                     'guilduser' => function ($sm) {
@@ -29,12 +40,10 @@ class Module implements \Zend\ModuleManager\Feature\ControllerProviderInterface,
         
 	public function getServiceConfig() {
 		return array(
+                        'invokables' => array(
+                            
+                        ),
 			'factories' => array(
-//                            'zfcuser_user_mapper' => function ($sm) {
-//                                    $adapter = $sm->get('zfcuser_zend_db_adapter');
-//                                    $tg = new \Zend\Db\TableGateway\TableGateway('user', $adapter);
-//                                    return new \GuildUser\Model\UserMapper($tg);
-//                            },
                             'Zend\View\Strategy\JsonStrategy' => function($sm) {
                                     return new \Zend\View\Strategy\JsonStrategy(new \Zend\View\Renderer\JsonRenderer());
                             },
@@ -42,8 +51,12 @@ class Module implements \Zend\ModuleManager\Feature\ControllerProviderInterface,
                                 $baseUserMapper = $sm->get('zfcuser_user_mapper');
                                 return \GuildUser\Mapper\User::fromZfcUser($baseUserMapper);
                             },
-                            'GuildUser\Model\GameMapper' => function ($sm) {
-                                $gameMapper = new \GuildUser\Model\GameMapper();
+                            'GuildUser\Mapper\Game' => function ($sm) {
+                                $gameMapper = new \GuildUser\Mapper\Game();
+                                $gameMapper->setDbAdapter($sm->get('zfcuser_zend_db_adapter'));
+                                $gameMapper->setEntityPrototype(new Mapper\UserGame());
+                                $gameMapper->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods);
+                                
                                 return $gameMapper;
                             },
                             'GuildUser\Mapper\ProfileMapper' => function ($sm) {
@@ -51,7 +64,7 @@ class Module implements \Zend\ModuleManager\Feature\ControllerProviderInterface,
                                 
                                 $profileMapper->setDbAdapter($sm->get('zfcuser_zend_db_adapter'));
                                 $profileMapper->setEntityPrototype(new Mapper\Profile());
-                                $profileMapper->setHydrator(new Mapper\ProfileHydrator);
+                                $profileMapper->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods);
                                 
                                 return $profileMapper;
                             }
@@ -74,13 +87,11 @@ class Module implements \Zend\ModuleManager\Feature\ControllerProviderInterface,
     public function getAutoloaderConfig()
     {
         return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
-                __DIR__ . '/autoload_classmap.php',
-            ),
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                     'GuildUser' => __DIR__ . '/src/GuildUser',
+                    'Game' => __DIR__ . '/src/Game',
                 ),
             ),
         );

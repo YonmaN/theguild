@@ -20,7 +20,6 @@ class ProfileHydrator extends ClassMethods
         }
         /* @var $object UserInterface*/
         $data = parent::extract($object);
-        $data = $this->mapField('id', 'user_id', $data);
         return $data;
     }
 
@@ -37,7 +36,6 @@ class ProfileHydrator extends ClassMethods
         if (!$object instanceof Profile) {
             throw new Exception\InvalidArgumentException('$object must be an instance of ZfcUser\Entity\UserInterface');
         }
-        $data = $this->mapField('user_id', 'id', $data);
         return parent::hydrate($data, $object);
     }
 

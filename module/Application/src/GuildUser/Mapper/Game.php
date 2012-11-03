@@ -1,5 +1,5 @@
 <?php
-namespace GuildUser\Model;
+namespace GuildUser\Mapper;
 
 use Zend\Db\TableGateway\TableGatewayInterface;
 
@@ -7,26 +7,20 @@ use Zend\Db\Sql\Predicate\Predicate;
 
 use Zend\Db\Sql\Where;
 
-use ZfcBase\Mapper\AbstractDbMapper as DbMapperAbstract;
 
-class GameMapper  extends AbstractDbTableMapper  {
+class Game extends \ZfcBase\Mapper\AbstractDbMapper  {
 
 	protected $tableName         = 'user_game';
-	protected $gameIDField       = 'game_id';
 	
 	public function findByUserId($id) {
-		$gateway = $this->getTableGateway(); /* @var $gateway \Zend\Db\TableGateway\TableGateway */
-		// TODO protect from injection
-		$select = new \Zend\Db\Sql\Select($gateway->getTable());
-		$select->join('game', "user_game.game_id = game.game_id AND user_id = {$id} AND user_game.enabled = 1");
-		$rowset = $gateway->selectWith($select)->toArray();
-		
-		$gamesArray = array();
-		foreach ($rowset as $game) {
-			$gamesArray[$game['game_id']] = $game;
-		}
-		
-		return $gamesArray;
+            
+             $select = $this->getSelect()
+                       ->from($this->tableName)
+                     ->join('game', "user_game.game_id = game.game_id AND user_id = {$id} AND user_game.enabled = 1");
+
+            $games = $this->select($select);
+            $this->getEventManager()->trigger('find', $this, array('games' => $games));
+            return $games;
 	}
 	
 	public function findAllGames() {

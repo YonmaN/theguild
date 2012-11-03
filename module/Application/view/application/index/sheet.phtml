@@ -135,7 +135,7 @@ window.addEvent('domready', function () {
 					</div>
 					<div id="bio-box" class="content-box">
 					<h3>כמה מילים על עצמי</h3>
-					<div id="bio-text"><?php echo nl2br($this->escape($profile->getBio()))?></div>
+					<div id="bio-text"><?php echo nl2br($this->escapeHtml($profile->getBio()))?></div>
 				</div>
 				</div>
 				

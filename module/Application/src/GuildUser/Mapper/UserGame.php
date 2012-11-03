@@ -1,13 +1,8 @@
 <?php
 
-namespace GuildUser\Model;
+namespace GuildUser\Mapper;
 
-use ZfcUser\Model\UserInterface;
-use ZfcUser\Model\UserMetaInterface;
-use DateTime,
-    ZfcBase\Model\ModelAbstract;
-
-class UserGame extends ModelAbstract
+class UserGame
 {
 	/**
 	 * @var integer
@@ -40,6 +35,10 @@ class UserGame extends ModelAbstract
 	 */
 	protected $enabled;
 	
+        /**
+         * @var string
+         */
+        protected $name;
 	
     /**
      * Get userId.
@@ -55,11 +54,31 @@ class UserGame extends ModelAbstract
      * Set userId.
      *
      * @param int $userId the value to be set
-     * @return UserBase
+     * @return UserGame
      */
     public function setUserId($userId)
     {
         $this->userId = (int) $userId;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getGameName()
+    {
+    	return $this->name;
+    }
+ 
+    /**
+     * Set userId.
+     *
+     * @param string $userId the value to be set
+     * @return UserGame
+     */
+    public function setGameName($name)
+    {
+        $this->name = $name;
         return $this;
     }
 	
@@ -73,7 +92,7 @@ class UserGame extends ModelAbstract
  
     /**
      * @param int $userId the value to be set
-     * @return UserBase
+     * @return UserGame
      */
     public function setGameId($gameId)
     {
@@ -90,7 +109,7 @@ class UserGame extends ModelAbstract
  
     /**
      * @param $comments
-     * @return UserBase
+     * @return UserGame
      */
     public function setComments($comments)
     {
@@ -107,7 +126,7 @@ class UserGame extends ModelAbstract
  
     /**
      * @param $comments
-     * @return UserBase
+     * @return UserGame
      */
     public function setXp($xp)
     {
@@ -124,7 +143,7 @@ class UserGame extends ModelAbstract
  
     /**
      * @param $gm
-     * @return UserBase
+     * @return UserGame
      */
     public function setGm($gm)
     {
@@ -141,7 +160,7 @@ class UserGame extends ModelAbstract
  
     /**
      * @param $learn
-     * @return UserBase
+     * @return UserGame
      */
     public function setLearn($learn)
     {
@@ -157,7 +176,7 @@ class UserGame extends ModelAbstract
 	}
     /**
      * @param $learn
-     * @return UserBase
+     * @return UserGame
      */
     public function setEnabled($enabled)
     {
@@ -165,24 +184,4 @@ class UserGame extends ModelAbstract
         return $this;
     }
  
-	
-	/**
-     * Set properties from an array
-     *
-     * @param array $array
-     * @return ZfcBase\Model\ModelAbstract
-     */
-    public function setFromArray($array)
-    {
-        if (!is_array($array) && !$array instanceof Traversable) {
-            return false;
-        } 
-        foreach ($array as $key => $value) {
-            $setter = static::fieldToSetterMethod($key);
-            if (is_callable(array($this, $setter))) {
-                $this->$setter($value);
-            }
-        }
-        return $this;
-    }
 }

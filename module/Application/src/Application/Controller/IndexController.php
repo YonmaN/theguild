@@ -36,7 +36,7 @@ class IndexController extends ActionController
     }
 
     public function sheetAction() {
-    	$id = $this->getRequest()->query()->get('id');
+    	$id = $this->getRequest()->getQuery()->get('id');
     	$view = $this->getServiceLocator()->get('Zend\View\Renderer\PhpRenderer');
     	$basePath = $this->getRequest()->getBaseUrl();
     	 
@@ -47,6 +47,7 @@ class IndexController extends ActionController
     	$view->plugin('headScript')->appendFile("$basePath/js/mootools-core-1.4.5-full-compat.js");
     	$view->plugin('headScript')->appendFile("$basePath/js/mootools-more-1.4.0.1.js");
     	$view->plugin('headScript')->appendFile("$basePath/js/ToolTip.js");
+        
     	$row = $this->getUserMapper()->findById($id);
      	$games = $this->getGameMapper()->findByUserId($id);
     	$profile = $this->getProfileMapper()->findByUserId($id);
